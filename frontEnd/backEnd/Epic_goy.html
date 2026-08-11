@@ -7,7 +7,6 @@
     <title>EPIC GOY - CUSI</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -19,6 +18,11 @@
             --accent-color: #000000;
             --accent-hover: #4f46e5;
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
@@ -26,13 +30,21 @@
             line-height: 1.6;
             margin: 0;
             padding: 2rem 1rem;
-            display: flex;
-            justify-content: center;
+            min-height: 100vh;
+            overflow-y: scroll;
         }
 
         .container {
             max-width: 800px;
             width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .header-title {
+            text-align: center;
+            position: relative;
+            margin-bottom: 2rem;
         }
 
         h1 {
@@ -40,9 +52,28 @@
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 2rem;
+            margin: 0;
             font-weight: 800;
         }
+
+        #imagen {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            width: 60px;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            #imagen {
+                position: static;
+                transform: none;
+                display: block;
+                margin: 0 auto 1rem auto;
+            }
+        }
+
         .card {
             background-color: var(--card-bg);
             border-radius: 12px;
@@ -59,6 +90,18 @@
             color: var(--text-main);
             text-align: left;
         }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--text-main);
+        }
+
+        .card h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
         .integrante p {
             background-color: rgba(255, 255, 255, 0.03);
             padding: 1rem;
@@ -105,6 +148,26 @@
             color: white;
         }
 
+        /* Video de YouTube responsivo */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         .social-footer {
             text-align: center;
             margin-top: 4rem;
@@ -129,20 +192,16 @@
         .social-links a.instagram:hover { color: #E1306C; transform: translateY(-5px); }
         .social-links a.twitter:hover { color: #1DA1F2; transform: translateY(-5px); }
         .social-links a.youtube:hover { color: #FF0000; transform: translateY(-5px); }
-
-        #imagen {
-    position: absolute;
-    top: 45px;   
-    right: 800px;
-    width: 67px;
-}
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>EPIC GOY</h1>
-        <img src="Cusi_style/epicgoylog.png" id="imagen" >
+        <div class="header-title">
+            <img src="Cusi_style/epicgoylog.png" id="imagen" >
+            <h1>EPIC GOY</h1>
+        </div>
+
         <div id="nosotros" class="somos card">
             <p>
                 EPIC GOY es un equipo de desarrolladores de la escuela confederación suiza N° 26. 
@@ -177,22 +236,24 @@
                 </a>
             </div>
         </div>
-<div id="nosotros" class="somos card">
-    <h1>PROYECTOS: </h1>
-    <H3>CUSI: </H3>
+
+        <div id="proyectos" class="somos card">
+            <h1>PROYECTOS:</h1>
+            <h3>CUSI:</h3>
             <p>
                 CUSI, es un juego indie y gratuito para todo público con microtransacciones “legales” para comprar objetos fabulosos a CUSI.
                 Queremos buscar la atención del público joven con juegos llamativos y muy divertidos también encontramos la forma de integrar todo lo bueno de los juegos de cuidado de mascota virtual (según la comunidad).
-                Actualmente Cusi no esta a la venta al publico y aun no se sabe la fecha de lanzamiento
+                Actualmente Cusi no esta a la venta al publico y aun no se sabe la fecha de lanzamiento.
             </p>
             <h4>AVANCES</h4>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/u7kdVe8q5zs?si=IVWvrcu4DO9qNmhX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/PHMRoEMio4Q?si=xrTPaYXLUKIR7fzV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
         </div>
         
         <div class="social-footer">
             <p style="color: var(--text-secondary); margin-bottom: 0;">Seguinos en nuestras redes:</p>
             <div class="social-links">
-              
                 <a href="https://www.instagram.com/epic.goy/?hl=es" class="instagram" target="_blank" title="Instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
@@ -204,7 +265,6 @@
                 </a>
             </div>
         </div>
-       
     </div>
 </body>
 </html>
