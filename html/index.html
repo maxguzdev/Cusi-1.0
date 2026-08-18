@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+    <div class="perfil">
+        <img src="https://static.wikia.nocookie.net/youjo-senki-saga-of-tanya-the-evil/images/0/04/Tanya_Manga.jpg/revision/latest/scale-to-width/360?cb=20220408140333&path-prefix=es" class="img-perfil">
+<button onclick="irA('backend/index.html')"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2bbKJUg4KPLeUh39goUnK4LOUqEvX217MjzksFSERDw&s=10" width="20px"></button>
+    </div>
+    <div class="botones">
+        <button id="boton" onclick="cambiartexto()">Enter</button>
+        <input type="text" id="newtext" placeholder="escribe tu nuevo texto">
+    </div>
+    <div id="contenedor" class="textito"></div>
+
+    <script src="script.js">
+
+        let listadetextos = JSON.parse(localStorage.getItem("text")) || [];
+        document.getElementById("contenedor").textContent = listadetextos.join(", ");
+
+        function cambiartexto() {
+            let input = document.getElementById("newtext");
+
+            let x = input.value;
+
+            listadetextos.push(x);
+
+            localStorage.setItem("text", JSON.stringify(listadetextos));
+
+            let newtext = JSON.parse(localStorage.getItem("text"));
+
+            document.getElementById("contenedor").textContent = newtext.join(", ");
+
+            input.value = "";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+.body{
+    background-color: antiquewhite;
+}
+
+.textito{
+    background-color: rgb(167, 143, 143);
+    width: 90%;            
+  max-width: 800px;        
+  margin: 68px auto;      
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+ 
+}
+.botones{
+    
+    margin-block: 20px;
+    margin: 0;
+  display: flex;
+  justify-content:center;
+  align-items: top;
+}
+.img-perfil{
+    width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
