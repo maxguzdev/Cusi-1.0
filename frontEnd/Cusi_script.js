@@ -15,14 +15,12 @@ async function irA(url) {
     }
 }
 
+document.addEventListener('click', function (e) {
+  console.log('clickeaste:', e.target.tagName, e.target.id, e.target.className);
 
-const cusi = document.getElementById("cusi_a")
-const deam = document.getElementById("damn")
-function cusiQ() {
-    cusi.addEventListener('click', function(){
-        deam.currentTime = 0;
-        deam.play().catch(error=>{
-            console.log("no funciona");
-        })
-    })
-}
+  if (e.target.id === 'cusi_a') {
+    const deam = document.getElementById("damn");
+    deam.currentTime = 0;
+    deam.play().catch(error => console.log('no funciona', error));
+  }
+});
