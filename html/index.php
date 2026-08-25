@@ -15,9 +15,9 @@
             
             <label for="subir-foto">Cambiar foto</label>
         <input type="file" id="subir-foto" accept="image/png, image/jpeg, image/webp">
-        <a href="SignUp.html">
+        <a href="SignUp.php">
             <button id="signup">SIGN UP</button></a>
-        <a href="SignIn.html">
+        <a href="SignIn.php">
             <button id="signin">SIGN IN</button></a>
     </div>
     <div class="botones">

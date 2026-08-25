@@ -33,7 +33,7 @@
 
         <button type="submit">Registrarse</button>
     </form>
-    <p>¿Ya tienes cuenta? <a href="SignIn.html">Ingresar</a></p>
+    <p>¿Ya tienes cuenta? <a href="SignIn.php">Ingresar</a></p>
 </div>
     
 
