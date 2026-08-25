@@ -9,23 +9,25 @@
 </head>
 
 <body>
-    <div class="perfil">
+    <div class="botones">
+        <button id="boton" class="postito" onclick="cambiartexto()">POSTEAR</button>
+        <input type="text" id="newtext" class="newtext" placeholder="¿Como anda la muchachada?">
+    </div>
+    <div id="contenedor" class="textito"></div>
+<nav class="sidebar">
+  <div class="perfil">
         <img src="https://static.wikia.nocookie.net/youjo-senki-saga-of-tanya-the-evil/images/0/04/Tanya_Manga.jpg/revision/latest/scale-to-width/360?cb=20220408140333&path-prefix=es"
             class="img-perfil">
-            
-            <label for="subir-foto">Cambiar foto</label>
-        <input type="file" id="subir-foto" accept="image/png, image/jpeg, image/webp">
         <a href="SignUp.php">
             <button id="signup">SIGN UP</button></a>
         <a href="SignIn.php">
             <button id="signin">SIGN IN</button></a>
     </div>
-    <div class="botones">
-        <button id="boton" onclick="cambiartexto()">Enter</button>
-        <input type="text" id="newtext" placeholder="escribe tu nuevo texto">
-    </div>
-    <div id="contenedor" class="textito"></div>
-
+  <ul>
+    <li><a href="#inicio" class="active">Inicio</a></li>
+    <li><a href="#configuracion">Configuración</a></li>
+  </ul>
+</nav>
     <script >
 
         let listadetextos = JSON.parse(localStorage.getItem("text")) || [];

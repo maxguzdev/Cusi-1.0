@@ -3,11 +3,11 @@
 }
 
 .textito{
-    background-color: rgb(167, 143, 143);
+    background-color: #A47DAB;
     width: 90%;            
-  max-width: 800px;        
+  max-width: 900px;        
   margin: 68px auto;      
-  min-height: 20vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -26,4 +26,76 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
+}
+.sidebar {
+  width: 500px;
+  height: 100vh;
+  background-color: #ffffff;
+  color: #ffffff;
+  padding-top: 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.sidebar h2 {
+  font-size: 1.25rem;
+  padding: 0 24px;
+  margin-bottom: 24px;
+  color: #f8fafc;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li a {
+  display: block;
+  padding: 12px 24px;
+  color: #000000;
+  text-decoration: none;
+  font-family: sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background-color: #d3d3d3;
+  color: #A47DAB;
+  border-left: 4px solid #A47DAB;
+}
+.postito {
+  background-color: #A47DAB;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 9999px; /* Bordes completamente redondeados */
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.postito:hover {
+  background-color: #A47DAB;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+.postito:active {
+  transform: scale(0.97);
+}
+
+
+.postito:disabled {
+  background-color: #A47DAB;
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
