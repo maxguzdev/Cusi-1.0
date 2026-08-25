@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="css/css.css">
 </head>
 
 <body>
     <div class="perfil">
-        <img src="https://static.wikia.nocookie.net/youjo-senki-saga-of-tanya-the-evil/images/0/04/Tanya_Manga.jpg/revision/latest/scale-to-width/360?cb=20220408140333&path-prefix=es" class="img-perfil">
-<button onclick="irA('backend/index.html')"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2bbKJUg4KPLeUh39goUnK4LOUqEvX217MjzksFSERDw&s=10" width="20px"></button>
+        <img src="https://static.wikia.nocookie.net/youjo-senki-saga-of-tanya-the-evil/images/0/04/Tanya_Manga.jpg/revision/latest/scale-to-width/360?cb=20220408140333&path-prefix=es"
+            class="img-perfil">
+            
+            <label for="subir-foto">Cambiar foto</label>
+        <input type="file" id="subir-foto" accept="image/png, image/jpeg, image/webp">
+        <a href="SignUp.html">
+            <button id="signup">SIGN UP</button></a>
+        <a href="SignIn.html">
+            <button id="signin">SIGN IN</button></a>
     </div>
     <div class="botones">
         <button id="boton" onclick="cambiartexto()">Enter</button>
@@ -18,7 +26,7 @@
     </div>
     <div id="contenedor" class="textito"></div>
 
-    <script src="script.js">
+    <script >
 
         let listadetextos = JSON.parse(localStorage.getItem("text")) || [];
         document.getElementById("contenedor").textContent = listadetextos.join(", ");
@@ -39,5 +47,7 @@
             input.value = "";
         }
     </script>
+    <link rel="stylesheet" href="">
 </body>
+
 </html>

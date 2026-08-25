@@ -10,7 +10,7 @@ body{
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url(back.png);
+    background-image: url(/html/img/back.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
