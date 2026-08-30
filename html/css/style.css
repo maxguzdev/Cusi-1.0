@@ -4,23 +4,26 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url(/html/img/back.png);
+    background-image: url('../img/back.png'); /* Subimos un nivel con ../ para encontrar /img */
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
 }
-
 form{
     padding: 50px;
     display: flex;
     flex-direction: column;
     width: 400px;
-    box-shadow: 0 0 20px rgba(rgb(0, 0, 0), rgb(0, 0, 0), rgb(2, 2, 9), alpha);
 border-radius: 15px;
 background-color: aliceblue;
 }
