@@ -17,6 +17,7 @@ async function irA(url) {
 
 
 document.addEventListener('click', function (e) {
+    console.log('clickeaste:', e.target.tagName, e.target.id, e.target.className);
     if (e.target.id == 'cusi_a') {
         const deam = document.getElementById("damn");
         const cusi = document.getElementById("cusi_a");
