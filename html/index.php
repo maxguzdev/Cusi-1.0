@@ -28,27 +28,7 @@
     <li><a href="#configuracion">Configuración</a></li>
   </ul>
 </nav>
-    <script >
-
-        let listadetextos = JSON.parse(localStorage.getItem("text")) || [];
-        document.getElementById("contenedor").textContent = listadetextos.join(", ");
-
-        function cambiartexto() {
-            let input = document.getElementById("newtext");
-
-            let x = input.value;
-
-            listadetextos.push(x);
-
-            localStorage.setItem("text", JSON.stringify(listadetextos));
-
-            let newtext = JSON.parse(localStorage.getItem("text"));
-
-            document.getElementById("contenedor").textContent = newtext.join(", ");
-
-            input.value = "";
-        }
-    </script>
+    <script src="js/scrips.js"></script>
     <link rel="stylesheet" href="">
 </body>
 
