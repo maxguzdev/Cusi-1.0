@@ -25,7 +25,7 @@
     </div>
   <ul>
     <li><a href="#inicio" class="active">Inicio</a></li>
-    <li><a href="#configuracion">Configuración</a></li>
+    <li><a href="configuracion.php">Configuración</a></li>
   </ul>
 </nav>
     <script src="js/scrips.js"></script>
