@@ -39,18 +39,6 @@ img {
     padding: 10px;
 }
 
-input[type="text"],
-input[type="password"] {
-    border: 1px solid #ccc;
-    width: 80%;
-    padding: 10px;
-}
-
-label {
-    font-weight: 500;
-    padding: 10px;
-}
-
 .box {
     width: 100%;
     height: auto;
@@ -76,19 +64,14 @@ button {
 button:hover {
     opacity: 0.75;
 }
+
   </style>
   <body>
     <form>
-      <img src="Cusi_style/logo.png" />
-      <label for="UserName">usuario</label>
-      <input type="text" id="UserName" placeholder="ejemplo" required />
-      <label for="password">usuario</label>
-      <input type="password" id="password" placeholder="contraseña" required />
-      <div class="box">
-        <input type="checkbox" id="visible" />
-        <label for="visible"> mostrar contraseña</label>
-      </div>
-      <button type="submit" id="submit">iniciar sesion</button>
+      <img src="Cusi_style/epicgoylog.png" />
+      
+
+
     </form>
   </body>
 </html>
