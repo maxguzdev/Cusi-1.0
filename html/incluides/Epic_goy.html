@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPIC GOY - CUSI</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #A47DAB;
+            --card-bg: antiquewhite;
+            --text-main: #040200;
+            --text-secondary: #000000;
+            --accent-color: #000000;
+            --accent-hover: #A47DAB;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            overflow-y: scroll;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .header-title {
+            text-align: center;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        #imagen {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            width: 60px;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            #imagen {
+                position: static;
+                transform: none;
+                display: block;
+                margin: 0 auto 1rem auto;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            text-align: left;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--text-main);
+        }
+
+        .card h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .integrante p {
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .integrante p:hover {
+            transform: translateX(5px);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .anexo {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .link-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .link-group span {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .link-group a {
+            color: var(--accent-color);
+            text-decoration: none;
+            word-break: break-all;
+            padding: 0.8rem 1rem;
+            background-color: rgba(99, 102, 241, 0.1);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .link-group a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .social-footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a.instagram:hover { color: #E1306C; transform: translateY(-5px); }
+        .social-links a.twitter:hover { color: #1DA1F2; transform: translateY(-5px); }
+        .social-links a.youtube:hover { color: #FF0000; transform: translateY(-5px); }
+.botonvolver{
+    background-color: #ffff;
+  color: #A47DAB;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}   
+   </style>
+</head>
+
+<body>
+    <a href="../wiew/index.php">
+  <button id="volver" class="botonvolver" >volver</button> 
+  </a>
+    <div class="container">
+        <div class="header-title">
+            <img src="../img/epicgoylog.png" id="imagen" >
+            <h1>EPIC GOY</h1>
+        </div>
+
+        <div id="nosotros" class="somos card">
+            <p>
+                EPIC GOY es un equipo de desarrolladores de la escuela confederación suiza N° 26. 
+                Somos un grupo de 5 personas especializadas en diseño, front end y back end, 
+                implementamos todos nuestros conocimientos para la creación de nuestro proyecto: “CUSI”
+            </p>
+        </div>
+
+        <div id="integrantes" class="integrante card">
+            <h1>Integrantes</h1>
+            <p><strong>León Raya:</strong> Scrum Master, Front End y Diseñador</p>
+            <p><strong>Maximo Guzman:</strong> Diseñador y Administrador de base de datos</p>
+            <p><strong>Yoel Mamani:</strong> Front End</p>
+            <p><strong>Samuel Guzman:</strong> Tester y Back End</p>
+            <p><strong>Matias Vilchez:</strong> Back End y tester</p>
+        </div>
+
+        <div id="anexos" class="anexo card">
+            <h1>Anexos</h1>
+            
+            <div class="link-group">
+                <span>Link del Trello:</span>
+                <a href="https://trello.com/invite/b/6a4cfde2b245f8fcee6ed653/ATTI62d2c627eeed77f1057b2de8ccc85a728E76600D/epic-goy" target="_blank">
+                    https://trello.com/invite/b/6a4cfde2b245f8fcee6ed653/ATTI62d2c627eeed77f1057b2de8ccc85a728E76600D/epic-goy
+                </a>
+            </div>
+
+            <div class="link-group">
+                <span>Link del Github:</span>
+                <a href="https://github.com/guzmanmaximopereyra-maker/Cusi-1.0.g" target="_blank">
+                    https://github.com/guzmanmaximopereyra-maker/Cusi-1.0.g
+                </a>
+            </div>
+        </div>
+
+        <div id="proyectos" class="somos card">
+            <h1>PROYECTOS:</h1>
+            <h3>CUSI:</h3>
+            <p>
+                CUSI, es un juego indie y gratuito para todo público con microtransacciones “legales” para comprar objetos fabulosos a CUSI.
+                Queremos buscar la atención del público joven con juegos llamativos y muy divertidos también encontramos la forma de integrar todo lo bueno de los juegos de cuidado de mascota virtual (según la comunidad).
+                Actualmente Cusi no esta a la venta al publico y aun no se sabe la fecha de lanzamiento.
+            </p>
+            <h4>AVANCES</h4>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/PHMRoEMio4Q?si=xrTPaYXLUKIR7fzV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <div class="social-footer">
+            <p style="color: var(--text-secondary); margin-bottom: 0;">Seguinos en nuestras redes:</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/epic.goy/?hl=es" class="instagram" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://x.com/EPICGOYx?lang=es" class="twitter" target="_blank" title="Twitter / X">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCqSgcuopIPHZb3LUp_5lTxw" class="youtube" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
