@@ -75,7 +75,7 @@
   font-weight: 700;
   padding: 10px 24px;
   border: none;
-  border-radius: 9999px; /* Bordes completamente redondeados */
+  border-radius: 9999px;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
@@ -98,4 +98,12 @@
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
+}
+
+.epic{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  height: auto;
 }
