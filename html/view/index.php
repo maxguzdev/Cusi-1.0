@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cusix</title>
     <link rel="stylesheet" href="../css/css.css">
+    <link rel="icon" href="../img/favicon_cusix.png" type="image/png">
 </head>
 
 <body>
@@ -31,7 +32,7 @@
   </ul>
 </nav>
     <script src="../js/scrips.js"></script>
-    <a href="../incluides/Epic_goy.html">
+    <a href="../incluides/Epic_goy.php">
     <img src="../img/epicgoylog.png" class="epic">
     </a>
 </body>

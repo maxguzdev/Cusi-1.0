@@ -1,6 +1,9 @@
 .body{
     background-color: antiquewhite;
 }
+.newtext{
+  width: 180px;
+}
 
 .textito{
     background-color: #A47DAB;
@@ -14,12 +17,10 @@
  
 }
 .botones{
-    
-    margin-block: 20px;
-    margin: 0;
+  margin: 30px;
+  gap: 10px;
   display: flex;
   justify-content:center;
-  align-items: top;
 }
 .img-perfil{
     width: 80px;
@@ -28,7 +29,7 @@
   object-fit: cover;
 }
 .sidebar {
-  width: 500px;
+  width: 380px;
   height: 100vh;
   background-color: #ffffff;
   color: #ffffff;
@@ -46,12 +47,6 @@
   color: #f8fafc;
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 .sidebar ul li a {
   display: block;
   padding: 12px 24px;
@@ -60,7 +55,6 @@
   font-family: sans-serif;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
-
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
   background-color: #d3d3d3;
@@ -80,17 +74,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
-
 .postito:hover {
   background-color: #A47DAB;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-
 .postito:active {
   transform: scale(0.97);
 }
-
 
 .postito:disabled {
   background-color: #A47DAB;
@@ -102,8 +93,13 @@
 
 .epic{
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 50px;
+  top: 35px;
+  right: 70px;
+  width: 90px;
   height: auto;
+}
+
+.perfil{
+  
+  width: 300px;
 }

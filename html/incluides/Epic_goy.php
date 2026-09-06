@@ -191,7 +191,7 @@
         .social-links a.instagram:hover { color: #E1306C; transform: translateY(-5px); }
         .social-links a.twitter:hover { color: #1DA1F2; transform: translateY(-5px); }
         .social-links a.youtube:hover { color: #FF0000; transform: translateY(-5px); }
-.botonvolver{
+    .botonvolver{
     background-color: #ffff;
   color: #A47DAB;
   font-family: system-ui, -apple-system, sans-serif;
@@ -208,7 +208,7 @@
 </head>
 
 <body>
-    <a href="../wiew/index.php">
+    <a href="../view/index.php">
   <button id="volver" class="botonvolver" >volver</button> 
   </a>
     <div class="container">
@@ -246,8 +246,8 @@
 
             <div class="link-group">
                 <span>Link del Github:</span>
-                <a href="https://github.com/guzmanmaximopereyra-maker/Cusi-1.0.g" target="_blank">
-                    https://github.com/guzmanmaximopereyra-maker/Cusi-1.0.g
+                <a href="https://github.com/maxguzdev/Cusi-1.0" target="_blank">
+                    https://github.com/maxguzdev/Cusi-1.0
                 </a>
             </div>
         </div>

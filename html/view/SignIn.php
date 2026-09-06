@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>sign in</title>
     <link rel="stylesheet" href="../css/style.css">
+     <link rel="icon" href="../img/favicon_cusix.png" type="image/png">
 </head>
 <body>
 

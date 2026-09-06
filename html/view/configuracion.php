@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuracion</title>
     <link rel="stylesheet" href="../css/confi.css">
+     <link rel="icon" href="../img/favicon_cusix.png" type="image/png">
 </head>
 <body>
     <a href="index.php">
