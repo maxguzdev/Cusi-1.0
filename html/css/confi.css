@@ -1,0 +1,24 @@
+ .social-footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a.instagram:hover { color: #E1306C; transform: translateY(-5px); }
+        .social-links a.twitter:hover { color: #1DA1F2; transform: translateY(-5px); }
+        .social-links a.youtube:hover { color: #FF0000; transform: translateY(-5px); }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuracion</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/confi.css">
 </head>
 <body>
@@ -28,7 +29,20 @@
   <option value="helicoptero apache">helicoptero apache</option>
   <option value="chino">chino</option>
 </select>
-
+<div class="social-footer">
+            <p style="color: var(--text-secondary); margin-bottom: 0;">Seguinos en nuestras redes:</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/epic.goy/?hl=es" class="instagram" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://x.com/EPICGOYx?lang=es" class="twitter" target="_blank" title="Twitter / X">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCqSgcuopIPHZb3LUp_5lTxw" class="youtube" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
 </body>
 <script src="../js/conf.js">
 </script>
