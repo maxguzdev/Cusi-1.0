@@ -47,11 +47,11 @@ document.addEventListener('click', function (e) {
             }
 
             if (diego) {
-                diego.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Kanep.png";
+                diego.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Diego_2.png";
 
                 setTimeout(() => {
                     diego.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Diego.png";
-                }, 5000);
+                }, 117, 0);
             }
             break;
     }
