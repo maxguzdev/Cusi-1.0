@@ -1,6 +1,6 @@
 function toggleIntegrante(boton) {
  
-    var barra = boton.nextElementSibling;
+    let barra = boton.nextElementSibling;
 
     barra.classList.toggle("abierta");
 }

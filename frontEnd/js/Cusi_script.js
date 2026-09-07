@@ -37,7 +37,7 @@ document.addEventListener('click', function (e) {
             }
             break;
 
-        case 'diego':                                           //todo aca adentro era para probar el codigo, falta el dialogo
+        case 'diego':                                          
             const dialog1 = document.getElementById("d1");
             const diego = document.getElementById("diego");
 
@@ -51,7 +51,25 @@ document.addEventListener('click', function (e) {
 
                 setTimeout(() => {
                     diego.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Diego.png";
-                }, 117, 0);
+                }, 1117);
+            }
+            break;
+            
+        case 'leo':                                          
+            const dialogL = document.getElementById("dL");
+            const poldo = document.getElementById("leo");
+
+            if (dialogL) {
+                dialogL.currentTime = 0;
+                dialogL.play().catch(error => console.log('no funciona', error));
+            }
+
+            if (poldo) {
+                poldo.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo_2.png";
+
+                setTimeout(() => {
+                    poldo.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo.png";
+                }, 2117);
             }
             break;
     }
