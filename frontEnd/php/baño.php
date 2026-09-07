@@ -11,5 +11,6 @@
       <audio src="/CUSI-1.0/frontEnd/mp3/Deam.mp3" id="damn"></audio>
       <img src="/CUSI-1.0/frontEnd/Cusi_style/bat_scr/ducha.png" width="200" id="ducha" class="im-btn" style="cursor: pointer;">
       <img src="/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo.png" width="229" class="im-btn" id="leo">
+      <audio src="/CUSI-1.0/frontEnd/mp3/dialogoL.mp3" id="dL"></audio>
 
    </section>
