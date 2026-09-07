@@ -54,14 +54,19 @@ document.addEventListener('click', function (e) {
                 }, 1117);
             }
             break;
-            
+
         case 'leo':                                          
             const dialogL = document.getElementById("dL");
             const poldo = document.getElementById("leo");
 
             if (dialogL) {
+                dialogL.addEventListener('ended', () => {
+                   //poner algo
+                });                
                 dialogL.currentTime = 0;
-                dialogL.play().catch(error => console.log('no funciona', error));
+                dialogL.play()
+                    .then(() => console.log('Playing successfully!'))
+                    .catch(error => console.log('no funciona', error));
             }
 
             if (poldo) {
