@@ -61,18 +61,27 @@ document.addEventListener('click', function (e) {
 
             if (dialogL) {
                 dialogL.addEventListener('ended', () => {
+                    const cartel = document.getElementById("cartel");
 
-                    const para = document.createElement("p");
-                    para.innerHTML = "This is a paragraph.";
-                    document.getElementById("cartel").appendChild(para);
+                    if (cartel) {
+                        cartel.innerHTML = `
+                            <div class="cartel-pregunta">
+                                <p>¿Querés jugar?</p>
+                                <a href="https://www.bandomovil.com/elespinar/534994">
+                                <button id="btn_si">Sí</button>
+                                </a>
+                                <button id="btn_no">No</button>
+                            </div>
+                        `;
+                    }
+                }, { once: true });
 
-                });
                 dialogL.currentTime = 0;
                 dialogL.play().catch(error => console.log('no funciona', error));
             }
 
             if (poldo) {
-                poldo.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo_2.png"; //falta imagen
+                poldo.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo_2.png";
 
                 setTimeout(() => {
                     poldo.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo.png";
@@ -80,20 +89,69 @@ document.addEventListener('click', function (e) {
             }
             break;
 
-        case 'kanep':
-            const dialog2 = document.getElementById("d2");
-            const kanep = document.getElementById("kanep");
-
-            if (dialog2) {
-                dialog2.currentTime = 0;
-                dialog2.play().catch(error => console.log('no funciona', error));
+        case 'btn_no':
+            const cartel = document.getElementById("cartel");
+            const poldos = document.getElementById("leo");
+            const dialogL2 = document.getElementById("dL2");
+            if (cartel) {
+                cartel.innerHTML = "";
             }
+            if (dialogL2) {
+                dialogL2.currentTime = 0;
+                dialogL2.play().catch(error => console.log('no funciona', error));
+            }
+            poldos.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo_3.png";
+            break;
 
-            if (kanep) {
-                kanep.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/"; //falta animación
-                kanep.addEventListener('ended', () => {
-                    kanep.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/kanep_a.png";
+        case 'kanep':
+            const kanepImg = document.getElementById("kanep");
+
+            if (kanepImg) {
+                const ancho = kanepImg.clientWidth || 200;
+                const alto = kanepImg.clientHeight || "auto";
+
+                kanepImg.style.display = "none";
+
+                const kanVideo = document.createElement("video");
+                kanVideo.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/video_prueba.mp4";
+                kanVideo.style.width = typeof ancho == 'number' ? `${ancho}px` : ancho;
+                if (alto !== "auto") kanVideo.style.height = `${alto}px`;
+                kanVideo.style.position = "absolute";
+                kanVideo.style.top = "160px";
+                kanVideo.style.left = "150px";
+
+
+                kanepImg.parentNode.insertBefore(kanVideo, kanepImg);
+
+                kanVideo.play().catch(error => console.log('Error al reproducir video:', error));
+
+                kanVideo.addEventListener('ended', () => {
+                    kanVideo.remove();
+                    kanepImg.style.display = "inline";
                 });
+            }
+            break;
+
+        case 'huerta':
+            const huerta = document.getElementById("huerta");
+            
+            if (huerta) {
+                    const cartel = document.getElementById("cartela");
+                    if (cartel) {
+                        cartel.innerHTML = `
+                            <div class="cartel-huerta">
+                               <p>Seleccioná una opción:</p>
+                        <div class="opciones-grid">
+                            <button id="opt_1">Opción 1</button>
+                            <button id="opt_2">Opción 2</button>
+                            <button id="opt_3">Opción 3</button>
+                            <button id="opt_4">Opción 4</button>
+                            <button id="opt_5">Opción 5</button>
+                            <button id="opt_6">Cancelar</button>
+                        </div>
+                            </div>
+                        `;
+                    }
             }
             break;
     }

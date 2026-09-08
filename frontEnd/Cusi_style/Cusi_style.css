@@ -72,7 +72,7 @@ button:focus-visible {
 
 .goy {
     position: absolute;
-    top: 40px;
+    top: 60px;
     left: 190px;
     display: flex;
     flex-wrap: wrap;
@@ -80,6 +80,15 @@ button:focus-visible {
     justify-content: flex-end;
 }
 
+.Cusix {
+    position: absolute;
+    top: 200px;
+    left: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
 .campos {
     position: absolute;
     top: 16px;
@@ -225,6 +234,88 @@ button:focus-visible {
     justify-content: flex-end;
 }
 
+
+
+/* Contenedor superpuesto que centra todo en pantalla */
+#cartel {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 999999 !important;}
+
+/* La tarjeta del cartel */
+.cartel-huerta {
+    position: relative;
+    top: -240px;
+    z-index: 1000000 !important;
+    background: #2b1b36;
+    border: 4px solid #ffffff;
+    border-radius: 16px;
+    padding: 25px 30px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Texto del título */
+.cartel-huerta p {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Arial Black', Gadget, sans-serif;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px #000;
+}
+
+/* Grilla de botones 2 columnas */
+.opciones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* Botones con estilo videojuego */
+.opciones-grid button {
+    background: linear-gradient(180deg, #8a3ab9 0%, #4c1d95 100%);
+    color: #ffffff;
+    border: 2px solid #1e0b36;
+    border-radius: 10px;
+    padding: 12px 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 0px #1e0b36;
+    transition: transform 0.1s, background 0.2s;
+}
+
+.opciones-grid button:hover {
+    background: linear-gradient(180deg, #9d4edd 0%, #5b21b6 100%);
+    transform: translateY(-2px);
+}
+
+.opciones-grid button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #1e0b36;
+}
+
+/* Botón de Cancelar/Salir diferenciado */
+.opciones-grid button#opt_6 {
+    background: linear-gradient(180deg, #ef4444 0%, #991b1b 100%);
+    border-color: #450a0a;
+    box-shadow: 0 4px 0px #450a0a;
+}
+
+.opciones-grid button#opt_6:hover {
+    background: linear-gradient(180deg, #f87171 0%, #b91c1c 100%);
+}
+
+
+
 #kanep {
     position: absolute;
     top: 160px;
@@ -315,6 +406,67 @@ button:focus-visible {
     justify-content: flex-end;
 }
 
+#cartel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Evita que bloquee la pantalla mientras esté vacío */
+    z-index: 100;
+}
+
+/* El cuadro/cartel estilizado */
+.cartel-pregunta {
+    pointer-events: auto; /* Activa la interacción para los botones */
+    background: #222222;
+    border: 4px solid #ffffff;
+    border-radius: 12px;
+    padding: 20px 30px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.cartel-pregunta p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Botones del cartel */
+.cartel-pregunta button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+/* Botón "No" diferenciado en rojo */
+.cartel-pregunta button#btn_no {
+    background-color: #f44336;
+}
+
+/* Efecto hover en botones */
+.cartel-pregunta button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.cartel-pregunta button:active {
+    transform: scale(0.95);
+}
+
 .pieza {
     position: absolute;
     width: 100%;
@@ -353,3 +505,4 @@ button:focus-visible {
     gap: 10px;
     justify-content: flex-end;
 }
+
