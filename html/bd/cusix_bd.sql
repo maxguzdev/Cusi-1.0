@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-08-2026 a las 03:07:07
+-- Tiempo de generación: 08-09-2026 a las 13:28:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,8 +44,8 @@ CREATE TABLE `post` (
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `nombre_perfil` varchar(100) NOT NULL,
-  `url_img` varchar(500) DEFAULT 'https://i.pinimg.com/originals/c3/57/df/c357df365d98bc295e3bf739052f0115.jpg',
-  `fecha_creacion` datetime DEFAULT current_timestamp()
+  `contraseña` varchar(255) NOT NULL,
+  `correo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -79,7 +79,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
