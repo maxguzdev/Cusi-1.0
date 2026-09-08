@@ -1,3 +1,4 @@
+<?php require_once "../confi_bd.php"; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
