@@ -1,6 +1,24 @@
 <?php 
-session_start();
-require_once "../confi_bd.php"; 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$servidor = "localhost";
+$usuario = "root";
+$clave = "";
+$basededatos = "cusix_bd";
+
+try {
+    
+    $conexion = new PDO("mysql:host=$servidor;dbname=$basededatos;charset=utf8", $usuario, $clave);
+    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Error de conexión: " . $e->getMessage());
+}
 
 if (!isset($_SESSION['id_usuario'])) { 
     header("Location: SignIn.php");
@@ -12,7 +30,7 @@ $mensaje = "";
 $error = "";
 
 try {
-    $stmt = $conexion->prepare("SELECT nombre_perfil, correo FROM usuarios WHERE id_usuario = ?");
+    $stmt = $conexion->prepare("SELECT nombre_perfil, correo FROM usuario WHERE id_usuario = ?");
     $stmt->execute([$user_id]);
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 

@@ -15,16 +15,30 @@ $mensaje = "";
 if (isset($_POST['registro'])) {
     $nombre_perfil = $_POST['nombre_perfil'];
     $correo = $_POST['correo'];
-    $contraseña = $_POST['contraseña'];
+    $contraseña_plana = $_POST['contraseña'];
 
-    $insertardatos = "INSERT INTO usuario (nombre_perfil, correo, contraseña) VALUES ('$nombre_perfil', '$correo', '$contraseña')";
+    $contraseña_encriptada = password_hash($contraseña_plana, PASSWORD_BCRYPT);
 
-    $ejecutarInsertar = mysqli_query($enlace, $insertardatos);
+   
+    $insertardatos = "INSERT INTO usuario (nombre_perfil, correo, contraseña) VALUES (?, ?, ?)";
+ 
+    $stmt = mysqli_prepare($enlace, $insertardatos);
 
-    if ($ejecutarInsertar) {
-        $mensaje = "<p style='color: green;'>¡Usuario registrado con éxito!</p>";
+    if ($stmt) {
+       
+        mysqli_stmt_bind_param($stmt, "sss", $nombre_perfil, $correo, $contraseña_encriptada);
+        
+        $ejecutarInsertar = mysqli_stmt_execute($stmt);
+
+        if ($ejecutarInsertar) {
+            $mensaje = "<p style='color: green;'>¡Usuario registrado con éxito!</p>";
+        } else {
+            $mensaje = "<p style='color: red;'>Error al registrar: " . mysqli_stmt_error($stmt) . "</p>";
+        }
+
+        mysqli_stmt_close($stmt);
     } else {
-        $mensaje = "<p style='color: red;'>Error al registrar: " . mysqli_error($enlace) . "</p>";
+        $mensaje = "<p style='color: red;'>Error al preparar la consulta: " . mysqli_error($enlace) . "</p>";
     }
 }
 ?>
