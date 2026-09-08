@@ -1,4 +1,3 @@
-<?php require_once "../confi_bd.php"; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,10 +12,11 @@
     <a href="index.php">
   <button id="volver" class="botonvolver" >volver</button> 
   </a>
-  <div class="fotoper">
-  <img id="mi-imagen" width="225px" src="../img/perfildefault.png" >
-  <button id="cambiar">cambiar imagen</button>
-</div>
+  <div id="ford">
+    <div class="fotoper">
+        <img id="fotoperfil" width="225px" src="../img/perfildefault.png" >
+        <center><button id="cambiar">cambiar imagen</button></center>
+    </div>
 <div class="info">
 <h1>Nombre:</h1><input type="text">
 <h1>Biografia:</h1><input type="text">
@@ -31,8 +31,10 @@
   <option value="helicoptero apache">helicoptero apache</option>
   <option value="chino">chino</option>
 </select>
-<div class="social-footer">
-            <p style="color: var(--text-secondary); margin-bottom: 0;">Seguinos en nuestras redes:</p>
+</div>
+</body>
+<footer class="social-footer">
+      <p style="color: var(--text-secondary); margin-bottom: 0;">Seguinos en nuestras redes:</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/epic.goy/?hl=es" class="instagram" target="_blank" title="Instagram">
                     <i class="fab fa-instagram"></i>
@@ -44,8 +46,7 @@
                     <i class="fab fa-youtube"></i>
                 </a>
             </div>
-        </div>
-</body>
+</footer>
 <script src="../js/conf.js">
 </script>
 </html>
