@@ -56,7 +56,7 @@
 
     <script src="../js/scrips.js"></script>
 
-    <a href="../incluides/Epic_goy.html">
+    <a href="../incluides/Epic_goy.php">
         <img src="../img/epicgoylog.png" class="epic">
     </a>
 

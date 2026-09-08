@@ -37,7 +37,7 @@ document.addEventListener('click', function (e) {
             }
             break;
 
-        case 'diego':                                          
+        case 'diego':
             const dialog1 = document.getElementById("d1");
             const diego = document.getElementById("diego");
 
@@ -55,26 +55,45 @@ document.addEventListener('click', function (e) {
             }
             break;
 
-        case 'leo':                                          
+        case 'leo':
             const dialogL = document.getElementById("dL");
             const poldo = document.getElementById("leo");
 
             if (dialogL) {
                 dialogL.addEventListener('ended', () => {
-                   //poner algo
-                });                
+
+                    const para = document.createElement("p");
+                    para.innerHTML = "This is a paragraph.";
+                    document.getElementById("cartel").appendChild(para);
+
+                });
                 dialogL.currentTime = 0;
-                dialogL.play()
-                    .then(() => console.log('Playing successfully!'))
-                    .catch(error => console.log('no funciona', error));
+                dialogL.play().catch(error => console.log('no funciona', error));
             }
 
             if (poldo) {
-                poldo.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo_2.png";
+                poldo.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo_2.png"; //falta imagen
 
                 setTimeout(() => {
                     poldo.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo.png";
                 }, 2117);
+            }
+            break;
+
+        case 'kanep':
+            const dialog2 = document.getElementById("d2");
+            const kanep = document.getElementById("kanep");
+
+            if (dialog2) {
+                dialog2.currentTime = 0;
+                dialog2.play().catch(error => console.log('no funciona', error));
+            }
+
+            if (kanep) {
+                kanep.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/"; //falta animación
+                kanep.addEventListener('ended', () => {
+                    kanep.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/kanep_a.png";
+                });
             }
             break;
     }

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
      <link rel="stylesheet" href="../css/epic.css">
     
-<<<<<<< HEAD:html/incluides/Epic_goy.php
     <style>
         :root {
             --bg-color: #A47DAB;
@@ -207,8 +206,6 @@
   transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }   
    </style>
-=======
->>>>>>> 16d34399763ae93202461c9199dbd51191c9d6cb:html/incluides/Epic_goy.html
 </head>
 
 <body>

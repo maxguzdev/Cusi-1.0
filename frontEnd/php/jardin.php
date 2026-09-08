@@ -9,5 +9,6 @@
       <audio src="/CUSI-1.0/frontEnd/mp3/Deam.mp3" id="damn"></audio>
       <img src="/CUSI-1.0/frontEnd/Cusi_style/garden-scr/huerta.png" width="450" id="huerta" class="im-btn" style="cursor: pointer;">
       <img src="/CUSI-1.0/frontEnd/Cusi_style/garden-scr/kanep_a.png" width="350" id="kanep">
+      <audio src="/CUSI-1.0/frontEnd/mp3/dialogo2.mp3" id="d2"></audio>
    </section>
  
