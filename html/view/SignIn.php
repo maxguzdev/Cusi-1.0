@@ -1,3 +1,5 @@
+<?php require_once "../co_up.php"; ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
