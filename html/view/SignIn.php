@@ -1,4 +1,3 @@
-<?php require_once "../co_up.php"; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -10,6 +9,7 @@
      <link rel="icon" href="../img/favicon_cusix.png" type="image/png">
 </head>
 <body>
+    <form action="" method="POST">
 
     <div class="card">
         <h2>Iniciar Sesión</h2>
