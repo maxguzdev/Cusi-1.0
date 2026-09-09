@@ -5,6 +5,12 @@
          <button onclick="irA('incluides/config.php')" class="btn-secundario" id="src"> <img src="/CUSI-1.0/frontEnd/Cusi_style/eng.png"
                width="70"></button>
       </div>
+
+        <div class="cusimios">
+         <img src="/CUSI-1.0/frontEnd/Cusi_style/cusimios.png" width="150">
+         <p id="value"></p> 
+      </div>
+      
        <div id="cartela"></div>
 
       <img src="/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi.png" width="550" id="cusi_a">

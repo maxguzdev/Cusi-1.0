@@ -51,7 +51,7 @@
     <button class="boton-activador" onclick="toggleIntegrante(this)">Maximo Guzman Roles: Diseñador y Administrador de base de datos</button>
     <div class="barra-desplegable">
         <div class="contenido-barra">
-            <p><strong>Biografia:</strong>Hola me llamo Maximo, soy el co-funder de epic goy y trabajo en el area de diseñador y el administrador de base de datos.<a href="https://www.instagram.com/elmaximopeligro/?hl=es" target="_blank">Info Extra</a></p>
+            <p><strong>Biografia:</strong>Hola me llamo Maximo, soy el co-fundador de EPIC GOY, trabajo en el area de diseño y soy el administrador de base de datos.<a href="https://www.instagram.com/elmaximopeligro/?hl=es" target="_blank">Info Extra</a></p>
         </div>
     </div>
 </div>
@@ -61,7 +61,7 @@
     <button class="boton-activador" onclick="toggleIntegrante(this)">Yoel Mamani Roles: Front End</button>
     <div class="barra-desplegable">
         <div class="contenido-barra">
-            <p><strong>Biografia:</strong>Hola me llamo Yoel, trabajo con mi compañero Leon en el Front End.<a href="https://www.instagram.com/y0_el21/?hl=es" target="_blank">Info Extra</a></p>
+            <p><strong>Biografia:</strong>Hola me llamo Yoel, trabajo con mi compañero León en el FrontEnd.<a href="https://www.instagram.com/y0_el21/?hl=es" target="_blank">Info Extra</a></p>
         </div>
     </div>
 </div>
@@ -71,7 +71,7 @@
     <button class="boton-activador" onclick="toggleIntegrante(this)">Samuel Guzman Roles: Tester y Back End</button>
     <div class="barra-desplegable">
         <div class="contenido-barra">
-            <p><strong>Biografia:</strong>Hola soy samuel y trabajo en el backend en cusi con mi compañero mati.<a href="https://ar.china-embassy.gov.cn/esp/" target="_blank">Mas sobre mi</a></p>
+            <p><strong>Biografia:</strong>Hola soy samuel y trabajo en el backend de los proyectos de EPIC GOY con mi compañero mati.<a href="https://ar.china-embassy.gov.cn/esp/" target="_blank">Mas sobre mi</a></p>
         </div>
     </div>
 </div>
@@ -81,7 +81,7 @@
     <button class="boton-activador" onclick="toggleIntegrante(this)">Matias Vilchez Roles: Back End y tester</button>
     <div class="barra-desplegable">
         <div class="contenido-barra">
-            <p><strong>Biografia:</strong>Hello me llamo matias, trabajo en el backend con mi compañero samuel<a href="https://www.instagram.com/paty1.221/?hl=es" target="_blank">Mas sobre mi</a></p>
+            <p><strong>Biografia:</strong>Hola me llamo Matias, trabajo en el backend con mi compañero samuel<a href="https://www.instagram.com/paty1.221/?hl=es" target="_blank">Mas sobre mi</a></p>
         </div>
     </div>
 </div>

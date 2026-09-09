@@ -6,6 +6,11 @@
                     width="70"></button>
         </div>
 
+           <div class="cusimios">
+         <img src="/CUSI-1.0/frontEnd/Cusi_style/cusimios.png" width="150">
+         <p id="value"></p> 
+      </div>
+
         <img src="/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi.png" width="550" id="cusi_a">
         <audio src="/CUSI-1.0/frontEnd/mp3/Deam.mp3" id="damn"></audio>
         <img src="/CUSI-1.0/frontEnd/Cusi_style/room-scr/games.png" width="480" id="minijuegos" class="im-btn" style="cursor: pointer;">

@@ -102,7 +102,6 @@ button:focus-visible {
 
 .campos #nombre {
     font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
-    ;
     font-size: 20px;
     font-weight: 900;
     letter-spacing: 1px;
@@ -115,6 +114,27 @@ button:focus-visible {
     cursor: pointer;
     transition: transform .08s ease, box-shadow .08s ease;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .3);
+}
+
+.cusimios{
+     position: absolute;
+    top: 40px;
+    left: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+#value{
+    position: absolute;
+    top: -25px;
+    left: 172px;
+    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+    font-size: 60px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #000000;
 }
 
 .living {
@@ -233,19 +253,6 @@ button:focus-visible {
     gap: 10px;
     justify-content: flex-end;
 }
-
-
-
-/* Contenedor superpuesto que centra todo en pantalla */
-#cartel {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.55);
-    z-index: 999999 !important;}
 
 /* La tarjeta del cartel */
 .cartel-huerta {
@@ -408,6 +415,7 @@ button:focus-visible {
 
 #cartel {
     position: absolute;
+    
     top: 0;
     left: 0;
     width: 100%;
