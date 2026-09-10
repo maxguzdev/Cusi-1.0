@@ -1,4 +1,5 @@
-let dinero = 67;
+let dinero = JSON.parse(localStorage.getItem("dinero")) || 67;
+
 function economia() {
     const quantity = document.getElementById("value");
 
@@ -7,6 +8,20 @@ function economia() {
     }
 }
 
+function guardarDinero() {
+    localStorage.setItem("dinero", JSON.stringify(dinero));
+    economia();
+}
+
+function gastar(costo) {
+    if (costo > dinero) {
+        console.log("No tenés suficiente dinero");
+        return false; 
+    }
+    dinero -= costo;
+    guardarDinero();
+    return true;
+}
 
 async function irA(url) {
     try {
@@ -30,7 +45,7 @@ document.addEventListener('click', function (e) {
     console.log('clickeaste:', e.target.tagName, e.target.id, e.target.className); //IMPORTANTE, CUANDO EL JUEGO ESTE TERMINADO ESTA LINEA BORRARLA PARA QUE NO OCUPE MUCHA CACHE
 
     switch (e.target.id) {
-        case 'cusi_a':{
+        case 'cusi_a': {
             const deam = document.getElementById("damn");
             const cusi = document.getElementById("cusi_a");
 
@@ -46,9 +61,10 @@ document.addEventListener('click', function (e) {
                     cusi.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi.png";
                 }, 700);
             }
-            break;}
+            break;
+        }
 
-        case 'diego':{
+        case 'diego': {
             const dialog1 = document.getElementById("d1");
             const diego = document.getElementById("diego");
 
@@ -62,13 +78,14 @@ document.addEventListener('click', function (e) {
 
                 setTimeout(() => {
                     diego.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Diego.png";
-                    dinero--;
-                    economia();
+                    gastar(10);
+                    guardarDinero();
                 }, 1117);
             }
-            break;}
+            break;
+        }
 
-        case 'leo':{
+        case 'leo': {
             const dialogL = document.getElementById("dL");
             const poldo = document.getElementById("leo");
 
@@ -100,9 +117,10 @@ document.addEventListener('click', function (e) {
                     poldo.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo.png";
                 }, 2117);
             }
-            break;}
+            break;
+        }
 
-        case 'btn_no':{
+        case 'btn_no': {
             const cartel = document.getElementById("cartel");
             const poldos = document.getElementById("leo");
             const dialogL2 = document.getElementById("dL2");
@@ -114,9 +132,10 @@ document.addEventListener('click', function (e) {
                 dialogL2.play().catch(error => console.log('no funciona', error));
             }
             poldos.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo_3.png";
-            break;}
+            break;
+        }
 
-        case 'kanep':{
+        case 'kanep': {
             const kanepImg = document.getElementById("kanep");
 
             if (kanepImg) {
@@ -143,9 +162,10 @@ document.addEventListener('click', function (e) {
                     kanepImg.style.display = "inline";
                 });
             }
-            break;}
+            break;
+        }
 
-        case 'huerta':{
+        case 'huerta': {
             const huerta = document.getElementById("huerta");
 
             if (huerta) {
@@ -166,7 +186,8 @@ document.addEventListener('click', function (e) {
                         `;
                 }
             }
-            break;}
+            break;
+        }
 
         case 'opt_6': {
             const cancel = document.getElementById("opt_6");
@@ -176,7 +197,7 @@ document.addEventListener('click', function (e) {
             }
             break;
         }
-        
+
 
     }
 });
