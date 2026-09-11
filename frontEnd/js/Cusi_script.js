@@ -16,7 +16,7 @@ function guardarDinero() {
 function gastar(costo) {
     if (costo > dinero) {
         console.log("No tenés suficiente dinero");
-        return false; 
+        return false;
     }
     dinero -= costo;
     guardarDinero();
@@ -136,31 +136,20 @@ document.addEventListener('click', function (e) {
         }
 
         case 'kanep': {
-            const kanepImg = document.getElementById("kanep");
+             const dialog2 = document.getElementById("d2");
+            const kanep = document.getElementById("kanep");
 
-            if (kanepImg) {
-                const ancho = kanepImg.clientWidth || 200;
-                const alto = kanepImg.clientHeight || "auto";
+            if (dialog2) {
+                dialog2.currentTime = 0;
+                dialog2.play().catch(error => console.log('no funciona', error));
+            }
 
-                kanepImg.style.display = "none";
+            if (kanep) {
+                kanep.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/kangif.gif";
 
-                const kanVideo = document.createElement("video");
-                kanVideo.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/video_prueba.mp4";
-                kanVideo.style.width = typeof ancho == 'number' ? `${ancho}px` : ancho;
-                if (alto !== "auto") kanVideo.style.height = `${alto}px`;
-                kanVideo.style.position = "absolute";
-                kanVideo.style.top = "160px";
-                kanVideo.style.left = "150px";
-
-
-                kanepImg.parentNode.insertBefore(kanVideo, kanepImg);
-
-                kanVideo.play().catch(error => console.log('Error al reproducir video:', error));
-
-                kanVideo.addEventListener('ended', () => {
-                    kanVideo.remove();
-                    kanepImg.style.display = "inline";
-                });
+                setTimeout(() => {
+                    kanep.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/kanep_a.png";
+                }, 3820);
             }
             break;
         }
