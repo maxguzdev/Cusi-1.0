@@ -255,7 +255,7 @@ button:focus-visible {
 }
 
 /* La tarjeta del cartel */
-.cartel-huerta {
+.cartelera {
     position: relative;
     top: -240px;
     z-index: 1000000 !important;
@@ -270,7 +270,7 @@ button:focus-visible {
 }
 
 /* Texto del título */
-.cartel-huerta p {
+.cartelera p {
     color: #ffffff;
     font-size: 22px;
     font-weight: bold;
@@ -281,6 +281,12 @@ button:focus-visible {
 
 /* Grilla de botones 2 columnas */
 .opciones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.opciones {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;

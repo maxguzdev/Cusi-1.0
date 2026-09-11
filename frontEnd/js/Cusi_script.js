@@ -136,7 +136,7 @@ document.addEventListener('click', function (e) {
         }
 
         case 'kanep': {
-             const dialog2 = document.getElementById("d2");
+            const dialog2 = document.getElementById("d2");
             const kanep = document.getElementById("kanep");
 
             if (dialog2) {
@@ -149,7 +149,7 @@ document.addEventListener('click', function (e) {
 
                 setTimeout(() => {
                     kanep.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/kanep_a.png";
-                }, 3820);
+                }, 3780);
             }
             break;
         }
@@ -161,7 +161,7 @@ document.addEventListener('click', function (e) {
                 const cartel = document.getElementById("cartela");
                 if (cartel) {
                     cartel.innerHTML = `
-                            <div class="cartel-huerta">
+                            <div class="cartelera">
                                <p>Seleccioná una opción:</p>
                         <div class="opciones-grid">
                             <button id="opt_1">Opción 1</button>
@@ -186,7 +186,32 @@ document.addEventListener('click', function (e) {
             }
             break;
         }
+        case 'minijuegos': {
+            const mini = document.getElementById("minijuegos");
 
+            if (mini) {
+                const cartel = document.getElementById("cartelbi");
+                if (cartel) {
+                    cartel.innerHTML = `
+                            <div class="cartelera">
+                               <p>Seleccioná un minijuego:</p>
+                        <div class="opciones">
+                        <a href="\Cusi-1.0\minijuegos\buscaminas\buscam.html">
+                                <button id=""></button>
+                                </a>
+                            <button id=""></button>
+                            <button id=""></button>
+                            <button id=""></button>
+                            <button id=""></button>
+                            <button id=""></button>
+                            <button id=""></button>
+                        </div>
+                            </div>
+                        `;
+                }
+            }
+            break;
+        }
 
     }
 });
