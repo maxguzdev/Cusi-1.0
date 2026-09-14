@@ -1,3 +1,6 @@
+ <?php
+            session_start();
+            ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,7 +27,7 @@
     <div id="contenedor" class="textito"></div>
 <nav class="sidebar">
   <div class="perfil">
-        <img src="../img/perfildefault.png"
+        <img src="<?= $_SESSION['img'] . "." ?>"
             class="img-perfil">
         <a href="SignUp.php">
             <button id="signup">SIGN UP</button></a>
@@ -45,6 +48,13 @@
     <nav class="sidebar">
         <div class="perfil">
             <img src="../img/perfildefault.png" class="img-perfil">
+            <div class="minombre">
+        <?php
+echo isset($_SESSION) 
+    ? "Preparen el orto que llego: " . $_SESSION['nombre_perfil'] . "<br>" 
+    : "";
+            ?>
+            </div>
             <a href="SignUp.php"><button id="signup">SIGN UP</button></a>
             <a href="SignIn.php"><button id="signin">SIGN IN</button></a>
         </div>

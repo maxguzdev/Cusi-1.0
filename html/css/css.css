@@ -32,13 +32,15 @@
   width: 380px;
   height: 100vh;
   background-color: #ffffff;
-  color: #ffffff;
+  color: black;
   padding-top: 24px;
   position: fixed;
   top: 0;
   left: 0;
   box-sizing: border-box;
 }
+
+
 
 .sidebar h2 {
   font-size: 1.25rem;

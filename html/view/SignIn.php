@@ -17,13 +17,13 @@
         <form action="" method="POST">
             <div>
                 <label for="email">Correo electrónico:</label><br>
-                <input type="email" id="email" name="correo" required placeholder="ejemplo@correo.com" value="pablo@gmail.com">
+                <input type="email" id="email" name="correo" required placeholder="ejemplo@correo.com" >
             </div>
             <br>
 
             <div>
                 <label for="password">Contraseña:</label><br>
-                <input type="password" id="password" name="contraseña" required  value="pablopablo">
+                <input type="password" id="password" name="contraseña" required >
             </div>
             <br>
 

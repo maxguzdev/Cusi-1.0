@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['nombre_perfil'])) {
+        header("location: SignIn.php");
+    }
+        
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,12 +21,18 @@
   </a>
   <div id="ford">
     <div class="fotoper">
-        <img id="fotoperfil" width="225px" src="../img/perfildefault.png" >
-        <center><button id="cambiar">cambiar imagen</button></center>
+        <img id="fotoperfil" width="225px" src="<?= $_SESSION['img'] . "." ?>" >
+        <a href="../logout.php">Cerrar sesión</a>
     </div>
 <div class="info">
-<h1>Nombre:</h1><input type="text">
-<h1>Biografia:</h1><input type="text">
+    <h1>Nombre:</h1><?= 
+    isset($_SESSION['nombre_perfil']) === NULL
+     ? 'window.location.href = SignIn.php'
+     : $_SESSION['nombre_perfil']
+        
+        
+    ?>
+    <h1>Biografía:</h1><?= $_SESSION['bio'] . "." ?>
 </div>
 <label for="genero">elije tu genero:</label>
 
