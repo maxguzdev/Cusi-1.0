@@ -196,9 +196,10 @@ document.addEventListener('click', function (e) {
                             <div class="cartelera">
                                <p>Seleccioná un minijuego:</p>
                         <div class="opciones">
-                        <a href="\Cusi-1.0\minijuegos\buscaminas\buscam.html">
-                                <button id=""></button>
-                                </a>
+                            <a href="/Cusi-1.0/minijuegoss/bm/buscaminitas.php">
+                            <button></button>
+                              </a>
+                            <button id=""></button>
                             <button id=""></button>
                             <button id=""></button>
                             <button id=""></button>
