@@ -26,7 +26,7 @@
 <select id="genero" class="gener" name="elije tu genero">
   <option value="hombre">hombre</option>
   <option value="boliviano">boliviano</option>
-  <option value="sixsevenbaby">sixsevenbaby</option>
+  <option value="fiscella">fiscella</option>
   <option value="mujer">mujer</option>
   <option value="helicoptero apache">helicoptero apache</option>
   <option value="chino">chino</option>
