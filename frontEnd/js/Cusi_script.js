@@ -199,13 +199,18 @@ document.addEventListener('click', function (e) {
                             <a href="/Cusi-1.0/minijuegoss/bm/buscaminitas.php">
                             <button></button>
                               </a>
-                            <button id=""></button>
-                            <button id=""></button>
-                            <button id=""></button>
-                            <button id=""></button>
-                            <button id=""></button>
-                            <button id=""></button>
-                            <button id=""></button>
+                            <a href="/Cusi-1.0/minijuegoss/blackjack/luigi-blackjack-main/index.html">
+                            <button></button>
+                              </a>
+                            <a href="/Cusi-1.0/minijuegoss/poker/PokoJogo-main/index.html">
+                            <button></button>
+                              </a>
+                            <a href="/Cusi-1.0/minijuegoss/ruleta/Roulette-main/index.html">
+                            <button></button>
+                              </a>
+                              <a href="/Cusi-1.0/minijuegoss/tragaperras/Juego_Tragaperras-main/index.html">
+                            <button></button>
+                              </a>
                         </div>
                             </div>
                         `;
