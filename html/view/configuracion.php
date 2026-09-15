@@ -23,6 +23,7 @@
     <div class="fotoper">
         <img id="fotoperfil" width="225px" src="<?= $_SESSION['img'] . "." ?>" >
         <a href="../logout.php">Cerrar sesión</a>
+        <button >editar</button> 
     </div>
 <div class="info">
     <h1>Nombre:</h1><?= 

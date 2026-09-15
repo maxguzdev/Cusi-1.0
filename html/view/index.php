@@ -50,14 +50,16 @@
             <img src="../img/perfildefault.png" class="img-perfil">
             <div class="minombre">
         <?php
-echo isset($_SESSION) 
+echo isset($_SESSION['nombre_perfil']) 
     ? "Preparen el orto que llego: " . $_SESSION['nombre_perfil'] . "<br>" 
     : "";
-            ?>
-            </div>
-            <a href="SignUp.php"><button id="signup">SIGN UP</button></a>
-            <a href="SignIn.php"><button id="signin">SIGN IN</button></a>
-        </div>
+?>
+<?php
+echo isset($_SESSION['nombre_perfil'])
+    ? '<a href="../logout.php">Cerrar sesión</a>'
+    : '<a href="SignUp.php"><button id="signup">SIGN UP</button></a> <a href="SignIn.php"><button id="signin">SIGN IN</button></a>';
+?>
+       
         <ul>
             <li><a href="#inicio" class="active">Inicio</a></li>
             <li><a href="configuracion.php">Configuración</a></li>
