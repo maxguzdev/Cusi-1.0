@@ -14,12 +14,17 @@
 
 
     <div class="main"> 
+        <div class="texto">
+        <p>FACIL</p>
+        <p>MEDIO</p>
+        <p>DIFICIL</p>
+        </div>
         <div class="seccion-dificultad">
                 <p class="titulo-dificultad">DIFICULTAD:</p>
                 <div class="cusis-columna">
-                    <img src="/Cusi-1.0/frontEnd/Cusi_style/CUSI_skins/kanep.png" width="200px" class="btn-dificultad" data-tamano="8" data-bombas="10">
-                    <img src="/Cusi-1.0/frontEnd/Cusi_style/CUSI_skins/arev.png" width="200px" class="btn-dificultad" data-tamano="10" data-bombas="20">
-                    <img src="/Cusi-1.0/frontEnd/Cusi_style/CUSI_skins/ares.png" width="200px" class="btn-dificultad" data-tamano="12" data-bombas="35">
+                    <img src="/Cusi-1.0/frontEnd/Cusi_style/CUSI_skins/kanep.png" width="200px" class="btn-dificultad" id="fac" data-tamano="8" data-bombas="10">
+                    <img src="/Cusi-1.0/frontEnd/Cusi_style/CUSI_skins/arev.png" width="200px" class="btn-dificultad" id="med" data-tamano="10" data-bombas="20">
+                    <img src="/Cusi-1.0/frontEnd/Cusi_style/CUSI_skins/ares.png" width="200px" class="btn-dificultad" id="dif" data-tamano="12" data-bombas="35">
                 </div>
             </div>
         <div class="contenedor-juego">
