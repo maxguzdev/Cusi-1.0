@@ -181,7 +181,7 @@ function NewGame(){
 
     const img_make_your_bet = document.createElement("img");
     img_make_your_bet.setAttribute("id", "img_make_your_bet");
-    img_make_your_bet.setAttribute("src", "image/Make your bets.png");
+    img_make_your_bet.setAttribute("src", "image/Make your beats.png");
     txt_make_your_bet.appendChild(img_make_your_bet);
 
     const img_start_button = document.createElement("img");
