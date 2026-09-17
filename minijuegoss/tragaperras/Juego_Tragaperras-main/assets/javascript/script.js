@@ -2,8 +2,13 @@
 Copyright (c) 2024. Alejandro Alberto Jiménez Brundin
 =======================================================*/
 
+
 let creditos = 67;
 
+// --- MOSTRAR LOS CRÉDITOS AL CARGAR LA PÁGINA ---
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("cuentaCreditos").innerHTML = creditos;
+});
 function insertarMonedas() {
   creditos++;
   document.getElementById("cuentaCreditos").innerHTML = creditos + "<span style='color: red; font-size: smaller;'> +1 </span>";
@@ -16,7 +21,7 @@ function rand(n) {
 
 function tirar() {
   if (creditos === 0) {
-    document.getElementById("mensaje").innerHTML = "Oh no perdiste tu casa, Roba dinero y Vuelve.";
+    document.getElementById("mensaje").innerHTML = "Oh no perdiste tu casa, ¡inténtalo de nuevo!";
     return;
   }
 
@@ -93,9 +98,27 @@ function verificarResultados(slot1, slot2, slot3) {
   document.getElementById("cuentaCreditos").innerHTML = creditos;
 }
 
+
+const sonidoFondo = new Audio('./assets/song/fondosong.mp3');
+sonidoFondo.loop = true; 
+ 
+let musicaReproduciendose = false;
+
+function iniciarMusicaFondo() {
+  if (!musicaReproduciendose) {
+    sonidoFondo.play().then(() => {
+      musicaReproduciendose = true;
+    }).catch(error => {
+      console.log("Esperando interacción del usuario para reproducir audio:", error);
+    });
+  }
+}
+
 const sonidoInicio = new Audio('./assets/song/maquinitainicio.mp3');
 
 document.getElementById('botonTirar').addEventListener('click', () => {
+  iniciarMusicaFondo(); // Activa la música si es el primer clic
+
   sonidoInicio.currentTime = 0; 
   sonidoInicio.play().catch(error => {
     console.log("No Funciono:", error);
@@ -110,6 +133,8 @@ document.getElementById('botonTirar').addEventListener('click', () => {
 const sonidocoin = new Audio('./assets/song/moneda.mp3');
 
 document.getElementById('insertarMoneda').addEventListener('click', () => {
+  iniciarMusicaFondo(); 
+
   sonidocoin.currentTime = 0; 
   sonidocoin.play().catch(error => {
     console.log("No Funciono:", error);

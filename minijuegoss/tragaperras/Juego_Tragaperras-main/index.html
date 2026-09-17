@@ -14,7 +14,6 @@
 <body>
     <div class="cusimios-hud">
         <img src="/Cusi-1.0/frontEnd/Cusi_style/cusimios.png" class="icono-moneda-hud">
-        <p id="creditos">Créditos: <span id="cuentaCreditos">0</span></p>
     </div>
     <div class="container">
         <button class="button" data-text="Awesome">
@@ -28,11 +27,20 @@
         </div>
         <button id="botonTirar" onclick="tirar()">Tirada</button>
         <button id="insertarMoneda" onclick="insertarMonedas()">Insertar moneda</button>
-        <p id="creditos">Créditos: <span id="cuentaCreditos">0</span></p>        
+        <p id="creditos">Créditos: <span id="cuentaCreditos"></span></p>     
         <p id="mensaje"></p>
-        <video muted autoplay loop>
+        <video muted autoplay loop class="videoback">
         <source src="assets/img/video/Silent_Agent_Project_V1.mp4">
     </video>
+    
+   <img src="assets/img/celular.png" class="celular" >
+
+   <div class="celularvid">
+ <video muted autoplay loop class="videocel">
+        <source src="assets/img/video/videocel.mp4">
+        </video>
+        </div>
+  
     <div id="capa"></div>
     </div>         
     <script src="./assets/javascript/script.js"></script>
