@@ -70,31 +70,23 @@
             <h2>Cómo Jugar al Buscaminas</h2>
             <div class="modal-body">
                 <div class="instruccion">
-                    <h3>🎯 Objetivo</h3>
-                    <p>Abre todas las casillas que NO contienen bombas sin pisar ninguna.</p>
+                    <h3>Objetivo</h3>
+                    <p>Abre todas las casillas que no contienen bombas sin pisar ninguna.</p>
                 </div>
                 <div class="instruccion">
-                    <h3>🖱️ Controles</h3>
-                    <ul>
-                        <li><strong>Click izquierdo:</strong> Abre una casilla</li>
-                        <li><strong>Click derecho (o tap largo):</strong> Coloca/quita una bandera 🚩</li>
-                        <li><strong>Doble click:</strong> Si ya abriste una casilla con número, abre alrededor automáticamente</li>
-                    </ul>
-                </div>
-                <div class="instruccion">
-                    <h3>🔢 Los Números</h3>
+                    <h3>Los Números</h3>
                     <p>Cada número indica cuántas bombas hay en las 8 casillas alrededor.</p>
                 </div>
                 <div class="instruccion">
-                    <h3>🚩 Las Banderas</h3>
-                    <p>Usa banderas para marcar dónde crees que están las bombas. ¡Pero no te equivoques!</p>
+                    <h3>Las Banderas</h3>
+                    <p>Usa banderas para marcar dónde crees que están las bombas.</p>
                 </div>
                 <div class="instruccion">
-                    <h3>⚡ Primer Click</h3>
+                    <h3>Primer Click</h3>
                     <p>El primer click SIEMPRE cae en zona segura, así no pierdes en el primer intento.</p>
                 </div>
                 <div class="instruccion">
-                    <h3>🎖️ Victoria</h3>
+                    <h3>Victoria</h3>
                     <p>Ganas cuando abres todas las casillas sin bomba Y marcas correctamente todas las bombas.</p>
                 </div>
             </div>

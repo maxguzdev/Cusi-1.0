@@ -23,6 +23,7 @@ let casillas = [];
 let finPartida = false;
 let primerClick = true;     // => true hasta que se hace el primer clic de la partida
 let juegoIniciado = false;  // => true cuando se selecciona dificultad
+let recompensaVictoria = 20; // => monedas que se dan al ganar, según la dificultad elegida
 
 function obtenerVecinos(i) {
     const estaBordeIzq = (i % width === 0);
@@ -178,9 +179,9 @@ function compruebaPartida() {
             }
         });
 
-        // Recompensa: tantas monedas como bombas tenía la dificultad elegida
-        // (fácil=20, medio=30, difícil=50), así premia más el riesgo mayor.
-        const recompensa = numBombas;
+        // Recompensa: fija por dificultad (fácil=20, medio=35, difícil=50),
+        // seteada junto con width/numBombas al elegir dificultad.
+        const recompensa = recompensaVictoria;
         if (typeof ganarDinero === 'function') {
             ganarDinero(recompensa);
         }
@@ -294,14 +295,17 @@ document.addEventListener('click', function (e) {
         case 'fac': 
             width = 10; 
             numBombas = 20;
+            recompensaVictoria = 20;
             break;
         case 'med': 
             width = 12; 
             numBombas = 30;
+            recompensaVictoria = 35;
             break;
         case 'dif': 
             width = 14; 
             numBombas = 50;
+            recompensaVictoria = 50;
             break;
         default:
             return;
