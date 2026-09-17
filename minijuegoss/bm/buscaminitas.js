@@ -6,6 +6,14 @@ const juego = document.querySelector('.juego');
 const resultado = document.querySelector('.resultado-juego');
 const contadorBanderas = document.getElementById('num-banderas');
 const contadorBanderasRestantes = document.getElementById('banderas-restantes');
+const placeholder = document.getElementById('placeholder');
+const btnRestart = document.getElementById('btn-restart');
+const btnInfo = document.getElementById('btn-info');
+const modalOverlay = document.getElementById('modal-overlay');
+const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+
+// Muestra el dinero guardado apenas carga la página (Cusi_script.js ya lo trae de localStorage)
+if (typeof economia === 'function') economia();
 
 // Variables GLOBALES con valores por defecto
 let width = 10;             // => Tamaño de la grilla (10x10)
@@ -13,6 +21,58 @@ let numBombas = 20;         // => Cantidad de bombas
 let numBanderas = 0;
 let casillas = [];
 let finPartida = false;
+let primerClick = true;     // => true hasta que se hace el primer clic de la partida
+let juegoIniciado = false;  // => true cuando se selecciona dificultad
+
+function obtenerVecinos(i) {
+    const estaBordeIzq = (i % width === 0);
+    const estaBordeDech = (i % width === width - 1);
+    const vecinos = [];
+
+    if (i > 0 && !estaBordeIzq) vecinos.push(i - 1);
+    if (i < (width * width - 1) && !estaBordeDech) vecinos.push(i + 1);
+    if (i >= width) vecinos.push(i - width);
+    if (i >= width && !estaBordeIzq) vecinos.push(i - width - 1);
+    if (i >= width && !estaBordeDech) vecinos.push(i - width + 1);
+    if (i < width * (width - 1)) vecinos.push(i + width);
+    if (i < width * (width - 1) && !estaBordeIzq) vecinos.push(i + width - 1);
+    if (i < width * (width - 1) && !estaBordeDech) vecinos.push(i + width + 1);
+
+    return vecinos;
+}
+
+function colocarBombas(indiceClickeado) {
+    // La celda clickeada y sus vecinas quedan afuera del sorteo de minas,
+    // así el primer clic siempre cae en zona segura y con espacio para despejar.
+    const excluidos = new Set([indiceClickeado, ...obtenerVecinos(indiceClickeado)]);
+    let disponibles = [];
+
+    for (let i = 0; i < casillas.length; i++) {
+        if (!excluidos.has(i)) disponibles.push(i);
+    }
+
+    // Por si algún día una dificultad tuviera más bombas que celdas disponibles
+    // fuera de la zona segura, se cae de nuevo a excluir solo la celda clickeada.
+    if (disponibles.length < numBombas) {
+        disponibles = [];
+        for (let i = 0; i < casillas.length; i++) {
+            if (i !== indiceClickeado) disponibles.push(i);
+        }
+    }
+
+    // Barajamos y tomamos las primeras numBombas celdas disponibles
+    for (let i = disponibles.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [disponibles[i], disponibles[j]] = [disponibles[j], disponibles[i]];
+    }
+
+    disponibles.slice(0, numBombas).forEach((i) => {
+        casillas[i].classList.remove('vacio');
+        casillas[i].classList.add('bomba');
+    });
+
+    añadeNumeros();
+}
 
 function añadeNumeros() {
     for (let i = 0; i < casillas.length; i++) {
@@ -77,38 +137,55 @@ function bomba(casillaClickeada) {
 }
 
 function añadirBandera(casilla) {
-    if (finPartida) return;
+    if (finPartida || casilla.classList.contains('marcada')) return;
 
-    if (!casilla.classList.contains('marcada') && numBanderas < numBombas) {
-        if (!casilla.classList.contains('bandera')) {
-            casilla.classList.add('bandera');
-            casilla.innerHTML = '🚩';
-            numBanderas++;
-            actualizaNumBanderas();
-            compruebaPartida();
-        } else {
-            casilla.classList.remove('bandera');
-            casilla.innerHTML = '';
-            numBanderas--;
-            actualizaNumBanderas();
-        }
+    if (casilla.classList.contains('bandera')) {
+        // Sacar la bandera siempre está permitido, sin importar el límite
+        casilla.classList.remove('bandera');
+        casilla.innerHTML = '';
+        numBanderas--;
+        actualizaNumBanderas();
+    } else if (numBanderas < numBombas) {
+        // Solo poner una bandera nueva si no se llegó al límite
+        casilla.classList.add('bandera');
+        casilla.innerHTML = '🚩';
+        numBanderas++;
+        actualizaNumBanderas();
+        compruebaPartida();
     }
 }
 
 function compruebaPartida() {
     let aciertos = 0;
-    let casillasReveladas = 0;
 
     for (let i = 0; i < casillas.length; i++) {
-        if (casillas[i].classList.contains('marcada')) casillasReveladas++;
         if (casillas[i].classList.contains('bandera') && casillas[i].classList.contains('bomba')) aciertos++;
     }
 
-    // Ganas si: TODAS las banderas están en bombas Y TODAS las no-bombas están reveladas
-    const casillasNoBomasTotales = (width * width - numBombas);
-    if (aciertos === numBombas && casillasReveladas === casillasNoBomasTotales) {
+    // Ganas apenas todas las bombas están marcadas con bandera.
+    // Como el límite de banderas es numBombas, si aciertos === numBombas
+    // significa que las 20 banderas están exactamente sobre las 20 bombas
+    // (no puede haber ninguna bandera "de más" en una casilla segura).
+    if (aciertos === numBombas) {
         finPartida = true;
-        resultado.textContent = 'Muy bien GANASTE!!!';
+
+        // Revela el resto del tablero para que se vea completo
+        casillas.forEach((casilla) => {
+            if (!casilla.classList.contains('bomba') && !casilla.classList.contains('marcada')) {
+                casilla.classList.add('marcada');
+                const total = casilla.getAttribute('data-bombas');
+                if (total != 0) casilla.innerHTML = total;
+            }
+        });
+
+        // Recompensa: tantas monedas como bombas tenía la dificultad elegida
+        // (fácil=20, medio=30, difícil=50), así premia más el riesgo mayor.
+        const recompensa = numBombas;
+        if (typeof ganarDinero === 'function') {
+            ganarDinero(recompensa);
+        }
+
+        resultado.innerHTML = `Muy bien GANASTE!!! +${recompensa} <img src="/Cusi-1.0/frontEnd/Cusi_style/cusimios.png" class="icono-moneda-resultado">`;
         resultado.classList.add('back-green');
     }
 }  // ✅ BUG 3 CORREGIDO
@@ -121,6 +198,11 @@ function actualizaNumBanderas() {
 function click(casilla) {
     if (casilla.classList.contains('marcada') || casilla.classList.contains('bandera') || finPartida) return;
 
+    if (primerClick) {
+        colocarBombas(parseInt(casilla.id));
+        primerClick = false;
+    }
+
     if (casilla.classList.contains('bomba')) {
         bomba(casilla);
     } else {
@@ -128,10 +210,12 @@ function click(casilla) {
         if (total != 0) {
             casilla.classList.add('marcada');
             casilla.innerHTML = total;
+            compruebaPartida();
             return;
         }
         casilla.classList.add('marcada');
         revelarCasillas(casilla);
+        compruebaPartida();
     }
 }
 
@@ -147,19 +231,21 @@ function crearJuego() {
     casillas = [];
     finPartida = false;
     numBanderas = 0;
+    primerClick = true;
+    juegoIniciado = true;
+
+    // Ocultar placeholder cuando se inicia el juego
+    placeholder.classList.add('hidden');
 
     juego.style.width = (width * 4) + 'rem';
     resultado.style.width = (width * 4) + 'rem';
 
-    const arrayBombas = Array(numBombas).fill('bomba');
-    const arrayVacios = Array(width * width - numBombas).fill('vacio');
-    const arrayCompleto = arrayVacios.concat(arrayBombas);
-    arrayCompleto.sort(() => Math.random() - 0.5);
-
+    // Todavía no hay minas: el tablero arranca 100% vacío.
+    // Las minas se reparten en colocarBombas() cuando ocurre el primer clic.
     for (let i = 0; i < width * width; i++) {
         const casilla = document.createElement('div');
         casilla.setAttribute('id', i);
-        casilla.classList.add(arrayCompleto[i]);
+        casilla.classList.add('vacio');
         juego.appendChild(casilla);
         casillas.push(casilla);
 
@@ -171,10 +257,38 @@ function crearJuego() {
         casilla.addEventListener('dblclick', (event) => dobleClick(event.target));
     }
 
-    añadeNumeros();
     actualizaNumBanderas();
 }
 
+// Función para abrir el modal de info
+function abrirModal() {
+    modalOverlay.classList.add('activo');
+}
+
+// Función para cerrar el modal de info
+function cerrarModal() {
+    modalOverlay.classList.remove('activo');
+}
+
+// Event listeners para los botones del header
+btnInfo.addEventListener('click', abrirModal);
+btnCerrarModal.addEventListener('click', cerrarModal);
+
+// Cerrar modal si se hace click afuera
+modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+        cerrarModal();
+    }
+});
+
+// Botón de restart: reinicia el juego con la dificultad actual
+btnRestart.addEventListener('click', () => {
+    if (juegoIniciado) {
+        crearJuego();
+    }
+});
+
+// Event listener para los botones de dificultad
 document.addEventListener('click', function (e) {
     switch (e.target.id) {
         case 'fac': 

@@ -23,6 +23,24 @@ function gastar(costo) {
     return true;
 }
 
+function ganarDinero(cantidad) {
+    dinero += cantidad;
+    guardarDinero();
+    return dinero;
+}
+
+// Si venimos de un minijuego con "?volver=NOMBRE" en la URL (por ejemplo
+// index.html?volver=pieza), apenas carga la página se pide ese fragmento
+// con irA() y se pone en #content, igual que hacen los botones del juego.
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const volverA = params.get('volver');
+
+    if (volverA) {
+        irA(`php/${volverA}.php`);
+    }
+});
+
 async function irA(url) {
     try {
         const response = await fetch(url, {
@@ -197,7 +215,7 @@ document.addEventListener('click', function (e) {
                                <p>Seleccioná un minijuego:</p>
                         <div class="opciones">
                             <a href="/Cusi-1.0/minijuegoss/bm/buscaminitas.php">
-                            <button></button>
+                            <button class="opcion-buscaminas"><span class="etiqueta-juego">Buscaminas</span></button>
                               </a>
                             <a href="/Cusi-1.0/minijuegoss/blackjack/luigi-blackjack-main/index.html">
                             <button></button>
