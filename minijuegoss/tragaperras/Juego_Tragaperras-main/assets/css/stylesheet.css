@@ -92,7 +92,7 @@ body {
   cursor: pointer;
   --border-right: 6px;
   --text-stroke-color: rgba(0, 0, 0, 0.6);
-  --animation-color: #37ff8b;
+  --animation-color: #7216eb;
   --fs-size: 2em;
   letter-spacing: 3px;
   text-decoration: none;
@@ -160,15 +160,36 @@ position: absolute;
   border-radius: 30px;
 }
 
-.videocel{
+.videocel {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;         
+  width: 100%;
+  height: 100%;        
   object-fit: cover;    
+  object-position: center;
   z-index: -1;
 }
+.icono-moneda-hud {
+    width: 40px; 
+    height: auto; 
+    vertical-align: middle; 
+  }
 
+  .boton-mini {
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.boton-mini img {
+    display: block;
+}
 /*=======================================================
 Copyright (c) 2024. Alejandro Alberto Jiménez Brundin
 =======================================================*/
