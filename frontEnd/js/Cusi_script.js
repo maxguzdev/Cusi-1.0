@@ -1,4 +1,4 @@
-let dinero = JSON.parse(localStorage.getItem("dinero")) || 67;
+let dinero = JSON.parse(localStorage.getItem("dinero")) || 0;
 
 function economia() {
     const quantity = document.getElementById("value");
@@ -218,7 +218,7 @@ document.addEventListener('click', function (e) {
                             <button class="opcion-buscaminas"><span class="etiqueta-juego">Buscaminas</span></button>
                               </a>
                             <a href="/Cusi-1.0/minijuegoss/blackjack/luigi-blackjack-main/index.html">
-                            <button></button>
+                            <button class="opcion-blackjack"><span class="etiqueta-juego">Blackjack</span></button>
                               </a>
                             <a href="/Cusi-1.0/minijuegoss/poker/PokoJogo-main/index.html">
                             <button></button>

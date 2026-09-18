@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cusi - blackjack</title>
+    <link rel="icon" href="/Cusi-1.0/frontEnd/Cusi_style/favicon_cusi.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,14 +26,19 @@
     </div>
 
     <div id="choix_paquets">
-        <label id="label_paquets">Nombre de paquets : 1</label>
+        <label id="label_paquets">Cantidad de mazos : 1</label>
         <input type="range" id="slider_paquets" min="1" max="10" value="1" oninput="UpdateSlider(this.value)">
         <div onclick="CreateMainDeck(parseInt(document.getElementById('slider_paquets').value))">
-            Play
+            Jugar
         </div>
     </div>
 
     <div id="timer">00:00</div>
+
+    <div id="menu-botones">
+        <a href="../../../frontEnd/index.html?volver=pieza" class="bouton_action boton-mini" id="btn-volver-bj"><img src="/CUSI-1.0/frontEnd/Cusi_style/left.png" width="30"></a>
+        <button class="bouton_action boton-mini" id="btn-info-bj">?</button>
+    </div>
     
     <img id="img_speaker" src="image/speaker off.png" onclick="PlaySong()" alt="">
 
@@ -88,18 +94,61 @@
         <div calss="hand-container"></div>
     </div>
 
-    <img id="luigi" src="image/Luigi Transparent v2.png">
+    <img id="luigi" src="image//Luigi Transparent v2.png">
+
+    <img id="darwin" src="image//background/Darwin.gif" alt="Darwin pateando las tragaperras">
 
     
     
     <div id="affichage_argent_mise">
-        <div class="ligne"> <div id="affichage_argent">  50X </div> <img class="icone_piece" src="image/piece.png"> </div>
-        <div class="ligne"> <div id="affichage_mise"> BET : 0X </div> <img class="icone_piece" src="image/piece.png"> </div>
+        <div class="ligne"> <div id="affichage_argent">  50X </div> <img class="icone_piece" src="/CUSI-1.0/frontEnd/Cusi_style/cusimios.png"> </div>
+        <div class="ligne"> <div id="affichage_mise"> APUESTA : 0X </div> <img class="icone_piece" src="/CUSI-1.0/frontEnd/Cusi_style/cusimios.png"> </div>
     </div>    
 
 
     </div>
     <div id="infos"></div>
+
+    <!-- Modal de Info (Cómo Jugar) -->
+    <div class="modal-overlay-bj" id="modal-overlay-bj">
+        <div class="modal-contenido-bj">
+            <button class="modal-cerrar-bj" id="btn-cerrar-modal-bj">✕</button>
+            <h2>Cómo Jugar al Blackjack</h2>
+            <div class="modal-body-bj">
+                <div class="instruccion-bj">
+                    <h3>🎯 Objetivo</h3>
+                    <p>Sumar lo más cerca posible de 21 sin pasarte, y ganarle a la banca.</p>
+                </div>
+                <div class="instruccion-bj">
+                    <h3>🃏 Valor de las cartas</h3>
+                    <p>Las figuras (J, Q, K) valen 10. El As vale 11 o 1, lo que más te convenga. El resto vale su número.</p>
+                </div>
+                <div class="instruccion-bj">
+                    <h3>💰 Apostar</h3>
+                    <p>Antes de repartir, elegí tus fichas para armar tu apuesta. Podés apostar todo con la ficha "ALL IN".</p>
+                </div>
+                <div class="instruccion-bj">
+                    <h3>🎮 Tus opciones en cada mano</h3>
+                    <ul>
+                        <li><strong>Pedir:</strong> te dan una carta más</li>
+                        <li><strong>Plantarse:</strong> te quedás con tu mano actual</li>
+                        <li><strong>Doblar:</strong> duplicás tu apuesta y recibís una sola carta más</li>
+                        <li><strong>Dividir:</strong> si tenés un par, lo separás en dos manos distintas</li>
+                    </ul>
+                </div>
+                <div class="instruccion-bj">
+                    <h3>🏦 La banca</h3>
+                    <p>La banca pide cartas automáticamente hasta llegar a 17 o más.</p>
+                </div>
+                <div class="instruccion-bj">
+                    <h3>🏆 Blackjack</h3>
+                    <p>Si tus primeras dos cartas suman 21 (As + carta de valor 10), es Blackjack y paga 2.5 veces tu apuesta.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../frontEnd/js/Cusi_script.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

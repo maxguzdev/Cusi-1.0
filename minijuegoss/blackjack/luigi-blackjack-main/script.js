@@ -29,8 +29,9 @@ let current_hand_index = 0;
 // Pour savoir si un As a déjà été splitté (on ne split les As qu'une fois)
 let split_as_done = false;
 
-let money = 50; // argent du joueur
+let money = (typeof dinero !== 'undefined') ? dinero : 50; // arranca con el dinero real del jugador
 let money_bet = 0; // argent misé
+DisplayMoney(); // refleja el dinero real ni bien carga, en vez del "50X" fijo del HTML
 
 let casino_theme = new Audio("song/Luigis Casino from Mario Bros Nintendo DS.mp3",); //son joué en arrière plan
 
@@ -105,6 +106,12 @@ function PlaySong(){
 // AFFICHAGE
 // ============================================================
 function DisplayMoney(){
+    // Sincroniza las fichas del blackjack con el dinero real del jugador
+    // (compartido con el resto del juego, vía Cusi_script.js)
+    if (typeof dinero !== 'undefined') {
+        dinero = money;
+        if (typeof guardarDinero === 'function') guardarDinero();
+    }
     affichage_argent.innerHTML = money + "X";
 }
 
@@ -113,7 +120,7 @@ function DisplayInfo(content){
 }
 
 function DisplayBet(){
-    affichage_mise.innerText = "BET : " + money_bet +"X";
+    affichage_mise.innerText = "APUESTA : " + money_bet +"X";
 }
 
 
@@ -121,7 +128,7 @@ function DisplayBet(){
 // DECK ET NOUVELLE PARTIE
 // ============================================================
 function UpdateSlider(value) {
-    document.getElementById("label_paquets").innerText = "Nombre de paquets : " + value;
+    document.getElementById("label_paquets").innerText = "Cantidad de mazos : " + value;
 }
 
 function CreateMainDeck(amount){
@@ -268,16 +275,16 @@ function DisplayAllHands() {
             const totalDiv = document.createElement("div");
             totalDiv.setAttribute("class", "hand-total");
             totalDiv.innerText = Calculate(player_hand[i]);
-            if (hand_statement[i] == "out") totalDiv.innerText += " Out !";
-            else if (hand_statement[i] == "blackjack") totalDiv.innerText += " BLACKJACK !";
-            else if (hand_statement[i] == "stand") totalDiv.innerText += " Stand !";
+            if (hand_statement[i] == "out") totalDiv.innerText += " ¡Te pasaste!";
+            else if (hand_statement[i] == "blackjack") totalDiv.innerText += " ¡BLACKJACK!";
+            else if (hand_statement[i] == "stand") totalDiv.innerText += " ¡Plantado!";
             handDiv.appendChild(totalDiv);
         }
     }
 
     // Mettre à jour le total de la main courante
     if (player_hand[current_hand_index]) {
-        interface_player_total.innerText = "Joueur = " + Calculate(player_hand[current_hand_index]);
+        interface_player_total.innerText = "Jugador = " + Calculate(player_hand[current_hand_index]);
     }
 }
 
@@ -302,7 +309,7 @@ function DisplayBankHand(cacher_deuxieme = false) {
         totalDiv.innerText = bank_points + " ?";
         interface_bank_hand.appendChild(totalDiv);
 
-        interface_bank_total.innerText = "Banque = " + bank_points;
+        interface_bank_total.innerText = "Banca = " + bank_points;
     } else {
         for (let i = 0; i < bank_hand.length; i++) {
             const display_card = document.createElement("img");
@@ -315,7 +322,7 @@ function DisplayBankHand(cacher_deuxieme = false) {
         totalDiv.setAttribute("class", "hand-total");
         totalDiv.innerText = Calculate(bank_hand);
         interface_bank_hand.appendChild(totalDiv);
-        interface_bank_total.innerText = "Banque = " + Calculate(bank_hand);
+        interface_bank_total.innerText = "Banca = " + Calculate(bank_hand);
     }
 }
 
@@ -331,7 +338,7 @@ function DisplayControls(indice_main) {
         player_replay.setAttribute("id", "player-replay");
         player_replay.setAttribute("class", "bouton_action");
         player_replay.setAttribute("onclick", "NewGame()");
-        player_replay.innerText = "Replay";
+        player_replay.innerText = "Repetir";
         controls.appendChild(player_replay);
         return;
     }
@@ -341,7 +348,7 @@ function DisplayControls(indice_main) {
     player_hit.setAttribute("id", "player-hit");
     player_hit.setAttribute("onclick", "PlayerHit(" + indice_main + ")");
     player_hit.setAttribute("class", "bouton_action");
-    player_hit.innerText = "Hit";
+    player_hit.innerText = "Pedir";
     controls.appendChild(player_hit);
 
     // Bouton Stand
@@ -349,7 +356,7 @@ function DisplayControls(indice_main) {
     player_stand.setAttribute("id", "player-stand");
     player_stand.setAttribute("onclick", "PlayerStand(" + indice_main + ")");
     player_stand.setAttribute("class", "bouton_action");
-    player_stand.innerText = "Stand";
+    player_stand.innerText = "Plantarse";
     controls.appendChild(player_stand);
 
     // Bouton Double mais seulement si la main n'a que 2 cartes
@@ -358,7 +365,7 @@ function DisplayControls(indice_main) {
         player_double.setAttribute("id", "player-double");
         player_double.setAttribute("onclick", "PlayerDouble(" + indice_main + ")");
         player_double.setAttribute("class", "bouton_action");
-        player_double.innerText = "Double";
+        player_double.innerText = "Doblar";
         controls.appendChild(player_double);
     }
 
@@ -379,7 +386,7 @@ function DisplayControls(indice_main) {
                 player_split.setAttribute("id", "player-split");
                 player_split.setAttribute("onclick", "PlayerSplit(" + indice_main + ")");
                 player_split.setAttribute("class", "bouton_action");
-                player_split.innerText = "Split";
+                player_split.innerText = "Dividir";
                 controls.appendChild(player_split);
             }
         }
@@ -415,6 +422,7 @@ function PlayerStand(indice_main) {
 function PlayerDouble(indice_main) {
     if (money_bet <= money) {
         money -= money_bet; // Mise doublée
+        DisplayMoney();
         hand_statement[indice_main] = "double";
         DrawCard("player", indice_main);
         DisplayAllHands();
@@ -432,6 +440,7 @@ function PlayerSplit(indice_main) {
     if (is_pair_as) split_as_done = true;
 
     money -= money_bet; // On remise la même somme pour la nouvelle main
+    DisplayMoney();
 
     // On crée la nouvelle main avec la 2ème carte
     nb_hand += 1;
@@ -507,8 +516,9 @@ function CheckHand(who, indice_main) {
         } else if (player == 21 && player_hand[indice_main].length == 2 && nb_hand == 1) {
             // Blackjack ! (seulement sur la première main sans split)
             hand_statement[indice_main] = "blackjack";
-            DisplayInfo("BlackJack !");
+            DisplayInfo("¡BlackJack!");
             money += Math.round(money_bet * 2.5);
+            money_bet = 0; // la mano terminó: se resetea la apuesta para la próxima ronda
             DisplayMoney();
             DisplayBet();
             DisplayControls(indice_main);
@@ -571,22 +581,23 @@ function ResolveAllHands() {
         const bet_for_this_hand = money_bet; // La mise de base (les doubles ont déjà été déduits)
 
         if (hand_statement[i] === "out") {
-            results.push("Main " + (i + 1) + " : Out ! (-" + bet_for_this_hand + "X)");
+            results.push("Mano " + (i + 1) + " : ¡Te pasaste! (-" + bet_for_this_hand + "X)");
         } else if (bank > 21) {
-            results.push("Main " + (i + 1) + " : Banque saute ! (+" + bet_for_this_hand + "X)");
+            results.push("Mano " + (i + 1) + " : ¡La banca se pasó! (+" + bet_for_this_hand + "X)");
             total_gain += bet_for_this_hand * 2;
         } else if (player > bank) {
-            results.push("Main " + (i + 1) + " : Victoire ! (+" + bet_for_this_hand + "X)");
+            results.push("Mano " + (i + 1) + " : ¡Victoria! (+" + bet_for_this_hand + "X)");
             total_gain += bet_for_this_hand * 2;
         } else if (bank > player) {
-            results.push("Main " + (i + 1) + " : Defaite ! (-" + bet_for_this_hand + "X)");
+            results.push("Mano " + (i + 1) + " : Derrota (-" + bet_for_this_hand + "X)");
         } else {
-            results.push("Main " + (i + 1) + " : Égalité !");
+            results.push("Mano " + (i + 1) + " : ¡Empate!");
             total_gain += bet_for_this_hand; // Remboursement
         }
     }
 
     money += total_gain;
+    money_bet = 0; // la ronda terminó: se resetea la apuesta para la próxima
     DisplayInfo(results.join("<br>"));
     DisplayMoney();
     DisplayBet();
@@ -661,4 +672,27 @@ function StartTimer() {
         const secondes = String(timer_secondes % 60).padStart(2, "0");
         document.getElementById("timer").innerText = minutes + ":" + secondes;
     }, 1000);
+}
+
+// ============================================================
+// MODAL "CÓMO JUGAR"
+// ============================================================
+const modalOverlayBj = document.getElementById("modal-overlay-bj");
+const btnInfoBj = document.getElementById("btn-info-bj");
+const btnCerrarModalBj = document.getElementById("btn-cerrar-modal-bj");
+
+if (btnInfoBj && modalOverlayBj) {
+    btnInfoBj.addEventListener("click", () => {
+        modalOverlayBj.classList.add("activo");
+    });
+
+    btnCerrarModalBj.addEventListener("click", () => {
+        modalOverlayBj.classList.remove("activo");
+    });
+
+    modalOverlayBj.addEventListener("click", (e) => {
+        if (e.target === modalOverlayBj) {
+            modalOverlayBj.classList.remove("activo");
+        }
+    });
 }
