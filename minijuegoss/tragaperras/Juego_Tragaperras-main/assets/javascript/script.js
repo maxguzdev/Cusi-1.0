@@ -2,16 +2,36 @@
 Copyright (c) 2024. Alejandro Alberto Jiménez Brundin
 =======================================================*/
 
+let money = (typeof dinero !== 'undefined') ? dinero : 50;
 
-let creditos = 67;
+function DisplayMoney() {
+    // Sincroniza el dinero con el estado global (Cusi_script.js)
+    if (typeof dinero !== 'undefined') {
+        dinero = money;
+        if (typeof guardarDinero === 'function') guardarDinero();
+    }
+    
+    // Actualiza el HUD del tragaperras
+    let cuentaCreditos = document.getElementById("cuentaCreditos");
+    if (cuentaCreditos) {
+        cuentaCreditos.innerHTML = money;
+    }
+
+    // Compatibilidad en caso de usar affichage_argent
+    if (typeof affichage_argent !== 'undefined' && affichage_argent) {
+        affichage_argent.innerHTML = money + "X";
+    }
+}
 
 // --- MOSTRAR LOS CRÉDITOS AL CARGAR LA PÁGINA ---
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("cuentaCreditos").innerHTML = creditos;
+  DisplayMoney();
 });
+
 function insertarMonedas() {
-  creditos++;
-  document.getElementById("cuentaCreditos").innerHTML = creditos + "<span style='color: red; font-size: smaller;'> +1 </span>";
+  money++;
+  DisplayMoney();
+  document.getElementById("cuentaCreditos").innerHTML = money + "<span style='color: red; font-size: smaller;'> +1 </span>";
   document.getElementById("mensaje").innerHTML = "Let's Go Gambling";
 }
 
@@ -20,7 +40,7 @@ function rand(n) {
 }
 
 function tirar() {
-  if (creditos === 0) {
+  if (money === 0) {
     document.getElementById("mensaje").innerHTML = "Oh no perdiste tu casa, ¡inténtalo de nuevo!";
     return;
   }
@@ -62,7 +82,7 @@ function tirar() {
   }, 25);
 }
 
-const sonidoGanar = new Audio('./assets/song/win.mp3');
+const sonidoGanar = new Audio('./assets/song/win2.mp3');
 const sonidoPerder = new Audio('./assets/song/lose2.mp3');
 
 function verificarResultados(slot1, slot2, slot3) {
@@ -78,8 +98,8 @@ function verificarResultados(slot1, slot2, slot3) {
     }, 3000);
 
     mensajeElemento.innerHTML =
-      "Carajo, Ganaste Vuelve a apostar Seguro lo multiplicas!!! Tienes: " + creditos + " monedas";
-    creditos = creditos + 10;
+      "Carajo, Ganaste Vuelve a apostar Seguro lo multiplicas!!!";
+    money += 10;
   } else {
     sonidoPerder.currentTime = 0;
     sonidoPerder.play().catch(error => console.log("Error al reproducir audio de perder:", error));
@@ -90,14 +110,14 @@ function verificarResultados(slot1, slot2, slot3) {
     }, 3000);
 
     mensajeElemento.innerHTML =
-      "Oh no Perdiste, Siempre hay una Monedita de mas. Tienes: " + creditos + " monedas";
-    if (creditos > 0) {
-      creditos--;
+      "Oh no Perdiste, Siempre hay una Monedita de mas.";
+    if (money > 0) {
+      money--;
     }
   }
-  document.getElementById("cuentaCreditos").innerHTML = creditos;
+  
+  DisplayMoney();
 }
-
 
 const sonidoFondo = new Audio('./assets/song/fondosong.mp3');
 sonidoFondo.loop = true; 
@@ -117,17 +137,19 @@ function iniciarMusicaFondo() {
 const sonidoInicio = new Audio('./assets/song/maquinitainicio.mp3');
 
 document.getElementById('botonTirar').addEventListener('click', () => {
-  iniciarMusicaFondo(); // Activa la música si es el primer clic
+  iniciarMusicaFondo();
 
-  sonidoInicio.currentTime = 0; 
-  sonidoInicio.play().catch(error => {
-    console.log("No Funciono:", error);
-  });
+  if (money > 0) {
+    sonidoInicio.currentTime = 0; 
+    sonidoInicio.play().catch(error => {
+      console.log("No Funciono:", error);
+    });
 
-  setTimeout(() => {
-    sonidoInicio.pause();
-    sonidoInicio.currentTime = 0;
-  }, 4000);
+    setTimeout(() => {
+      sonidoInicio.pause();
+      sonidoInicio.currentTime = 0;
+    }, 4000);
+  }
 });
 
 const sonidocoin = new Audio('./assets/song/moneda.mp3');
