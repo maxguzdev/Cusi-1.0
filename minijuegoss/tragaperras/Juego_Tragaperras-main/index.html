@@ -3,7 +3,7 @@
 <!--=======================================================-->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,10 @@
 </head>
 <body>
    
-        <a href="../../../frontEnd/index.html?volver=pieza" class="bouton_action boton-mini" id="btn-volver-bj"><img src="/CUSI-1.0/frontEnd/Cusi_style/left.png" width="30"></a>
+        <div id="menu-botones">
+            <a href="../../../frontEnd/index.html?volver=pieza" class="bouton_action boton-mini" id="btn-volver-bj"><img src="/CUSI-1.0/frontEnd/Cusi_style/left.png" width="30"></a>
+            <button class="bouton_action boton-mini" id="btn-info-tp">?</button>
+        </div>
         
    
     <div class="container">
@@ -45,7 +48,34 @@
         </div>
   
     <div id="capa"></div>
-    </div>         
+    </div>
+
+    <!-- Modal de Info (Cómo Jugar) -->
+    <div class="modal-overlay-tp" id="modal-overlay-tp">
+        <div class="modal-contenido-tp">
+            <button class="modal-cerrar-tp" id="btn-cerrar-modal-tp">✕</button>
+            <h2>Cómo Jugar a la Tragaperras</h2>
+            <div class="modal-body-tp">
+                <div class="instruccion-tp">
+                    <h3>🪙 Insertar moneda</h3>
+                    <p>Cada moneda que insertás sale de tu dinero real. Tenés que insertar una antes de poder tirar de la palanca.</p>
+                </div>
+                <div class="instruccion-tp">
+                    <h3>🎰 Tirar de la palanca</h3>
+                    <p>Con la moneda ya puesta, tirá para girar los tres carretes.</p>
+                </div>
+                <div class="instruccion-tp">
+                    <h3>🏆 Ganar</h3>
+                    <p>Si las tres frutas coinciden, ganás 10 monedas.</p>
+                </div>
+                <div class="instruccion-tp">
+                    <h3>💸 Perder</h3>
+                    <p>Si no coinciden, perdés la moneda que insertaste (nada más).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../../../frontEnd/js/Cusi_script.js"></script>
     <script src="./assets/javascript/script.js"></script>
   </body>

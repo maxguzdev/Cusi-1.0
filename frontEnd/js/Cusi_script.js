@@ -38,6 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (volverA) {
         irA(`php/${volverA}.php`);
+
+        // Sacamos el "?volver=..." de la URL para que quede como index.html
+        // sola, igual que el resto del sitio (que nunca cambia la URL real,
+        // solo el contenido de #content). Si no lo limpiamos, un F5 o un
+        // "atrás" del navegador te devuelve siempre a pieza sin importar
+        // dónde estabas navegando dentro del juego.
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
 });
 
@@ -96,8 +103,6 @@ document.addEventListener('click', function (e) {
 
                 setTimeout(() => {
                     diego.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Diego.png";
-                    gastar(10);
-                    guardarDinero();
                 }, 1117);
             }
             break;
@@ -227,7 +232,10 @@ document.addEventListener('click', function (e) {
                             <button></button>
                               </a>
                               <a href="/Cusi-1.0/minijuegoss/tragaperras/Juego_Tragaperras-main/index.html">
-                            <button></button>
+                            <button class="opcion-tragaperras"><span class="etiqueta-juego">Tragaperras</span></button>
+                              </a>
+                              <a href="/Cusi-1.0/minijuegoss/cusis_band/cband.html">
+                            <button class="opcion-banda"><span class="etiqueta-juego">Cusi´s Band</span></button>
                               </a>
                         </div>
                             </div>

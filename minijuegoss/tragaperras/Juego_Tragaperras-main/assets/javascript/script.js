@@ -3,6 +3,7 @@ Copyright (c) 2024. Alejandro Alberto Jiménez Brundin
 =======================================================*/
 
 let money = (typeof dinero !== 'undefined') ? dinero : 50;
+let monedaInsertada = false; // hay que pagar 1 moneda antes de poder tirar
 
 function DisplayMoney() {
     // Sincroniza el dinero con el estado global (Cusi_script.js)
@@ -29,9 +30,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function insertarMonedas() {
-  money++;
+  if (money <= 0) {
+    document.getElementById("mensaje").innerHTML = "No tenés monedas para insertar.";
+    return;
+  }
+
+  money--; // la moneda sale de tu dinero real, no aparece de la nada
+  monedaInsertada = true;
   DisplayMoney();
-  document.getElementById("cuentaCreditos").innerHTML = money + "<span style='color: red; font-size: smaller;'> +1 </span>";
+  document.getElementById("cuentaCreditos").innerHTML = money + "<span style='color: red; font-size: smaller;'> -1 </span>";
   document.getElementById("mensaje").innerHTML = "Let's Go Gambling";
 }
 
@@ -40,10 +47,11 @@ function rand(n) {
 }
 
 function tirar() {
-  if (money === 0) {
+  if (!monedaInsertada) {
     document.getElementById("mensaje").innerHTML = "Oh no perdiste tu casa, ¡inténtalo de nuevo!";
     return;
   }
+  monedaInsertada = false; // la moneda se consume en esta tirada
 
   let cambia_imagen = [
     "./assets/img/fresa.png",
@@ -85,6 +93,9 @@ function tirar() {
 const sonidoGanar = new Audio('./assets/song/win2.mp3');
 const sonidoPerder = new Audio('./assets/song/lose2.mp3');
 
+// Premio según el símbolo que coincide en los 3 rodillos (mismo orden que cambia_imagen)
+const premiosPorSimbolo = [10, 20, 30]; // fresa=10, naranja=20, uvas=30
+
 function verificarResultados(slot1, slot2, slot3) {
   let mensajeElemento = document.getElementById("mensaje");
 
@@ -99,7 +110,8 @@ function verificarResultados(slot1, slot2, slot3) {
 
     mensajeElemento.innerHTML =
       "Carajo, Ganaste Vuelve a apostar Seguro lo multiplicas!!!";
-    money += 10;
+    const premio = premiosPorSimbolo[slot1]; // slot1 === slot2 === slot3 acá
+    money += premio;
   } else {
     sonidoPerder.currentTime = 0;
     sonidoPerder.play().catch(error => console.log("Error al reproducir audio de perder:", error));
@@ -111,9 +123,7 @@ function verificarResultados(slot1, slot2, slot3) {
 
     mensajeElemento.innerHTML =
       "Oh no Perdiste, Siempre hay una Monedita de mas.";
-    if (money > 0) {
-      money--;
-    }
+    // La moneda ya se descontó al insertarla, no se resta doble
   }
   
   DisplayMoney();
@@ -139,7 +149,7 @@ const sonidoInicio = new Audio('./assets/song/maquinitainicio.mp3');
 document.getElementById('botonTirar').addEventListener('click', () => {
   iniciarMusicaFondo();
 
-  if (money > 0) {
+  if (monedaInsertada) {
     sonidoInicio.currentTime = 0; 
     sonidoInicio.play().catch(error => {
       console.log("No Funciono:", error);
@@ -167,6 +177,29 @@ document.getElementById('insertarMoneda').addEventListener('click', () => {
     sonidocoin.currentTime = 0;
   }, 1000);
 });
+
+// ============================================================
+// MODAL "CÓMO JUGAR"
+// ============================================================
+const modalOverlayTp = document.getElementById("modal-overlay-tp");
+const btnInfoTp = document.getElementById("btn-info-tp");
+const btnCerrarModalTp = document.getElementById("btn-cerrar-modal-tp");
+
+if (btnInfoTp && modalOverlayTp) {
+    btnInfoTp.addEventListener("click", () => {
+        modalOverlayTp.classList.add("activo");
+    });
+
+    btnCerrarModalTp.addEventListener("click", () => {
+        modalOverlayTp.classList.remove("activo");
+    });
+
+    modalOverlayTp.addEventListener("click", (e) => {
+        if (e.target === modalOverlayTp) {
+            modalOverlayTp.classList.remove("activo");
+        }
+    });
+}
 
 /*=======================================================
 Copyright (c) 2024. Alejandro Alberto Jiménez Brundin

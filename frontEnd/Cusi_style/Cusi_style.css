@@ -349,6 +349,61 @@ button:focus-visible {
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
 }
 
+/* Botón "Tragaperras" del cartel de minijuegos: mismo patrón que los demás */
+.opciones button.opcion-tragaperras {
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/tragaperras_icon.png') center/cover no-repeat;
+}
+
+.opciones button.opcion-tragaperras .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+.opciones button.opcion-banda .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+.opciones button.opcion-banda {
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/banda_icon.png') center/cover no-repeat;
+}
+
 /* Botones con estilo videojuego */
 .opciones-grid button {
     background: linear-gradient(180deg, #8a3ab9 0%, #4c1d95 100%);
