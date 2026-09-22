@@ -21,7 +21,8 @@
   </a>
   <div id="ford">
     <div class="fotoper">
-        <img id="fotoperfil" width="225px" src="<?= $_SESSION['img'] . "." ?>" >
+        <img id="fotoperfil" width="225px" src="<?= !empty($_SESSION['img']) ? $_SESSION['img'] : '../img/default-avatar.png' ?>" >
+
         <a href="../logout.php">Cerrar sesión</a>
         <button >editar</button> 
     </div>
@@ -33,7 +34,8 @@
         
         
     ?>
-    <h1>Biografía:</h1><?= $_SESSION['bio'] . "." ?>
+    <h1>Biografía:</h1><?= isset($_SESSION['bio']) && !empty($_SESSION['bio']) ? $_SESSION['bio'] . "." : "Sin biografía aún." ?>
+
 </div>
 <label for="genero">elije tu genero:</label>
 
