@@ -225,9 +225,6 @@ document.addEventListener('click', function (e) {
                             <a href="/Cusi-1.0/minijuegoss/blackjack/luigi-blackjack-main/index.html">
                             <button class="opcion-blackjack"><span class="etiqueta-juego">Blackjack</span></button>
                               </a>
-                            <a href="/Cusi-1.0/minijuegoss/poker/PokoJogo-main/index.html">
-                            <button></button>
-                              </a>
                             <a href="/Cusi-1.0/minijuegoss/ruleta/Roulette-main/index.html">
                             <button></button>
                               </a>

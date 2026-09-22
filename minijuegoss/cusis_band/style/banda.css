@@ -207,9 +207,12 @@ body:has(.pagina-instrumento) {
 /*******************************************************************************\
  Panel del juego de ritmo (notas cayendo)
 \*******************************************************************************/
+/* El tamaño y dibujo de #pista / .nota / .receptor ahora los pone
+   instrumento.js (función estilosPista, al final del archivo) — ahí es
+   donde vive el sistema de flechas SVG. Acá solo queda el marco del panel. */
 .panel-juego {
-    flex: 0 0 260px;
-    max-width: 280px;
+    flex: 0 0 400px;
+    max-width: 420px;
     background: linear-gradient(180deg, #EDE3F9, #E1D3F5);
     border: 5px solid #17140F;
     border-radius: 20px;
@@ -229,30 +232,12 @@ body:has(.pagina-instrumento) {
     font-size: 1.1rem;
 }
 
+/* El estilo nuevo que inyecta instrumento.js (función estilosPista) no le
+   pone ancho a #pista — sin esto, al estar dentro de un flex con
+   align-items:center, se encoge a casi nada en vez de ocupar el panel. */
 #pista {
-    position: relative;
     width: 100%;
-    height: 340px;
-    background: #17140F;
-    border: 4px solid #3A2C53;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.nota {
-    position: absolute;
-    width: 25%;
-    height: 34px;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(180deg, #C9B6E4, #8F71B3);
-    border: 3px solid #17140F;
-    border-radius: 8px;
-    color: #17140F;
-    font-weight: 900;
-    font-size: 1.1rem;
 }
 
 .ayuda-teclas {
@@ -264,6 +249,8 @@ body:has(.pagina-instrumento) {
 
 @media (max-width: 1000px) {
     .panel-juego {
-        max-width: 320px;
+        flex-basis: auto;
+        width: 100%;
+        max-width: 420px;
     }
 }
