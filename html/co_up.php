@@ -20,7 +20,7 @@ if (isset($_POST['registro'])) {
     $contraseña_encriptada = password_hash($contraseña_plana, PASSWORD_BCRYPT);
 
    
-    $insertardatos = "INSERT INTO usuario (nombre_perfil, correo, contraseña) VALUES (?, ?, ?)";
+    $insertardatos = "INSERT INTO usuario (nombre_perfil, correo, contrasena) VALUES (?, ?, ?)";
  
     $stmt = mysqli_prepare($enlace, $insertardatos);
 
