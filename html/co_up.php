@@ -19,13 +19,11 @@ if (isset($_POST['registro'])) {
 
     $contraseña_encriptada = password_hash($contraseña_plana, PASSWORD_BCRYPT);
 
-   
-    $insertardatos = "INSERT INTO usuario (nombre_perfil, correo, contrasena) VALUES (?, ?, ?)";
+    $insertardatos = "INSERT INTO usuario (nombre_perfil, correo, contraseña) VALUES (?, ?, ?)";
  
     $stmt = mysqli_prepare($enlace, $insertardatos);
 
     if ($stmt) {
-       
         mysqli_stmt_bind_param($stmt, "sss", $nombre_perfil, $correo, $contraseña_encriptada);
         
         $ejecutarInsertar = mysqli_stmt_execute($stmt);
