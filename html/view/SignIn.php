@@ -11,23 +11,23 @@
     <div class="card">
         <h2>Iniciar Sesión</h2>
 
-        <!-- Muestra el mensaje si las credenciales fallan -->
+        <!-- Muestra el mensaje si las credenciales fallan o faltan -->
         <?php if (!empty($mensaje)) echo $mensaje; ?>
 
         <form action="" method="POST">
             <div>
                 <label for="email">Correo electrónico:</label><br>
-                <input type="email" id="email" name="correo" required placeholder="ejemplo@correo.com" >
+                <input type="email" id="email" name="correo" required placeholder="ejemplo@correo.com">
             </div>
             <br>
 
             <div>
                 <label for="password">Contraseña:</label><br>
-                <input type="password" id="password" name="contraseña" required >
+                <input type="password" id="password" name="contrasena" required>
             </div>
             <br>
 
-            <button type="submit">Ingresar</button>
+            <button type="submit" name="ingresar">Ingresar</button>
         </form>
 
         <p>¿No tienes cuenta? <a href="SignUp.php">Regístrate</a></p>
