@@ -24,7 +24,7 @@
         <img id="fotoperfil" width="225px" src="<?= !empty($_SESSION['img']) ? $_SESSION['img'] : '../img/default-avatar.png' ?>" >
 
         <a href="../logout.php">Cerrar sesión</a>
-        <button >editar</button> 
+        <a href="editar_perfil.php"><button>editar</button></a>
     </div>
 <div class="info">
     <h1>Nombre:</h1><?= 

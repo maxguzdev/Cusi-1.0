@@ -18,7 +18,7 @@ $mensaje = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo = isset($_POST['correo']) ? trim($_POST['correo']) : '';
-    $contrasena = isset($_POST['contrasena']) ? trim($_POST['contrasena']) : '';
+    $contrasena = isset($_POST['contraseña']) ? trim($_POST['contraseña']) : '';
 
     if (!empty($correo) && !empty($contrasena)) {
        

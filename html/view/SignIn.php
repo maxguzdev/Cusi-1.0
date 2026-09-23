@@ -23,7 +23,7 @@
 
             <div>
                 <label for="password">Contraseña:</label><br>
-                <input type="password" id="password" name="contrasena" required>
+                <input type="password" id="password" name="contraseña" required>
             </div>
             <br>
 

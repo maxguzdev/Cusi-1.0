@@ -17,14 +17,16 @@ if (isset($_POST['registro'])) {
     $correo = $_POST['correo'];
     $contraseña_plana = $_POST['contraseña'];
 
-    $contraseña_encriptada = password_hash($contraseña_plana, PASSWORD_BCRYPT);
+    $contrasena_encriptada = password_hash($contraseña_plana, PASSWORD_BCRYPT);
 
+    // Quitamos 'img' de aquí, volvemos a 3 columnas y 3 signos de pregunta
     $insertardatos = "INSERT INTO usuario (nombre_perfil, correo, contraseña) VALUES (?, ?, ?)";
  
     $stmt = mysqli_prepare($enlace, $insertardatos);
 
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "sss", $nombre_perfil, $correo, $contraseña_encriptada);
+        // Volvemos a mandar solo los 3 datos principales ("sss")
+        mysqli_stmt_bind_param($stmt, "sss", $nombre_perfil, $correo, $contrasena_encriptada);
         
         $ejecutarInsertar = mysqli_stmt_execute($stmt);
 
