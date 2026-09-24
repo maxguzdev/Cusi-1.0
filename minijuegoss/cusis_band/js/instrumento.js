@@ -90,6 +90,11 @@ let proxima = 0;           // primera nota sin spawnear (el array va ordenado)
 let generacion = 0;        // apaga el loop viejo si cambiás de canción
 let stats = null;
 let offset = Number(localStorage.getItem(CLAVE_OFFSET) || 0); // seg (+ = notas más tarde)
+
+function actualizarOffsetVisible() {
+    const el = document.getElementById('offset-visible');
+    if (el) el.textContent = Math.round(offset * 1000) + 'ms';
+}
 let pistaEls = null;
 let personaje = null;      // { img, cfg, poses, idle... }
 let bpmActual = 120;
@@ -374,6 +379,8 @@ function iniciarJuego(audio) {
     pistaEls = construirPista();
     if (!pistaEls) return; // esta pantalla no tiene panel de juego
 
+    actualizarOffsetVisible();
+
     const datos = cargarNotas(audio.getAttribute('src') || audio.src, audio.duration);
     bpmActual = datos.bpm || 120;
     notas = datos.notas.sort((a, b) => a.tiempo - b.tiempo);
@@ -621,6 +628,7 @@ document.addEventListener('keydown', (e) => {
         offset = Math.round((offset + (tecla === '[' ? -0.01 : 0.01)) * 1000) / 1000;
         localStorage.setItem(CLAVE_OFFSET, String(offset));
         mostrarJuicio((offset > 0 ? '+' : '') + Math.round(offset * 1000) + ' ms', 'ok');
+        actualizarOffsetVisible();
         return;
     }
 
