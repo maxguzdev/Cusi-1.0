@@ -90,11 +90,6 @@ let proxima = 0;           // primera nota sin spawnear (el array va ordenado)
 let generacion = 0;        // apaga el loop viejo si cambiás de canción
 let stats = null;
 let offset = Number(localStorage.getItem(CLAVE_OFFSET) || 0); // seg (+ = notas más tarde)
-
-function actualizarOffsetVisible() {
-    const el = document.getElementById('offset-visible');
-    if (el) el.textContent = Math.round(offset * 1000) + 'ms';
-}
 let pistaEls = null;
 let personaje = null;      // { img, cfg, poses, idle... }
 let bpmActual = 120;
@@ -379,8 +374,6 @@ function iniciarJuego(audio) {
     pistaEls = construirPista();
     if (!pistaEls) return; // esta pantalla no tiene panel de juego
 
-    actualizarOffsetVisible();
-
     const datos = cargarNotas(audio.getAttribute('src') || audio.src, audio.duration);
     bpmActual = datos.bpm || 120;
     notas = datos.notas.sort((a, b) => a.tiempo - b.tiempo);
@@ -423,12 +416,11 @@ function iniciarJuego(audio) {
             if (!n.el) continue;
             const restante = n.tiempo - t;
 
-            // cabeza perdida
+
             if (!n.resuelta && restante < -VENTANA.ok) { fallar(n); continue; }
 
             if (n.golpeada && n.larga && !n.soltada) {
-                // nota larga en curso: la punta se queda clavada en el receptor
-                // y la cola se va consumiendo.
+ 
                 const queda = Math.max(0, n.tiempo + n.dur - t);
                 n.el.style.transform = 'translate3d(0,' + zonaY + 'px,0)';
                 if (n.cola) n.cola.style.height = (queda * vel) + 'px';
@@ -441,14 +433,11 @@ function iniciarJuego(audio) {
             n.el.style.transform = 'translate3d(0,' + (zonaY * (1 - restante / TRAVEL)) + 'px,0)';
         }
 
-        // Seguimos incluso si el audio se pausa o está buffereando: el reloj
-        // se congela solo y las flechas retoman donde estaban.
         if (!audio.ended) requestAnimationFrame(loop);
         else terminar();
     }
 
-    // El final también se avisa por evento, más confiable que esperar a que
-    // justo caiga un frame después de que termine el mp3.
+ 
     audio.addEventListener('ended', () => { if (mia === generacion) terminar(); }, { once: true });
 
     requestAnimationFrame(loop);
@@ -521,7 +510,6 @@ function acertar(n, dist) {
     mostrarCombo();
 }
 
-// Puntos mientras mantenés apretada una nota larga.
 function tickHold(n, t) {
     const fin = n.tiempo + n.dur;
 
@@ -588,7 +576,6 @@ function terminar() {
     pistaEls.pista.appendChild(panel);
 }
 
-// ====== Lista de canciones (delegado en document) ======
 document.addEventListener('click', (e) => {
     const li = e.target.closest('.lista-canciones li');
     if (!li) return;
@@ -611,7 +598,6 @@ document.addEventListener('click', (e) => {
         .catch((error) => console.log('No se pudo reproducir la canción:', error));
 });
 
-// ====== Input ======
 function carrilDe(tecla) {
     for (let i = 0; i < N_CARRILES; i++) {
         if (CARRILES[i].teclas.includes(tecla)) return i;
@@ -622,13 +608,11 @@ function carrilDe(tecla) {
 document.addEventListener('keydown', (e) => {
     const tecla = e.key.toLowerCase();
 
-    // Calibración: [ y ] mueven las notas 10ms si las sentís adelantadas o
-    // atrasadas respecto del audio de tu máquina. Queda guardado.
+   
     if (tecla === '[' || tecla === ']') {
         offset = Math.round((offset + (tecla === '[' ? -0.01 : 0.01)) * 1000) / 1000;
         localStorage.setItem(CLAVE_OFFSET, String(offset));
         mostrarJuicio((offset > 0 ? '+' : '') + Math.round(offset * 1000) + ' ms', 'ok');
-        actualizarOffsetVisible();
         return;
     }
 
@@ -669,12 +653,10 @@ document.addEventListener('keyup', (e) => {
 
     pistaEls.receptores[carril].classList.remove('activo');
 
-    // soltar una nota larga antes de tiempo rompe el combo
     const n = sosteniendo[carril];
     if (n) soltarHold(n, true);
 });
 
-// Si perdés el foco de la ventana, damos las teclas por soltadas.
 window.addEventListener('blur', () => {
     for (let i = 0; i < N_CARRILES; i++) {
         teclaAbajo[i] = false;
