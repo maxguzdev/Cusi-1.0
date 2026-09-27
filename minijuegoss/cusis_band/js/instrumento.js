@@ -30,18 +30,18 @@ const N_CARRILES = CARRILES.length;
 const PERSONAJES = {
     cusi: {
         carpeta: 'style/img/',
-        idle: ['cusi_bass.png', 'cusi2.png'],
+        idle: ['cusi2.png'],
         poses: {
             izquierda: 'cusi_izq.png',
             abajo:     'cusi_abajo.png',
             arriba:    'cusi_arriba.png',
             derecha:   'cusi_der.png'
         },
-        volverIdle: 220   // ms que dura la pose antes de volver al idle
+        volverIdle: 520   // ms que dura la pose antes de volver al idle
     },
     kanep: {
         carpeta: 'style/img/',
-        idle: ['kangif2.gif'],
+        idle: ['kangep_guitar.png'],
         poses: {
             izquierda: 'kanep_izq.png',
             abajo:     'kanep_abajo.png',

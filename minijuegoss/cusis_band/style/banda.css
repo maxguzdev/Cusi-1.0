@@ -88,12 +88,19 @@ body {
 /*******************************************************************************\
  Páginas individuales de instrumento (bajo.html, bateria.html, guitarra.html)
 \*******************************************************************************/
-/* body.pagina-instrumento nunca se activaba: esa clase vive en el <section>
-   que se inyecta adentro de #content, no en el <body> real de cband.html
-   (que nunca cambia de clase). :has() mira hacia ADENTRO del body en vez
-   de necesitar la clase puesta ahí afuera, así que sí funciona. */
+/* body nunca se activaba: esa clase vive en el <section> que se inyecta adentro
+   de #content, no en el <body> real de cband.html (que nunca cambia de clase).
+   :has() mira hacia ADENTRO del body en vez de necesitar la clase puesta ahí
+   afuera, así que sí funciona.
+   Además: el body tiene display:flex + justify-content:center pensado para
+   centrar SOLO .escenario (el stage). Si dejamos ese flex activo, cualquier
+   cosa que se inyecte en #content queda atrapada en ese mismo flex y se
+   encoge a su ancho de contenido en vez de usar la pantalla completa — por
+   eso los paneles de instrumento no entraban en una fila. Con display:block
+   se lo sacamos de encima; .instrumento-layout ya se centra solo. */
 body:has(.pagina-instrumento) {
     overflow: auto;
+    display: block;
 }
 
 .volver-banda {
@@ -120,15 +127,15 @@ body:has(.pagina-instrumento) {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    padding: 80px 40px 40px;
+    gap: 30px;
+    padding: 80px 30px 30px;
     box-sizing: border-box;
     flex-wrap: wrap;
 }
 
 .personaje-grande {
-    flex: 1 1 420px;
-    max-width: 560px;
+    flex: 0 1 480px;
+    max-width: 640px;
     display: flex;
     align-items: center;
     justify-content: center;
