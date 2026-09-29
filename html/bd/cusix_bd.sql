@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-09-2026 a las 16:55:49
+-- Tiempo de generación: 29-09-2026 a las 15:29:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -55,7 +55,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre_perfil`, `contraseña`, `correo`, `img`, `bio`) VALUES
-(3, 'maximo', '$2y$10$9Zre7NXexOoAYPG5S1yQvOvaj1f2H8D2BH9FTjggPYSqUoRSDERGe', 'maximo@gmail.com', '../img/perfildefault.png', '');
+(3, 'hfytf', '$2y$10$9Zre7NXexOoAYPG5S1yQvOvaj1f2H8D2BH9FTjggPYSqUoRSDERGe', 'maximo@gmail.com', '../img/perfildefault.png', 'hgyg967y');
 
 --
 -- Índices para tablas volcadas
@@ -72,7 +72,8 @@ ALTER TABLE `post`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `correo` (`correo`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
