@@ -1,4 +1,4 @@
-let dinero = JSON.parse(localStorage.getItem("dinero")) || 0;
+let dinero = JSON.parse(localStorage.getItem("dinero")) || 100;
 
 function economia() {
     const quantity = document.getElementById("value");

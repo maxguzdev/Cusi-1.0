@@ -3,7 +3,15 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< HEAD
+<<<<<<< HEAD
+-- Tiempo de generación: 08-09-2026 a las 13:28:12
+=======
 -- Tiempo de generación: 14-09-2026 a las 16:55:49
+>>>>>>> d799768f111c866a74a694d0cdf0b513dec7c907
+=======
+-- Tiempo de generación: 29-09-2026 a las 15:29:04
+>>>>>>> f815c21e9d089b9ab296668981f5fb71dc40752a
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,9 +53,13 @@ CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `nombre_perfil` varchar(100) NOT NULL,
   `contraseña` varchar(255) NOT NULL,
+<<<<<<< HEAD
+  `correo` varchar(255) NOT NULL
+=======
   `correo` varchar(255) NOT NULL,
   `img` varchar(255) NOT NULL DEFAULT '../img/perfildefault.png',
   `bio` varchar(255) NOT NULL
+>>>>>>> d799768f111c866a74a694d0cdf0b513dec7c907
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -55,7 +67,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre_perfil`, `contraseña`, `correo`, `img`, `bio`) VALUES
-(3, 'maximo', '$2y$10$9Zre7NXexOoAYPG5S1yQvOvaj1f2H8D2BH9FTjggPYSqUoRSDERGe', 'maximo@gmail.com', '../img/perfildefault.png', '');
+(3, 'hfytf', '$2y$10$9Zre7NXexOoAYPG5S1yQvOvaj1f2H8D2BH9FTjggPYSqUoRSDERGe', 'maximo@gmail.com', '../img/perfildefault.png', 'hgyg967y');
 
 --
 -- Índices para tablas volcadas
@@ -72,7 +84,8 @@ ALTER TABLE `post`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `correo` (`correo`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -88,7 +101,11 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
+<<<<<<< HEAD
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+=======
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+>>>>>>> d799768f111c866a74a694d0cdf0b513dec7c907
 
 --
 -- Restricciones para tablas volcadas

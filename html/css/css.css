@@ -7,14 +7,19 @@
 
 .textito{
     background-color: #A47DAB;
-    width: 90%;            
+    width: 100%;            
   max-width: 900px;        
-  margin: 68px auto;      
-  min-height: 100vh;
+  margin: 10px auto;      
+  min-height: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
- 
+  font-size: 15px;
+    line-height: 2;
+    color: #0f1419;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    white-space: pre-wrap;    
+    word-wrap: break-word;  
 }
 .botones{
   margin: 30px;
@@ -129,3 +134,78 @@
         .social-links a.instagram:hover { color: #E1306C; transform: translateY(-5px); }
         .social-links a.twitter:hover { color: #1DA1F2; transform: translateY(-5px); }
         .social-links a.youtube:hover { color: #FF0000; transform: translateY(-5px); }
+#contenedor {
+    display: flex;
+    flex-direction: column;   
+    gap: 16px;                 
+    max-width: 550px;      
+    margin: 0px auto;         
+    padding: 0 10px;           
+    box-sizing: border-box;
+    height: auto;            
+    align-items: flex-start;
+}
+
+.tweetcard {
+     background-color: #ffffff; 
+    padding: 16px;
+    
+   
+    width: 100%;               
+    height: auto;        
+    box-sizing: border-box;
+    
+    border-top: 1px solid #cfd9de;
+    border-right: 1px solid #cfd9de;
+    border-bottom: 1px solid #cfd9de;
+    border-left: none;         
+    
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); 
+}
+
+.tweetheader {
+    display: flex;
+    align-items: center;       
+    margin-bottom: 10px;      
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;        
+    margin-right: 12px;        
+    object-fit: cover;
+}
+
+.name {
+    font-weight: bold;
+    color: #0f1419;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.gmail {
+    color: #536471;
+    font-size: 14px;
+    margin-left: 4px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.carrusel-derecha {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 300px;
+  max-width: 40vw;
+  z-index: 1000;
+}
+
+.carrusel-derecha img {
+  height: 500px;       
+  object-fit: contain; 
+  margin-right: auto;
+}
