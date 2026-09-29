@@ -229,10 +229,16 @@
 
 
 .barra-desplegable.abierta {
-    max-height: 100px; 
+    max-height: 500px;
 }
 
 .contenido-barra {
-    padding: 10px 15px;
+    overflow-y: scroll;
+    padding: 5px 10px;
     color: #555;
+}
+
+.img-nuestro{
+  margin-left: 220px;
+  width: 200px;
 }

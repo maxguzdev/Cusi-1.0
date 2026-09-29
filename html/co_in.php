@@ -1,8 +1,11 @@
 <?php
+<<<<<<< HEAD
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+=======
+>>>>>>> d799768f111c866a74a694d0cdf0b513dec7c907
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -20,6 +23,7 @@ if (!$enlace) {
 
 $mensaje = "";
 
+<<<<<<< HEAD
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
@@ -37,6 +41,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['id_usuario'] = $fila['id_usuario'];
                 $_SESSION['nombre_perfil'] = $fila['nombre_perfil'];
                                
+=======
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $correo = isset($_POST['correo']) ? trim($_POST['correo']) : '';
+    $contrasena = isset($_POST['contraseña']) ? trim($_POST['contraseña']) : '';
+
+    if (!empty($correo) && !empty($contrasena)) {
+       
+        $stmt = mysqli_prepare($enlace, "SELECT id_usuario, nombre_perfil, correo, contraseña, img, bio FROM usuario WHERE correo = ?");
+        mysqli_stmt_bind_param($stmt, "s", $correo);        
+        mysqli_stmt_execute($stmt);
+        $resultado = mysqli_stmt_get_result($stmt);
+        
+        if ($fila = mysqli_fetch_assoc($resultado)) {    
+            if (password_verify($contrasena, $fila['contraseña'])) {            
+                
+                $_SESSION['id_usuario'] = $fila['id_usuario'];
+                $_SESSION['nombre_perfil'] = $fila['nombre_perfil'];
+                $_SESSION['img'] = $fila['img']; 
+                $_SESSION['bio'] = $fila['bio']; 
+                                    
+>>>>>>> d799768f111c866a74a694d0cdf0b513dec7c907
                 header("Location: index.php");
                 exit();
             } else {
@@ -45,6 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $mensaje = "<p style='color: red;'>El correo no está registrado.</p>";
         }
+<<<<<<< HEAD
+=======
+        mysqli_stmt_close($stmt);
+>>>>>>> d799768f111c866a74a694d0cdf0b513dec7c907
     } else {
         $mensaje = "<p style='color: red;'>Por favor, completa todos los campos.</p>";
     }

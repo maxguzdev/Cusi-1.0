@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['nombre_perfil'])) {
+        header("location: SignIn.php");
+    }
+        
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,19 +21,33 @@
   </a>
   <div id="ford">
     <div class="fotoper">
+<<<<<<< HEAD
         <img id="fotoperfil" width="225px" src="../img/perfildefault.png" >
         <center><button id="cambiar">cambiar imagen</button></center>
+=======
+        <img id="fotoperfil" width="225px" src="<?= !empty($_SESSION['img']) ? $_SESSION['img'] : '../img/default-avatar.png' ?>" >
+
+        <a href="../logout.php">Cerrar sesión</a>
+        <a href="editar_perfil.php"><button>editar</button></a>
+>>>>>>> d799768f111c866a74a694d0cdf0b513dec7c907
     </div>
 <div class="info">
-<h1>Nombre:</h1><input type="text">
-<h1>Biografia:</h1><input type="text">
+    <h1>Nombre:</h1><?= 
+    isset($_SESSION['nombre_perfil']) === NULL
+     ? 'window.location.href = SignIn.php'
+     : $_SESSION['nombre_perfil']
+        
+        
+    ?>
+    <h1>Biografía:</h1><?= isset($_SESSION['bio']) && !empty($_SESSION['bio']) ? $_SESSION['bio'] . "." : "Sin biografía aún." ?>
+
 </div>
 <label for="genero">elije tu genero:</label>
 
 <select id="genero" class="gener" name="elije tu genero">
   <option value="hombre">hombre</option>
   <option value="boliviano">boliviano</option>
-  <option value="sixsevenbaby">sixsevenbaby</option>
+  <option value="fiscella">fiscella</option>
   <option value="mujer">mujer</option>
   <option value="helicoptero apache">helicoptero apache</option>
   <option value="chino">chino</option>
