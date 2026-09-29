@@ -158,20 +158,20 @@ document.addEventListener('click', function (e) {
             break;
         }
 
-        case 'kanep': {
+        case 'pablo': {
             const dialog2 = document.getElementById("d2");
-            const kanep = document.getElementById("kanep");
+            const pablo = document.getElementById("pablo");
 
             if (dialog2) {
                 dialog2.currentTime = 0;
                 dialog2.play().catch(error => console.log('no funciona', error));
             }
 
-            if (kanep) {
-                kanep.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/kangif.gif";
+            if (pablo) {
+                pablo.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/pablo.gif";
 
                 setTimeout(() => {
-                    kanep.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/kanep_a.png";
+                    pablo.src = "/CUSI-1.0/frontEnd/Cusi_style/garden-scr/pablo_a.png";
                 }, 3780);
             }
             break;
@@ -231,7 +231,7 @@ document.addEventListener('click', function (e) {
                               <a href="/Cusi-1.0/minijuegoss/tragaperras/Juego_Tragaperras-main/index.html">
                             <button class="opcion-tragaperras"><span class="etiqueta-juego">Tragaperras</span></button>
                               </a>
-                               <a href="/Cusi-1.0/minijuegoss/flappy pablo/flappy-bird-master/index.html">
+                               <a href="/Cusi-1.0/minijuegoss/flappy pablo/index.html">
                             <button class="opcion-banda"><span class="etiqueta-juego">Cusi´s Band</span></button>
                               </a>
                               <a href="/Cusi-1.0/minijuegoss/cusis_band/cband.html">

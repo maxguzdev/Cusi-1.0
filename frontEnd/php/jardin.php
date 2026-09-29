@@ -16,7 +16,7 @@
       <img src="/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi.png" width="550" id="cusi_a">
       <audio src="/CUSI-1.0/frontEnd/mp3/Deam.mp3" id="damn"></audio>
       <img src="/CUSI-1.0/frontEnd/Cusi_style/garden-scr/huerta.png" width="450" id="huerta" class="im-btn" style="cursor: pointer;">
-      <img src="/CUSI-1.0/frontEnd/Cusi_style/garden-scr/kanep_a.png" width="350" id="kanep">
+      <img src="/CUSI-1.0/frontEnd/Cusi_style/garden-scr/pablo_a.png" width="350" id="pablo">
       <audio src="/CUSI-1.0/frontEnd/mp3/dialogo2.mp3" id="d2"></audio>
    </section>
  
