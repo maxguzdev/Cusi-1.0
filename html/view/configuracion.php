@@ -21,15 +21,10 @@
   </a>
   <div id="ford">
     <div class="fotoper">
-<<<<<<< HEAD
-        <img id="fotoperfil" width="225px" src="../img/perfildefault.png" >
-        <center><button id="cambiar">cambiar imagen</button></center>
-=======
         <img id="fotoperfil" width="225px" src="<?= !empty($_SESSION['img']) ? $_SESSION['img'] : '../img/default-avatar.png' ?>" >
 
         <a href="../logout.php">Cerrar sesión</a>
         <a href="editar_perfil.php"><button>editar</button></a>
->>>>>>> d799768f111c866a74a694d0cdf0b513dec7c907
     </div>
 <div class="info">
     <h1>Nombre:</h1><?= 
