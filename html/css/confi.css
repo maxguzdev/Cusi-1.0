@@ -22,3 +22,60 @@
         .social-links a.instagram:hover { color: #E1306C; transform: translateY(-5px); }
         .social-links a.twitter:hover { color: #1DA1F2; transform: translateY(-5px); }
         .social-links a.youtube:hover { color: #FF0000; transform: translateY(-5px); }
+       body {
+     background-color: #A47DAB;
+     align-items: center;
+
+
+ }
+body {
+     background-color: #A47DAB;
+     align-items: center;
+
+
+ }
+
+ 
+#fotper{
+margin-top: 20px;
+}
+ #fotoperfil {
+     border-radius: 30px;
+     display: flex;
+     align-items: center;
+     margin-bottom: 20px;
+     margin-top: 20px;
+ }
+
+
+ #ford {
+     background-color: #DDA0DD;
+     margin-top: 50px;
+     padding-bottom: 100px;
+     width: 100%;
+     max-width: 600px;
+     margin-left: 650px;
+     border-radius: 30px;
+
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+
+ }
+#cambiar{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     font-size: 0.9rem;
+     font-family: 'Times New Roman', Times, serif;
+       margin-top: 20px;
+}
+ #genero{
+    font-weight:normal;
+    font-size: 1.0rem;
+    margin-bottom: 5px;
+    font-family: 'Times New Roman', Times, serif;
+ }
+ h1{
+     font-family: 'Times New Roman', Times, serif;
+ }
