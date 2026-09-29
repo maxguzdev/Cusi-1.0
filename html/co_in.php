@@ -3,12 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$servidor = "localhost";
-$usuario = "root";
-$clave = "";
-$basededatos = "cusix_bd";
-
-$enlace = mysqli_connect($servidor, $usuario, $clave, $basededatos);
+$enlace = mysqli_connect("localhost", "root", "", "cusix_bd");
 
 if (!$enlace) {
     die("Error de conexión: " . mysqli_connect_error());

@@ -4,10 +4,14 @@
 --
 -- Servidor: 127.0.0.1
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Tiempo de generación: 08-09-2026 a las 13:28:12
 =======
 -- Tiempo de generación: 14-09-2026 a las 16:55:49
 >>>>>>> d799768f111c866a74a694d0cdf0b513dec7c907
+=======
+-- Tiempo de generación: 29-09-2026 a las 15:29:04
+>>>>>>> f815c21e9d089b9ab296668981f5fb71dc40752a
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -63,7 +67,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre_perfil`, `contraseña`, `correo`, `img`, `bio`) VALUES
-(3, 'maximo', '$2y$10$9Zre7NXexOoAYPG5S1yQvOvaj1f2H8D2BH9FTjggPYSqUoRSDERGe', 'maximo@gmail.com', '../img/perfildefault.png', '');
+(3, 'hfytf', '$2y$10$9Zre7NXexOoAYPG5S1yQvOvaj1f2H8D2BH9FTjggPYSqUoRSDERGe', 'maximo@gmail.com', '../img/perfildefault.png', 'hgyg967y');
 
 --
 -- Índices para tablas volcadas
@@ -80,7 +84,8 @@ ALTER TABLE `post`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `correo` (`correo`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
