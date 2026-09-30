@@ -1,5 +1,4 @@
-
-   <section class="cocina">
+<section class="cocina">
       <div class="botones">
          <button onclick="irA('php/living.php')" class="arrow_l"><img src="/CUSI-1.0/frontEnd/Cusi_style/left.png" width="70"></button>
          <button onclick="irA('php/baño.php')" class="arrow_r"><img src="/CUSI-1.0/frontEnd/Cusi_style/right.png" width="70"></button>
@@ -12,8 +11,14 @@
          <p id="value"></p> 
       </div>
 
+      <div id="food"></div>
+
       <img src="/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi.png" width="550" id="cusi_a">
       <audio src="/CUSI-1.0/frontEnd/mp3/Deam.mp3" id="damn"></audio>
       <img src="/CUSI-1.0/frontEnd/Cusi_style/cocina-scr/heladera.png" width="270" id="heladera" class="im-btn" style="cursor: pointer;">
-      <img src="/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Franco.png" width="380" id="franco">
+      <img src="/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Franco.png" width="380" id="franco" style="cursor: pointer;">
+
+      <!-- Bandeja de comida estilo Pou: se llena sola con JS (renderBandejaComida)
+           usando lo que haya en inventarioComida. Tocar un plato le da de comer a Cusi. -->
+      <div id="bandeja-comida" class="bandeja-comida"></div>
    </section>

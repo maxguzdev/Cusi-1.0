@@ -6,6 +6,13 @@ body {
     /* saca cualquier barra de scroll */
 }
 
+@font-face {
+  font-family: 'Cusi-Regular';
+  src: url('../font/Cusi-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .pantalla-inicio {
     position: relative;
     width: 100%;
@@ -21,7 +28,7 @@ body {
     justify-content: flex-end;
     box-sizing: border-box;
     padding: 70px 16px;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+    font-family: 'Cusi-Regular';
 }
 
 .botones {
@@ -33,8 +40,7 @@ body {
 
 button {
     font-family: inherit;
-    font-size: 30px;
-    font-weight: 900;
+    font-size: 35px;
     letter-spacing: 1px;
     color: #FFF6E2;
     padding: 14px 44px;
@@ -101,9 +107,8 @@ button:focus-visible {
 }
 
 .campos #nombre {
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+   font-family: 'Cusi-Regular';
     font-size: 20px;
-    font-weight: 900;
     letter-spacing: 1px;
     color: #FFF6E2;
     padding: 14px 14px;
@@ -130,9 +135,8 @@ button:focus-visible {
     position: absolute;
     top: -25px;
     left: 172px;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+   font-family: 'Cusi-Regular';
     font-size: 60px;
-    font-weight: 900;
     letter-spacing: 1px;
     color: #000000;
 }
@@ -152,7 +156,7 @@ button:focus-visible {
     justify-content: flex-end;
     box-sizing: border-box;
     padding: 70px 16px;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+    font-family: 'Cusi-Regular';
 }
 
 #src {
@@ -240,7 +244,7 @@ button:focus-visible {
     justify-content: flex-end;
     box-sizing: border-box;
     padding: 70px 16px;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+   font-family: 'Cusi-Regular';
 
 }
 
@@ -269,12 +273,32 @@ button:focus-visible {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
 }
 
+#cartelera {
+    position: relative;
+    top: -140px;
+    z-index: 1000000 !important;
+    background: #2b1b36;
+    border: 4px solid #ffffff;
+    border-radius: 16px;
+    padding: 25px 30px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+#cartelera p {
+    color: #ffffff;
+    font-size: 22px;
+   font-family: 'Cusi-Regular';
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px #000;
+}
 /* Texto del título */
 .cartelera p {
     color: #ffffff;
     font-size: 22px;
-    font-weight: bold;
-    font-family: 'Arial Black', Gadget, sans-serif;
+    font-family: 'Cusi-Regular';
     margin-bottom: 20px;
     text-shadow: 2px 2px 0px #000;
 }
@@ -314,8 +338,7 @@ button:focus-visible {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     color: #FFF6E2;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
-    font-weight: 900;
+    font-family: 'Cusi-Regular';
     letter-spacing: 0.5px;
     font-size: 14px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
@@ -342,8 +365,7 @@ button:focus-visible {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     color: #FFF6E2;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
-    font-weight: 900;
+    font-family: 'Cusi-Regular';
     letter-spacing: 0.5px;
     font-size: 14px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
@@ -370,8 +392,7 @@ button:focus-visible {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     color: #FFF6E2;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
-    font-weight: 900;
+    font-family: 'Cusi-Regular';
     letter-spacing: 0.5px;
     font-size: 14px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
@@ -384,8 +405,7 @@ button:focus-visible {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     color: #FFF6E2;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
-    font-weight: 900;
+    font-family: 'Cusi-Regular';
     letter-spacing: 0.5px;
     font-size: 14px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
@@ -404,6 +424,138 @@ button:focus-visible {
                 url('/CUSI-1.0/frontEnd/Cusi_style/banda_icon.png') center/cover no-repeat;
 }
 
+.opciones button.opcion-ruleta {
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+}
+
+.opciones button.opcion-ruleta .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+.opciones button.opcion-pablo {
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+}
+
+.opciones button.opcion-pablo .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+.opciones button.opcion-run {
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+}
+
+.opciones button.opcion-run .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+   font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+.opciones button.opcion-pc {
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+}
+
+.opciones button.opcion-pc .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+.opciones button.opcion-snake {
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+}
+
+.opciones button.opcion-snake .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+
+
 /* Botones con estilo videojuego */
 .opciones-grid button {
     background: linear-gradient(180deg, #8a3ab9 0%, #4c1d95 100%);
@@ -412,7 +564,6 @@ button:focus-visible {
     border-radius: 10px;
     padding: 12px 8px;
     font-size: 15px;
-    font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 0px #1e0b36;
     transition: transform 0.1s, background 0.2s;
@@ -467,7 +618,7 @@ button:focus-visible {
     justify-content: flex-end;
     box-sizing: border-box;
     padding: 70px 16px;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+    font-family: 'Cusi-Regular';
 
 }
 
@@ -479,6 +630,121 @@ button:focus-visible {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-end;
+}
+
+/*******************************************************************************\
+ Menú de la heladera: botón de salir, botones de comida con imagen + cantidad
+\*******************************************************************************/
+/* El botón de salir ahora es HIJO de .cartelera (no un hermano de afuera),
+   anclado en su esquina como el botón de cerrar de cualquier modal. Al ser
+   descendiente, siempre viaja pegado a la tarjeta (incluso con su
+   position:relative; top:-240px) y nunca vuelve a quedar tapado ni a
+   superponerse con la grilla de opciones. */
+.btn-cerrar-heladera {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    z-index: 5;
+    padding: 6px 14px;
+}
+
+.opcion-comida,
+.item-bandeja {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.opcion-comida img,
+.item-bandeja img {
+    width: 120px;
+    height: 70px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.precio-comida {
+    color: #FFF6E2;
+    font-size: 0.8rem;
+    font-weight: 900;
+    pointer-events: none;
+}
+
+.cantidad-comida {
+    position: absolute;
+    bottom: -6px;
+    right: -6px;
+    background: #FFD35C;
+    color: #17140F;
+    font-size: 0.75rem;
+    font-weight: 900;
+    line-height: 1;
+    padding: 3px 6px;
+    border-radius: 999px;
+    border: 2px solid #17140F;
+    pointer-events: none;
+}
+
+/*******************************************************************************\
+ Bandeja de comida (estilo Pou) para darle de comer a Cusi directo,
+ sin pasar por el menú de compra de la heladera.
+\*******************************************************************************/
+.bandeja-comida {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 1000002;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    max-width: 92vw;
+    padding: 10px 18px;
+    overflow-x: auto;
+    background: rgba(43, 27, 54, 0.9);
+    border: 4px solid #ffffff;
+    border-radius: 999px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.bandeja-comida .item-bandeja {
+    flex: 0 0 auto;
+    background: linear-gradient(180deg, #C9B6E4, #8F71B3);
+    border: 3px solid #17140F;
+    border-radius: 14px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.bandeja-comida .item-bandeja:hover {
+    filter: brightness(1.08);
+}
+
+.bandeja-comida .item-bandeja:active {
+    transform: scale(0.95);
+}
+
+.bandeja-vacia {
+    color: #FFF6E2;
+    font-size: 0.85rem;
+    margin: 0;
+    padding: 0 8px;
+    white-space: nowrap;
+}
+
+/* Bounce cortito cuando Cusi come algo de la bandeja */
+@keyframes comiendo {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.12) rotate(-3deg); }
+    60% { transform: scale(0.96) rotate(2deg); }
+    100% { transform: scale(1); }
+}
+
+#cusi_a.comiendo {
+    animation: comiendo 0.4s ease;
 }
 
 #franco {
@@ -507,7 +773,7 @@ button:focus-visible {
     justify-content: flex-end;
     box-sizing: border-box;
     padding: 70px 16px;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+    font-family: 'Cusi-Regular';
 
 }
 
@@ -555,8 +821,7 @@ button:focus-visible {
     text-align: center;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
     color: #ffffff;
-    font-family: Arial, sans-serif;
-}
+    font-family: 'Cusi-Regular';
 
 .cartel-pregunta p {
     font-size: 20px;
@@ -630,4 +895,6 @@ button:focus-visible {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-end;
+}
+
 }

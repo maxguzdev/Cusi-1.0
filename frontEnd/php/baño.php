@@ -13,7 +13,7 @@
       <img src="/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi.png" width="550" id="cusi_a">
       <audio src="/CUSI-1.0/frontEnd/mp3/Deam.mp3" id="damn"></audio>
       <img src="/CUSI-1.0/frontEnd/Cusi_style/bat_scr/ducha.png" width="200" id="ducha" class="im-btn" style="cursor: pointer;">
-      <img src="/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo.png" width="229" class="im-btn" id="leo">
+      <img src="/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo.png" width="229" class="im-btn" id="leo" style="cursor: pointer;">
       <audio src="/CUSI-1.0/frontEnd/mp3/dialogoL.mp3" id="dL"></audio>
       <audio src="/CUSI-1.0/frontEnd/mp3/dialogoL2x.mp3" id="dL2"></audio>
    </section>

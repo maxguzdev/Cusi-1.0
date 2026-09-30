@@ -11,8 +11,6 @@
 * {
     box-sizing: border-box;
     font-family: helvetica, sans-serif;
-    -webkit-user-select: none;
-    -moz-user-select: none;
 }
 
 html, body {

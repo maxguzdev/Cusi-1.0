@@ -24,7 +24,7 @@
             <div class="cusis-columna">
                 <div class="opcion-dificultad opcion-facil">
                     <span class="etiqueta">FÁCIL</span>
-                    <img src="/Cusi-1.0/frontEnd/Cusi_style/CUSI_skins/kanep.png" width="200px" class="btn-dificultad" id="fac" data-tamano="8" data-bombas="10">
+                    <img src="/Cusi-1.0/frontEnd/Cusi_style/CUSI_skins/pablo.png" width="200px" class="btn-dificultad" id="fac" data-tamano="8" data-bombas="10">
                 </div>
                 <div class="opcion-dificultad opcion-media">
                     <span class="etiqueta">MEDIO</span>
