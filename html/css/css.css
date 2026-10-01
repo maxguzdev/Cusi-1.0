@@ -1,211 +1,421 @@
-.body{
-    background-color: antiquewhite;
-}
-.newtext{
-  width: 180px;
+
+
+:root {
+    --morado:        #A47DAB;   /* color de marca */
+    --morado-fuerte: #8B5E96;   /* botones y textos (mejor contraste) */
+    --morado-oscuro: #6F4A79;   /* hover */
+    --morado-claro:  #F3ECF5;   /* fondos suaves */
+    --morado-borde:  #E3D6E7;   /* bordes */
+
+    --fondo:         #FAF7FB;
+    --blanco:        #FFFFFF;
+    --texto:         #2A1F2D;
+    --text-secondary:#7A6B7F;
+
+    --sidebar-w:     380px;
+    --radio:         16px;
+    --sombra:        0 2px 10px rgba(111, 74, 121, 0.08);
+    --sombra-hover:  0 6px 18px rgba(111, 74, 121, 0.16);
 }
 
-.textito{
-    background-color: #A47DAB;
-    width: 100%;            
-  max-width: 900px;        
-  margin: 10px auto;      
-  min-height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-size: 15px;
-    line-height: 2;
-    color: #0f1419;
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--fondo);
+    color: var(--texto);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    white-space: pre-wrap;    
-    word-wrap: break-word;  
+    margin: 0;
 }
-.botones{
-  margin: 30px;
-  gap: 10px;
-  display: flex;
-  justify-content:center;
+
+img {
+    max-width: 100%;
+    height: auto;
 }
-.img-perfil{
-    width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
+
+a {
+    color: var(--morado-fuerte);
 }
+
 .sidebar {
-  width: 380px;
-  height: 100vh;
-  background-color: #ffffff;
-  color: black;
-  padding-top: 24px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background-color: var(--blanco);
+    border-right: 1px solid var(--morado-borde);
+    box-shadow: 4px 0 20px rgba(111, 74, 121, 0.05);
+    padding: 28px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
 }
 
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 24px;
+    background: var(--morado-claro);
+    border-radius: var(--radio);
+}
 
+.img-perfil {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--blanco);
+    box-shadow: 0 0 0 2px var(--morado);
+    flex-shrink: 0;
+}
 
-.sidebar h2 {
-  font-size: 1.25rem;
-  padding: 0 24px;
-  margin-bottom: 24px;
-  color: #f8fafc;
+.minombre {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+
+.minombre strong {
+    font-size: 1.1rem;
+    color: var(--texto);
+}
+
+.minombre a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--morado-fuerte);
+}
+
+.minombre a:hover {
+    text-decoration: underline;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .sidebar ul li a {
-  display: block;
-  padding: 12px 24px;
-  color: #000000;
-  text-decoration: none;
-  font-family: sans-serif;
-  transition: background-color 0.2s ease, color 0.2s ease;
+    display: block;
+    padding: 12px 18px;
+    margin-bottom: 6px;
+    color: var(--texto);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
-.sidebar ul li a:hover,
+
+.sidebar ul li a:hover {
+    background-color: var(--morado-claro);
+    color: var(--morado-fuerte);
+}
+
 .sidebar ul li a.active {
-  background-color: #d3d3d3;
-  color: #A47DAB;
-  border-left: 4px solid #A47DAB;
+    background-color: var(--morado-fuerte);
+    color: var(--blanco);
+    font-weight: 600;
 }
+
+#signup,
+#signin {
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#signup {
+    background-color: var(--morado-fuerte);
+    color: var(--blanco);
+    border: 2px solid var(--morado-fuerte);
+}
+
+#signup:hover {
+    background-color: var(--morado-oscuro);
+    border-color: var(--morado-oscuro);
+}
+
+#signin {
+    background-color: transparent;
+    color: var(--morado-fuerte);
+    border: 2px solid var(--morado-fuerte);
+}
+
+#signin:hover {
+    background-color: var(--morado-claro);
+}
+
+.principal {
+    margin-left: var(--sidebar-w);
+    padding: 24px 20px;
+}
+
+.botones {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 550px;
+    margin: 20px auto 24px;
+    padding: 14px;
+    background-color: var(--blanco);
+    border: 1px solid var(--morado-borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+.newtext {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 18px;
+    font-size: 15px;
+    color: var(--texto);
+    background-color: var(--fondo);
+    border: 1px solid var(--morado-borde);
+    border-radius: 9999px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.newtext::placeholder {
+    color: var(--text-secondary);
+}
+
+.newtext:focus {
+    background-color: var(--blanco);
+    border-color: var(--morado);
+    box-shadow: 0 0 0 4px rgba(164, 125, 171, 0.2);
+}
+
+.newtext:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .postito {
-  background-color: #A47DAB;
-  color: #ffffff;
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  padding: 10px 24px;
-  border: none;
-  border-radius: 9999px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    background-color: var(--morado-fuerte);
+    color: var(--blanco);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(111, 74, 121, 0.25);
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
+
 .postito:hover {
-  background-color: #A47DAB;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--morado-oscuro);
+    box-shadow: 0 4px 12px rgba(111, 74, 121, 0.3);
 }
 
 .postito:active {
-  transform: scale(0.97);
+    transform: scale(0.97);
 }
 
 .postito:disabled {
-  background-color: #A47DAB;
-  opacity: 0.5;
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
 }
 
-.epic{
-  position: absolute;
-  top: 35px;
-  right: 70px;
-  width: 90px;
-  height: auto;
-}
-
-.perfil{
-  
-  width: 300px;
-}
- .social-footer {
-            text-align: center;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: var(--text-secondary);
-            font-size: 2rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .social-links a.instagram:hover { color: #E1306C; transform: translateY(-5px); }
-        .social-links a.twitter:hover { color: #1DA1F2; transform: translateY(-5px); }
-        .social-links a.youtube:hover { color: #FF0000; transform: translateY(-5px); }
 #contenedor {
     display: flex;
-    flex-direction: column;   
-    gap: 16px;                 
-    max-width: 550px;      
-    margin: 0px auto;         
-    padding: 0 10px;           
-    box-sizing: border-box;
-    height: auto;            
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
 }
 
 .tweetcard {
-     background-color: #ffffff; 
-    padding: 16px;
-    
-   
-    width: 100%;               
-    height: auto;        
-    box-sizing: border-box;
-    
-    border-top: 1px solid #cfd9de;
-    border-right: 1px solid #cfd9de;
-    border-bottom: 1px solid #cfd9de;
-    border-left: none;         
-    
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); 
+    background-color: var(--blanco);
+    padding: 18px;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    border: 1px solid var(--morado-borde);
+    border-left: 4px solid var(--morado);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.tweetcard:hover {
+    box-shadow: var(--sombra-hover);
+    transform: translateY(-2px);
 }
 
 .tweetheader {
     display: flex;
-    align-items: center;       
-    margin-bottom: 10px;      
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.tweetheader > div {
+    min-width: 0;
 }
 
 .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;        
-    margin-right: 12px;        
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
     object-fit: cover;
+    border: 2px solid var(--morado);
+    flex-shrink: 0;
 }
 
 .name {
-    font-weight: bold;
-    color: #0f1419;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    color: var(--texto);
 }
 
 .gmail {
-    color: #536471;
+    color: var(--text-secondary);
     font-size: 14px;
     margin-left: 4px;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-.carrusel-derecha {
-  position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  width: 300px;
-  max-width: 40vw;
-  z-index: 1000;
 }
 
-.carrusel-derecha img {
-  height: 500px;       
-  object-fit: contain; 
-  margin-right: auto;
+.textito {
+    width: 100%;
+    margin: 0;
+    padding: 4px 0 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--texto);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+
+.epic {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    width: 80px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.epic:hover {
+    transform: rotate(-6deg) scale(1.08);
+}
+
+.social-footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--morado-borde);
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: var(--morado);
+    font-size: 2rem;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a.instagram:hover { color: #E1306C; transform: translateY(-5px); }
+.social-links a.twitter:hover   { color: #1DA1F2; transform: translateY(-5px); }
+.social-links a.youtube:hover   { color: #FF0000; transform: translateY(-5px); }
+
+.carrusel-derecha {
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto 20px;
+    border: 1px solid var(--morado-borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    overflow: hidden;
+    background-color: var(--morado-claro);
+}
+
+.carrusel-derecha .carousel-item img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--morado-borde);
+        box-shadow: var(--sombra);
+        padding: 14px;
+    }
+
+    .perfil {
+        justify-content: center;
+        margin-bottom: 12px;
+    }
+
+    .img-perfil {
+        width: 52px;
+        height: 52px;
+    }
+
+    .sidebar ul {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .sidebar ul li a {
+        margin-bottom: 0;
+        padding: 10px 16px;
+    }
+
+    .principal {
+        margin-left: 0;
+        padding: 14px 10px;
+    }
+
+    .contenedor-epic-logo {
+        display: block;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .epic {
+        position: static;
+        max-width: 100px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .botones {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .postito {
+        width: 100%;
+    }
+
+    .tweetcard:hover {
+        transform: none;
+    }
 }

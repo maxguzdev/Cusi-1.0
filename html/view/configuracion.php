@@ -40,12 +40,9 @@
 <label for="genero">elije tu genero:</label>
 
 <select id="genero" class="gener" name="elije tu genero">
-  <option value="hombre">hombre</option>
-  <option value="boliviano">boliviano</option>
-  <option value="fiscella">fiscella</option>
-  <option value="mujer">mujer</option>
-  <option value="helicoptero apache">helicoptero apache</option>
-  <option value="chino">chino</option>
+  <option value="masculino">Masculino</option>
+  <option value="femenino">Femenino</option>
+  <option value="otro">Otro</option>
 </select>
 </div>
 </body>
