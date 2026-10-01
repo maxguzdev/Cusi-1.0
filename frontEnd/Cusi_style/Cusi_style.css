@@ -434,7 +434,7 @@ button:focus-visible {
     align-items: flex-end;
     justify-content: center;
     background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+                url('/CUSI-1.0/frontEnd/Cusi_style/ruleta_icon.jpeg') center/cover no-repeat;
 }
 
 .opciones button.opcion-ruleta .etiqueta-juego {

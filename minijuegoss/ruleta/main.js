@@ -5,12 +5,10 @@ const START_BANK = 1000;
 let bank = START_BANK;
 let currentChip = 0;
 let bets = { numbers: {}, color: {}, evenodd: {} };
-let highScores = [];
-try { highScores = JSON.parse(localStorage.getItem("rouletteHighScores")) || []; } catch { highScores = []; }
 
 const $ = id => document.getElementById(id);
 const bankDisplay = $("bankDisplay"), betDisplay = $("betDisplay");
-const playerNameInput = $("playerNameInput"), resultDisplay = $("resultDisplay"), spinButton = $("spinButton");
+const resultDisplay = $("resultDisplay"), spinButton = $("spinButton");
 
 const sumBets = c => Object.values(bets[c]).reduce((s, v) => s + v, 0);
 const totalBet = () => sumBets("numbers") + sumBets("color") + sumBets("evenodd");
@@ -146,27 +144,7 @@ function evaluateBets(n) {
   document.querySelectorAll(".betOption").forEach(o => o.querySelector(".amt")?.remove());
   spinButton.disabled = false;
   updateDisplays();
-  updateHighScore();
   if (bank <= 0) resultDisplay.textContent += " Te quedaste sin fondos: pulsa «Nueva partida».";
-}
-
-/********** PUNTUACIONES **********/
-function updateHighScore() {
-  const name = (playerNameInput.value.trim() || "Invitado").slice(0, 16);
-  const prev = highScores.find(s => s.name === name);
-  if (prev) prev.bank = Math.max(prev.bank, bank); else highScores.push({ name, bank });
-  highScores = highScores.sort((a, b) => b.bank - a.bank).slice(0, 5);
-  try { localStorage.setItem("rouletteHighScores", JSON.stringify(highScores)); } catch {}
-  renderHighScores();
-}
-
-function renderHighScores() {
-  const body = $("scoreboardBody");
-  body.replaceChildren(...highScores.map(({ name, bank }) => {
-    const tr = document.createElement("tr");
-    [name, "$" + bank].forEach(t => { const td = document.createElement("td"); td.textContent = t; tr.appendChild(td); });
-    return tr;
-  }));
 }
 
 /********** CONTROLES **********/
@@ -195,4 +173,3 @@ $("newGameButton").addEventListener("click", () => {
 
 drawWheel();
 updateDisplays();
-renderHighScores();

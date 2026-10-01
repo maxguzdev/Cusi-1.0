@@ -19,6 +19,7 @@ let score       //  score counter
 let gameState   //  state of game
 let frame       //  ms/frame = 17; dx/frame = 2; fps = 59;
 let degree      //  bird rotation degree
+let paused = false  //  game paused by the player
 const SFX_SCORE = new Audio()         //  sound for scoring
 const SFX_FLAP = new Audio()          //  sound for flying bird
 const SFX_COLLISION = new Audio()     //  sound for collision
@@ -175,13 +176,16 @@ pipes = {
                 //ANIMATION: set of pipes scroll from the right of canvas by decrementing x
                 pg.x -= this.dx
                 
+                //score up as soon as the bird fully passes a pipe
+                if (!pg.passed && pg.x + this.w < bird.x - bird.r) {
+                    pg.passed = true
+                    score.current++
+                    SFX_SCORE.play()
+                }
                 //delete pipes as they scroll off the canvas (memory management)
                 if(pg.x < -this.w) {
                     this.pipeGenerator.shift()
-                        //score up
-                        score.current++
-                        SFX_SCORE.play()
-                    }
+                }
 
                 //PIPE COLLISION
                 //collision with top pipe
@@ -654,9 +658,9 @@ gameOver = {
     //object's render function that utilizes all above values to draw image onto canvas
     render: function() {
         //only draw this if the game state is on game over
+        //the game over panel is HTML now (see CUSI UI LAYER at the end of this file)
         if (gameState.current == gameState.gameOver) {
-            ctx.drawImage(theme1, this.imgX,this.imgY,this.width,this.height, this.x,this.y,this.w,this.h)
-            description.style.visibility = "visible"
+            showGameOver()
         }
     }
 }
@@ -688,8 +692,10 @@ let update = () => {
 //game looper
 let loop = () => {
     draw()
-    update()
-    frame++
+    if (!paused) {
+        update()
+        frame++
+    }
     //average of requestAnimationFrame is 50-60fps
     // requestAnimationFrame(loop)
 }
@@ -697,47 +703,174 @@ loop()
 setInterval(loop, 17)
 
 /*************************
-***** EVENT HANDLERS ***** 
+***** CUSI UI LAYER ******
 *************************/
-//on mouse click // tap screen
-cvs.addEventListener('click', () => {
-    //if ready screen >> go to play state
+const BEST_KEY = 'cusi_flappy_best'
+const MUTE_KEY = 'cusi_flappy_mute'
+const MEDALS = [
+    { min: 40, name: 'platino' },
+    { min: 30, name: 'oro' },
+    { min: 20, name: 'plata' },
+    { min: 10, name: 'bronce' }
+]
+const sfxList = [SFX_SCORE, SFX_FLAP, SFX_COLLISION, SFX_FALL, SFX_SWOOSH]
+const $ = (id) => document.getElementById(id)
+const stage = $('stage')
+const panelOver = $('panel-over')
+const panelPause = $('panel-pause')
+const btnPause = $('btn-pause')
+const btnMute = $('btn-mute')
+const btnFull = $('btn-full')
+let bestScore = 0
+let muted = false
+let overShown = false
+let overTimer = null
+try { bestScore = parseInt(localStorage.getItem(BEST_KEY)) || 0 } catch (e) {}
+try { muted = localStorage.getItem(MUTE_KEY) === '1' } catch (e) {}
+
+function renderBest() {
+    $('hud-best').textContent = bestScore
+}
+function setHint(on) {
+    description.classList.toggle('oculto', !on)
+}
+function applyMute() {
+    sfxList.forEach((s) => { s.muted = muted })
+    btnMute.setAttribute('aria-pressed', muted)
+    btnMute.title = muted ? 'Activar sonido (M)' : 'Silenciar (M)'
+    try { localStorage.setItem(MUTE_KEY, muted ? '1' : '0') } catch (e) {}
+}
+function setOverlay(panel, visible) {
+    panel.classList.toggle('visible', visible)
+    panel.setAttribute('aria-hidden', !visible)
+}
+
+//called every frame by gameOver.render(); only reacts the first time
+function showGameOver() {
+    if (overShown) return
+    overShown = true
+    paused = false
+    stage.classList.add('golpe')
+    setTimeout(() => stage.classList.remove('golpe'), 350)
+
+    const finalScore = score.current
+    const nuevoRecord = finalScore > bestScore
+    if (nuevoRecord) {
+        bestScore = finalScore
+        try { localStorage.setItem(BEST_KEY, bestScore) } catch (e) {}
+        renderBest()
+    }
+    const medal = MEDALS.find((m) => finalScore >= m.min)
+    $('over-score').textContent = finalScore
+    $('over-best').textContent = bestScore
+    $('over-nuevo').classList.toggle('on', nuevoRecord)
+    $('over-medalla').dataset.medalla = medal ? medal.name : 'ninguna'
+    $('over-medalla-nombre').textContent = medal ? 'Medalla de ' + medal.name : 'Sin medalla todavía'
+
+    //small delay so the player sees the bird fall before the panel appears
+    overTimer = setTimeout(() => {
+        setOverlay(panelOver, true)
+        $('btn-retry').focus()
+    }, 650)
+}
+
+function restart() {
+    if (gameState.current !== gameState.gameOver || !panelOver.classList.contains('visible')) return
+    clearTimeout(overTimer)
+    overShown = false
+    setOverlay(panelOver, false)
+    pipes.reset()
+    score.reset()
+    bird.velocity = 0
+    gameState.current = gameState.getReady
+    SFX_SWOOSH.play()
+    setHint(true)
+    document.activeElement && document.activeElement.blur()
+}
+
+function handleInput() {
+    if (paused) return
+    //ready screen >> play state
     if (gameState.current == gameState.getReady) {
+        frame = 0
         gameState.current = gameState.play
     }
-    //if play state >> bird keeps flying
+    //play state >> bird flies
     if (gameState.current == gameState.play) {
         bird.flap()
         SFX_FLAP.play()
-        description.style.visibility = "hidden"
+        setHint(false)
     }
-    //if game over screen >> go to ready screen
-    if (gameState.current == gameState.gameOver) {
-        pipes.reset()
-        score.reset()
-        gameState.current = gameState.getReady
-        SFX_SWOOSH.play()
+}
+
+function setPaused(value) {
+    if (value && gameState.current !== gameState.play) return
+    paused = value
+    setOverlay(panelPause, value)
+    if (value) $('btn-resume').focus()
+    else document.activeElement && document.activeElement.blur()
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenEnabled) return
+    if (document.fullscreenElement) {
+        document.exitFullscreen()
+    } else {
+        document.documentElement.requestFullscreen().catch(() => {})
+    }
+}
+
+/*************************
+***** EVENT HANDLERS ***** 
+*************************/
+//mouse click // tap screen (pointerdown responds faster than click on mobile)
+cvs.addEventListener('pointerdown', (e) => {
+    e.preventDefault()
+    handleInput()
+})
+
+document.addEventListener('keydown', (e) => {
+    if (e.repeat) return
+    switch (e.code) {
+        case 'Space':
+        case 'ArrowUp':
+        case 'KeyW':
+            e.preventDefault()
+            if (gameState.current == gameState.gameOver) restart()
+            else handleInput()
+            break
+        case 'Enter':
+            if (gameState.current == gameState.gameOver) restart()
+            break
+        case 'Escape':
+        case 'KeyP':
+            setPaused(!paused)
+            break
+        case 'KeyM':
+            muted = !muted
+            applyMute()
+            break
+        case 'KeyF':
+            toggleFullscreen()
+            break
     }
 })
-//on spacebar
-document.body.addEventListener('keydown', (e) => {
-    //if ready screen >> go to play state
-    if (e.keyCode == 32) {
-        if (gameState.current == gameState.getReady) {
-            gameState.current = gameState.play
-        }
-        //if play state >> bird keeps flying
-        if (gameState.current == gameState.play) {
-            bird.flap()
-            SFX_FLAP.play()
-            description.style.visibility = "hidden"
-        }
-        //if game over screen >> go to ready screen
-        if (gameState.current == gameState.gameOver) {
-            pipes.reset()
-            score.reset()
-            SFX_SWOOSH.play()
-            gameState.current = gameState.getReady
-        }
-    }
+
+//pause automatically if the player leaves the tab
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) setPaused(true)
 })
+
+$('btn-retry').addEventListener('click', restart)
+$('btn-resume').addEventListener('click', () => setPaused(false))
+btnPause.addEventListener('click', () => setPaused(!paused))
+btnMute.addEventListener('click', () => { muted = !muted; applyMute() })
+btnFull.addEventListener('click', toggleFullscreen)
+document.addEventListener('fullscreenchange', () => {
+    btnFull.dataset.activo = document.fullscreenElement ? '1' : '0'
+})
+if (!document.fullscreenEnabled) btnFull.hidden = true
+
+renderBest()
+applyMute()
+setHint(true)
