@@ -1,3 +1,29 @@
+@font-face {
+    font-family: 'Cusi Regular';
+    src: url('../font/Cusi-Regular.ttf') format('truetype');
+}
+
+body{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--cream);
+    font-family: 'Cusi Regular', 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif;
+    color: var(--ink-strong);
+    background-image: url('img/fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 :root{
     --purple: #8F71B3;
     --purple-dark: #6E4F94;
@@ -16,27 +42,6 @@
 html, body{
     height: 100%;
     margin: 0;
-}
-
-body{
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: var(--cream);
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
-    color: var(--ink-strong);
-     background-image: url('img/fondo.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 .main {

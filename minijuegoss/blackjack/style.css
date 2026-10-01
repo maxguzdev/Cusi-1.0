@@ -1,9 +1,13 @@
+@font-face {
+    font-family: 'Cusi Regular';
+    src: url('../../frontEnd/font/Cusi-Regular.ttf') format('truetype');
+}
+
 *{
     padding: 0px;
     margin: 0px;
-   font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
+    font-family: 'Cusi Regular', 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif;
 }
-
 .carte{
     width: 100px;
     height: 156px;

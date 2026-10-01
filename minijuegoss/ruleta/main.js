@@ -1,8 +1,10 @@
 /********** ESTADO **********/
 const RED = new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
 const colorOf = n => n === 0 ? "green" : RED.has(n) ? "red" : "black";
-const START_BANK = 1000;
-let bank = START_BANK;
+// El dinero es el mismo del juego principal: localStorage "dinero" (mismo origen).
+const leerDinero = () => { try { const d = Number(JSON.parse(localStorage.getItem("dinero"))); return Number.isFinite(d) && d >= 0 ? Math.floor(d) : 100; } catch { return 100; } };
+const guardarDinero = () => { try { localStorage.setItem("dinero", JSON.stringify(bank)); } catch {} };
+let bank = leerDinero();
 let currentChip = 0;
 let bets = { numbers: {}, color: {}, evenodd: {} };
 
@@ -13,7 +15,7 @@ const resultDisplay = $("resultDisplay"), spinButton = $("spinButton");
 const sumBets = c => Object.values(bets[c]).reduce((s, v) => s + v, 0);
 const totalBet = () => sumBets("numbers") + sumBets("color") + sumBets("evenodd");
 function updateDisplays() {
-  bankDisplay.textContent = "Banco: $" + bank;
+  bankDisplay.textContent = "Dinero: $" + bank;
   betDisplay.textContent = "Apostado: $" + totalBet();
 }
 
@@ -29,7 +31,7 @@ function attachBetting(elements, category, keyOf) {
   elements.forEach(el => el.addEventListener("click", () => {
     if (spinning) return;
     if (currentChip <= 0) { resultDisplay.textContent = "Primero elige una ficha."; return; }
-    if (totalBet() + currentChip > bank) { resultDisplay.textContent = "No te alcanza el banco para esa apuesta."; return; }
+    if (totalBet() + currentChip > bank) { resultDisplay.textContent = "No te alcanza el dinero para esa apuesta."; return; }
     const key = keyOf(el);
     bets[category][key] = (bets[category][key] || 0) + currentChip;
     paint(el, category, key);
@@ -133,6 +135,7 @@ function evaluateBets(n) {
   }
   const staked = totalBet(), net = payout - staked;
   bank += payout; // la apuesta ya se descontó al girar
+  guardarDinero();
   const names = { red: "ROJO", black: "NEGRO", green: "VERDE" };
   resultDisplay.textContent = `Salió ${n} (${names[color]}). ` +
     (net > 0 ? `Ganaste $${net}.` : net === 0 ? "Recuperas tu apuesta." : `Pierdes $${-net}.`);
@@ -144,7 +147,7 @@ function evaluateBets(n) {
   document.querySelectorAll(".betOption").forEach(o => o.querySelector(".amt")?.remove());
   spinButton.disabled = false;
   updateDisplays();
-  if (bank <= 0) resultDisplay.textContent += " Te quedaste sin fondos: pulsa «Nueva partida».";
+  if (bank <= 0) resultDisplay.textContent += " Te quedaste sin dinero: ganá más en los otros minijuegos.";
 }
 
 /********** CONTROLES **********/
@@ -152,8 +155,11 @@ spinButton.addEventListener("click", () => {
   if (spinning) return;
   const stake = totalBet();
   if (!stake) { resultDisplay.textContent = "Haz tus apuestas antes de girar."; return; }
-  if (stake > bank) { resultDisplay.textContent = "Tus apuestas superan tu banco."; return; }
+  if (stake > bank) { resultDisplay.textContent = "Tus apuestas superan tu dinero."; return; }
+  bank = leerDinero(); // por si cambió en otra pestaña
+  if (stake > bank) { resultDisplay.textContent = "Tus apuestas superan tu dinero."; updateDisplays(); return; }
   bank -= stake; // se descuenta al girar
+  guardarDinero();
   updateDisplays();
   resultDisplay.textContent = "No va más…";
   spinButton.disabled = true;
@@ -163,13 +169,6 @@ spinButton.addEventListener("click", () => {
 });
 
 $("clearButton").addEventListener("click", () => { if (!spinning) resetBets(); });
-
-$("newGameButton").addEventListener("click", () => {
-  if (spinning) return;
-  bank = START_BANK; resetBets();
-  resultDisplay.textContent = "Nueva partida. ¡Suerte!";
-  updateDisplays();
-});
 
 drawWheel();
 updateDisplays();

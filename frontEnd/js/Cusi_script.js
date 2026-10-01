@@ -340,7 +340,7 @@ document.addEventListener('click', function (e) {
                                <a href="/Cusi-1.0/minijuegoss/snake/index.html">
                             <button class="opcion-snake"><span class="etiqueta-juego">Snake</span></button>
                               </a>
-                            <a href="/Cusi-1.0/minijuegoss/">
+                            <a href="/Cusi-1.0/minijuegoss/reparaware/index.html">
                             <button class="opcion-pc"><span class="etiqueta-juego">Reparaware</span></button>
                               </a>
                         </div>

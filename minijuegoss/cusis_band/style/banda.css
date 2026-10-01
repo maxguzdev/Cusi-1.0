@@ -1,3 +1,21 @@
+@font-face {
+    font-family: 'Cusi Regular';
+    src: url('../font/Cusi-Regular.ttf') format('truetype');
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('img/pantalla_de_inicio.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Cusi Regular', 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif;
+}
+
 html,
 body {
     margin: 0;
@@ -20,19 +38,6 @@ body {
     text-align: center;
     text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
     pointer-events: none;
-}
-
-body {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url('img/pantalla_de_inicio.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    font-family: 'Arial Rounded MT Bold', 'Trebuchet MS', Verdana, sans-serif;
 }
 
 .inicio {

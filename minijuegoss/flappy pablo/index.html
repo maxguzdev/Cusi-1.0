@@ -1,21 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Cusi - Flappy Pablo</title>
     <link rel="stylesheet" href="style.css">
-      <link rel="icon" href="/Cusi-1.0/frontEnd/Cusi_style/favicon_cusi.png" type="image/png">
+    <link rel="icon" href="/Cusi-1.0/frontEnd/Cusi_style/favicon_cusi.png" type="image/png">
 </head>
 <body>
-    <div class="container">
-        <a href="../../frontEnd/index.html?volver=pieza" class="volver-juego" title="Salir" aria-label="Salir">← Salir</a>
-        <div class="game-title">
-            <h1>FLAPPY BIRD</h1>
-        </div>
-        <div class="game-screen">
-            <canvas id="game" width="300" height="500"></canvas>
-            <p id="description" class="game-description">Press 'spacebar' or 'click' to begin</p>
+    <div class="container" id="stage">
+        <div class="consola">
+
+            <header class="cabecera">
+                <a href="../../frontEnd/index.html?volver=pieza" class="btn-amarillo" title="Volver al menú" aria-label="Volver al menú">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12 11 3.5v5.2h10v6.6H11v5.2z"/></svg>
+                </a>
+
+                <h1 class="titulo">FLAPPY PABLO</h1>
+
+                <button class="btn-amarillo" id="btn-mute" type="button" title="Sonido (M)" aria-label="Silenciar" aria-pressed="false">
+                    <svg class="ico-sonido" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5v5h4l5.5 4.5V5L7 9.5z"/><path class="onda" d="M16 8.5a5 5 0 0 1 0 7M18.8 5.8a9 9 0 0 1 0 12.4"/></svg>
+                    <svg class="ico-mute" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5v5h4l5.5 4.5V5L7 9.5z"/><path class="cruz" d="M16 9l5 6M21 9l-5 6"/></svg>
+                </button>
+            </header>
+
+            <p class="pastilla">Récord <span id="hud-best">0</span></p>
+
+            <main class="tablero">
+                <canvas id="game" width="300" height="500"></canvas>
+
+                <p id="description" class="game-description">Espacio o click para volar</p>
+
+                <!-- Pausa (Esc / P, o sola al cambiar de pestaña) -->
+                <section class="panel" id="panel-pause" aria-hidden="true" aria-label="Juego en pausa">
+                    <div class="tarjeta">
+                        <h2 class="panel-titulo">Pausa</h2>
+                        <button class="btn-grande" id="btn-resume" type="button">Seguir jugando</button>
+                        <a class="btn-sec" href="../../frontEnd/index.html?volver=pieza">Volver al menú</a>
+                    </div>
+                </section>
+
+                <!-- Game over -->
+                <section class="panel" id="panel-over" aria-hidden="true" aria-label="Fin del juego">
+                    <div class="tarjeta">
+                        <h2 class="panel-titulo">Game Over</h2>
+
+                        <div class="medalla" id="over-medalla" data-medalla="ninguna" aria-hidden="true"></div>
+                        <p class="medalla-nombre" id="over-medalla-nombre">Sin medalla todavía</p>
+
+                        <dl class="puntajes">
+                            <div>
+                                <dt>Puntaje</dt>
+                                <dd id="over-score">0</dd>
+                            </div>
+                            <div>
+                                <dt>Récord</dt>
+                                <dd id="over-best">0</dd>
+                            </div>
+                        </dl>
+                        <p class="nuevo" id="over-nuevo">¡Nuevo récord!</p>
+
+                        <button class="btn-grande" id="btn-retry" type="button">Jugar otra vez</button>
+                        <a class="btn-sec" href="../../frontEnd/index.html?volver=pieza">Volver al menú</a>
+                    </div>
+                </section>
+            </main>
         </div>
     </div>
     <script src="main.js"></script>

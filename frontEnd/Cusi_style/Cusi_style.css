@@ -1,6 +1,11 @@
-/* ==========================================================================
-   1. BASE & TIPOGRAFÍA
-   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    /* saca cualquier barra de scroll */
+}
+
 @font-face {
   font-family: 'Cusi-Regular';
   src: url('../font/Cusi-Regular.ttf') format('truetype');
@@ -8,398 +13,405 @@
   font-style: normal;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
+.pantalla-inicio {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url('pantalla_de_inicio.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 70px 16px;
+    font-family: 'Cusi-Regular';
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: 'Cusi-Regular', sans-serif;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* ==========================================================================
-   2. CONTENEDORES DE HABITACIONES / ESCENARIOS
-   ========================================================================== */
-.pantalla-inicio,
-.living,
-.garden,
-.cocina,
-.baño,
-.pieza,
-.piezan {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  min-height: 100dvh;
-  margin: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding: clamp(16px, 5vh, 70px) 16px;
-  overflow: hidden;
-}
-
-.pantalla-inicio { background-image: url('pantalla_de_inicio.png'); }
-.living          { background-image: url('living-scr/fondo.png'); }
-.garden          { background-image: url('garden-scr/fondo_b.png'); }
-.cocina          { background-image: url('cocina-scr/fondo_b.png'); }
-.baño            { background-image: url('bat_scr/fondo_b.png'); }
-.pieza, .piezan  { background-image: url('room-scr/fondo_b.png'); }
-
-/* ==========================================================================
-   3. BOTONES GENERALES Y ESTILOS
-   ========================================================================== */
 .botones {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  max-width: 100%;
-  z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
 }
 
 button {
-  font-family: inherit;
-  font-size: clamp(18px, 4vw, 35px);
-  letter-spacing: 1px;
-  color: #FFF6E2;
-  padding: clamp(8px, 1.5vh, 14px) clamp(20px, 3vw, 44px);
-  background: linear-gradient(180deg, #B45BC0, #7B2E86);
-  border: clamp(2px, 0.4vw, 4px) solid #17140F;
-  border-radius: 14px;
-  box-shadow: 0 6px 0 #4E1B57, 0 10px 16px rgba(0, 0, 0, .4);
-  cursor: pointer;
-  transition: transform .08s ease, box-shadow .08s ease, filter .2s;
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, .3);
-  max-width: 100%;
+    font-family: inherit;
+    font-size: 35px;
+    letter-spacing: 1px;
+    color: #FFF6E2;
+    padding: 14px 44px;
+    background: linear-gradient(180deg, #B45BC0, #7B2E86);
+    border: 4px solid #17140F;
+    border-radius: 14px;
+    box-shadow: 0 6px 0 #4E1B57, 0 10px 16px rgba(0, 0, 0, .4);
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .08s ease;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .3);
 }
 
 button:hover {
-  filter: brightness(1.08);
+    filter: brightness(1.08);
 }
 
 button:active {
-  transform: translateY(6px);
-  box-shadow: 0 0 0 #4E1B57, 0 4px 8px rgba(0, 0, 0, .4);
+    transform: translateY(6px);
+    box-shadow: 0 0 0 #4E1B57, 0 4px 8px rgba(0, 0, 0, .4);
 }
 
 button:focus-visible {
-  outline: 3px solid #FFD35C;
-  outline-offset: 3px;
+    outline: 3px solid #FFD35C;
+    outline-offset: 3px;
 }
 
 .btn-secundario {
-  background: linear-gradient(180deg, #6FA8DC, #3D6FA8);
-  box-shadow: 0 6px 0 #234A73, 0 10px 16px rgba(0, 0, 0, .4);
+    background: linear-gradient(180deg, #6FA8DC, #3D6FA8);
+    box-shadow: 0 6px 0 #234A73, 0 10px 16px rgba(0, 0, 0, .4);
 }
 
 .btn-secundario:active {
-  box-shadow: 0 0 0 #234A73, 0 4px 8px rgba(0, 0, 0, .4);
+    box-shadow: 0 0 0 #234A73, 0 4px 8px rgba(0, 0, 0, .4);
 }
 
-.im-btn {
-  scale: initial;
-  transition: transform 0.3s ease;
-  max-width: 100%;
-  height: auto;
-}
-
-.im-btn:hover {
-  transform: scale(1.1);
-}
-
-/* ==========================================================================
-   4. ELEMENTOS HUD & INTERFAZ
-   ========================================================================== */
 .goy {
-  position: absolute;
-  top: 6%;
-  left: 15%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-end;
-  z-index: 5;
+    position: absolute;
+    top: 60px;
+    left: 190px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
 .Cusix {
-  position: absolute;
-  top: 22%;
-  left: 4%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-end;
-  z-index: 5;
+    position: absolute;
+    top: 200px;
+    left: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
-
 .campos {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: flex-end;
-  z-index: 10;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
 .campos #nombre {
-  font-family: 'Cusi-Regular';
-  font-size: clamp(14px, 2vw, 20px);
-  letter-spacing: 1px;
-  color: #FFF6E2;
-  padding: 10px 14px;
-  background: linear-gradient(180deg, #B45BC0, #7B2E86);
-  border: 3px solid #17140F;
-  border-radius: 14px;
-  box-shadow: 0 4px 0 #4E1B57, 0 8px 12px rgba(0, 0, 0, .4);
-  cursor: pointer;
-  transition: transform .08s ease, box-shadow .08s ease;
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, .3);
+   font-family: 'Cusi-Regular';
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #FFF6E2;
+    padding: 14px 14px;
+    background: linear-gradient(180deg, #B45BC0, #7B2E86);
+    border: 4px solid #17140F;
+    border-radius: 14px;
+    box-shadow: 0 6px 0 #4E1B57, 0 10px 16px rgba(0, 0, 0, .4);
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .08s ease;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .3);
 }
 
-.cusimios {
-  position: absolute;
-  top: 4%;
-  left: 3%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-end;
-  z-index: 10;
+.cusimios{
+     position: absolute;
+    top: 40px;
+    left: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
-#value {
-  position: absolute;
-  top: -25px;
-  left: 172px;
-  font-family: 'Cusi-Regular';
-  font-size: clamp(30px, 5vw, 60px);
-  letter-spacing: 1px;
-  color: #000000;
+#value{
+    position: absolute;
+    top: -25px;
+    left: 172px;
+   font-family: 'Cusi-Regular';
+    font-size: 60px;
+    letter-spacing: 1px;
+    color: #000000;
+}
+
+.living {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url('living-scr/fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 70px 16px;
+    font-family: 'Cusi-Regular';
 }
 
 #src {
-  position: absolute;
-  top: 4%;
-  right: 4%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-end;
-  z-index: 10;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
-/* Flechas de navegación */
 .arrow_l {
-  position: absolute;
-  bottom: 18%;
-  left: 5%;
-  display: flex;
-  gap: 10px;
-  z-index: 20;
+    position: absolute;
+    bottom: 170px;
+    left: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
 .arrow_r {
-  position: absolute;
-  bottom: 18%;
-  right: 5%;
-  display: flex;
-  gap: 10px;
-  z-index: 20;
+    position: absolute;
+    bottom: 170px;
+    right: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
-/* ==========================================================================
-   5. OBJETOS DE HABITACIONES (POSICIONES BASE)
-   ========================================================================== */
-#heladera {
-  position: absolute;
-  bottom: 35%;
-  left: 28%;
-  display: flex;
-  gap: 10px;
-  z-index: 2;
+.im-btn {
+    scale: initial;
+    transition: 0.5s;
 }
 
-#armario {
-  position: absolute;
-  bottom: 32%;
-  left: 28%;
-  display: flex;
-  gap: 10px;
-  z-index: 2;
+.im-btn:hover {
+    scale: 1.1;
 }
 
 #tienda {
-  position: absolute;
-  bottom: 40%;
-  left: 25%;
-  display: flex;
-  gap: 10px;
-  z-index: 2;
-}
-
-#huerta {
-  position: absolute;
-  bottom: 38%;
-  left: 40%;
-  display: flex;
-  gap: 10px;
-  z-index: 2;
-}
-
-#pablo {
-  position: absolute;
-  bottom: 45%;
-  left: 12%;
-  display: flex;
-  gap: 10px;
-  z-index: 1;
+    position: absolute;
+    top: 230px;
+    left: 325px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
 #diego {
-  position: absolute;
-  bottom: 25%;
-  left: 32%;
-  display: flex;
-  gap: 10px;
-  z-index: 1;
+    position: absolute;
+    top: 365px;
+    left: 410px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+    z-index: 1;
 }
 
 #cusi_a {
-  position: absolute;
-  bottom: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  z-index: 2;
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+    z-index: 2;
 }
 
-#franco {
-  position: absolute;
-  bottom: 22%;
-  right: 20%;
-  display: flex;
-  gap: 10px;
-  z-index: 1;
+.garden {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url('garden-scr/fondo_b.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 70px 16px;
+   font-family: 'Cusi-Regular';
+
 }
 
-#ducha {
-  position: absolute;
-  top: 0%;
-  left: 43%;
-  display: flex;
-  gap: 10px;
-  z-index: 2;
+#huerta {
+    position: absolute;
+    top: 230px;
+    left: 510px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
-#leo {
-  position: absolute;
-  bottom: 25%;
-  right: 30%;
-  display: flex;
-  gap: 10px;
-  z-index: 1;
+/* La tarjeta del cartel */
+.cartelera {
+    position: relative;
+    top: -240px;
+    z-index: 1000000 !important;
+    background: #2b1b36;
+    border: 4px solid #ffffff;
+    border-radius: 16px;
+    padding: 25px 30px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
 }
 
-#minijuegos {
-  position: absolute;
-  bottom: 26%;
-  right: 25%;
-  display: flex;
-  gap: 10px;
-  z-index: 2;
-}
-
-/* ==========================================================================
-   6. CARTELES / MODALES CENTRADOS
-   ========================================================================== */
-.cartelera,
 #cartelera {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000000 !important;
-  background: #2b1b36;
-  border: 4px solid #ffffff;
-  border-radius: 16px;
-  padding: clamp(16px, 3vw, 25px) clamp(16px, 4vw, 30px);
-  width: 90%;
-  max-width: 420px;
-  max-height: 85vh;
-  overflow-y: auto;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    position: relative;
+    top: -140px;
+    z-index: 1000000 !important;
+    background: #2b1b36;
+    border: 4px solid #ffffff;
+    border-radius: 16px;
+    padding: 25px 30px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
 }
 
-.cartelera p,
 #cartelera p {
-  color: #ffffff;
-  font-size: clamp(16px, 3vw, 22px);
-  font-family: 'Cusi-Regular';
-  margin-top: 0;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 0px #000;
+    color: #ffffff;
+    font-size: 22px;
+   font-family: 'Cusi-Regular';
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px #000;
+}
+/* Texto del título */
+.cartelera p {
+    color: #ffffff;
+    font-size: 22px;
+    font-family: 'Cusi-Regular';
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px #000;
 }
 
-.opciones-grid,
+/* Grilla de botones 2 columnas */
+.opciones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
 .opciones {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
 }
 
-.opciones button.opcion-buscaminas,
-.opciones button.opcion-blackjack,
-.opciones button.opcion-tragaperras,
-.opciones button.opcion-banda,
-.opciones button.opcion-ruleta,
-.opciones button.opcion-pablo,
-.opciones button.opcion-pc,
-.opciones button.opcion-snake {
-  position: relative;
-  width: 100%;
-  height: 90px;
-  padding: 0;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  border-radius: 8px;
-  border: 2px solid #1e0b36;
-}
-
+/* Botón "Buscaminas" del cartel de minijuegos: imagen de fondo + etiqueta
+   con fondo negro difuminado pegada abajo, en vez del botón vacío genérico */
 .opciones button.opcion-buscaminas {
-  background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-              url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
 }
 
+.opciones button.opcion-buscaminas .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+/* Botón "Blackjack" del cartel de minijuegos: mismo patrón que Buscaminas */
 .opciones button.opcion-blackjack {
-  background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-              url('/CUSI-1.0/frontEnd/Cusi_style/blackjack_icon.png') center/cover no-repeat;
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/blackjack_icon.png') center/cover no-repeat;
 }
 
+.opciones button.opcion-blackjack .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+/* Botón "Tragaperras" del cartel de minijuegos: mismo patrón que los demás */
 .opciones button.opcion-tragaperras {
-  background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-              url('/CUSI-1.0/frontEnd/Cusi_style/tragaperras_icon.png') center/cover no-repeat;
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/tragaperras_icon.png') center/cover no-repeat;
+}
+
+.opciones button.opcion-tragaperras .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+}
+
+.opciones button.opcion-banda .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
 }
 
 .opciones button.opcion-banda {
-<<<<<<< HEAD
     position: relative;
     width: 140px;
     height: 90px;
@@ -488,368 +500,374 @@ button:focus-visible {
     letter-spacing: 0.5px;
     font-size: 14px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
-=======
-  background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-              url('/CUSI-1.0/frontEnd/Cusi_style/banda_icon.png') center/cover no-repeat;
->>>>>>> a87902fc575b09d26be1a92f34298f352263fd61
 }
 
-.opciones button.opcion-ruleta,
-.opciones button.opcion-pablo,
-.opciones button.opcion-pc,
 .opciones button.opcion-snake {
-  background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-              url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+    position: relative;
+    width: 140px;
+    height: 90px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
 }
 
-.opciones button .etiqueta-juego {
-  width: 100%;
-  padding: 6px 4px;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  color: #FFF6E2;
-  font-family: 'Cusi-Regular';
-  letter-spacing: 0.5px;
-  font-size: clamp(11px, 2vw, 14px);
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+.opciones button.opcion-snake .etiqueta-juego {
+    width: 100%;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #FFF6E2;
+    font-family: 'Cusi-Regular';
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
 }
 
+
+
+/* Botones con estilo videojuego */
 .opciones-grid button {
-  background: linear-gradient(180deg, #8a3ab9 0%, #4c1d95 100%);
-  color: #ffffff;
-  border: 2px solid #1e0b36;
-  border-radius: 10px;
-  padding: 12px 8px;
-  font-size: clamp(12px, 2vw, 15px);
-  cursor: pointer;
-  box-shadow: 0 4px 0px #1e0b36;
-  transition: transform 0.1s, background 0.2s;
+    background: linear-gradient(180deg, #8a3ab9 0%, #4c1d95 100%);
+    color: #ffffff;
+    border: 2px solid #1e0b36;
+    border-radius: 10px;
+    padding: 12px 8px;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 0px #1e0b36;
+    transition: transform 0.1s, background 0.2s;
 }
 
 .opciones-grid button:hover {
-  background: linear-gradient(180deg, #9d4edd 0%, #5b21b6 100%);
-  transform: translateY(-2px);
+    background: linear-gradient(180deg, #9d4edd 0%, #5b21b6 100%);
+    transform: translateY(-2px);
 }
 
 .opciones-grid button:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0px #1e0b36;
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #1e0b36;
 }
 
+/* Botón de Cancelar/Salir diferenciado */
 .opciones-grid button#opt_6 {
-  background: linear-gradient(180deg, #ef4444 0%, #991b1b 100%);
-  border-color: #450a0a;
-  box-shadow: 0 4px 0px #450a0a;
+    background: linear-gradient(180deg, #ef4444 0%, #991b1b 100%);
+    border-color: #450a0a;
+    box-shadow: 0 4px 0px #450a0a;
 }
 
 .opciones-grid button#opt_6:hover {
-  background: linear-gradient(180deg, #f87171 0%, #b91c1c 100%);
+    background: linear-gradient(180deg, #f87171 0%, #b91c1c 100%);
 }
 
-#cartel {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-  z-index: 100000;
-  padding: 16px;
+
+
+#pablo {
+    position: absolute;
+    top: 160px;
+    left: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+    z-index: 1;
 }
 
-.cartel-pregunta {
-  pointer-events: auto;
-  background: #222222;
-  border: 4px solid #ffffff;
-  border-radius: 12px;
-  padding: 20px 30px;
-  text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  font-family: 'Cusi-Regular';
-  max-width: 400px;
-  width: 100%;
+.cocina {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url('cocina-scr/fondo_b.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 70px 16px;
+    font-family: 'Cusi-Regular';
+
 }
 
-.cartel-pregunta p {
-  font-size: clamp(16px, 2.5vw, 20px);
-  font-weight: bold;
-  margin-bottom: 15px;
+#heladera {
+    position: absolute;
+    top: 200px;
+    left: 350px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
-.cartel-pregunta button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 0 8px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.cartel-pregunta button#btn_no {
-  background-color: #f44336;
-}
-
-.cartel-pregunta button:hover {
-  opacity: 0.9;
-  transform: scale(1.05);
-}
-
-.cartel-pregunta button:active {
-  transform: scale(0.95);
-}
-
-/* ==========================================================================
-   7. HELADERA Y BANDEJA DE COMIDA
-   ========================================================================== */
+/*******************************************************************************\
+ Menú de la heladera: botón de salir, botones de comida con imagen + cantidad
+\*******************************************************************************/
+/* El botón de salir ahora es HIJO de .cartelera (no un hermano de afuera),
+   anclado en su esquina como el botón de cerrar de cualquier modal. Al ser
+   descendiente, siempre viaja pegado a la tarjeta (incluso con su
+   position:relative; top:-240px) y nunca vuelve a quedar tapado ni a
+   superponerse con la grilla de opciones. */
 .btn-cerrar-heladera {
-  position: absolute;
-  top: -12px;
-  right: -12px;
-  z-index: 5;
-  padding: 6px 14px;
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    z-index: 5;
+    padding: 6px 14px;
 }
 
 .opcion-comida,
 .item-bandeja {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 }
 
 .opcion-comida img,
 .item-bandeja img {
-  width: clamp(80px, 15vw, 120px);
-  height: clamp(50px, 10vw, 70px);
-  object-fit: contain;
-  pointer-events: none;
+    width: 120px;
+    height: 70px;
+    object-fit: contain;
+    pointer-events: none;
 }
 
 .precio-comida {
-  color: #FFF6E2;
-  font-size: 0.8rem;
-  font-weight: 900;
-  pointer-events: none;
+    color: #FFF6E2;
+    font-size: 0.8rem;
+    font-weight: 900;
+    pointer-events: none;
 }
 
 .cantidad-comida {
-  position: absolute;
-  bottom: -6px;
-  right: -6px;
-  background: #FFD35C;
-  color: #17140F;
-  font-size: 0.75rem;
-  font-weight: 900;
-  line-height: 1;
-  padding: 3px 6px;
-  border-radius: 999px;
-  border: 2px solid #17140F;
-  pointer-events: none;
+    position: absolute;
+    bottom: -6px;
+    right: -6px;
+    background: #FFD35C;
+    color: #17140F;
+    font-size: 0.75rem;
+    font-weight: 900;
+    line-height: 1;
+    padding: 3px 6px;
+    border-radius: 999px;
+    border: 2px solid #17140F;
+    pointer-events: none;
 }
 
+/*******************************************************************************\
+ Bandeja de comida (estilo Pou) para darle de comer a Cusi directo,
+ sin pasar por el menú de compra de la heladera.
+\*******************************************************************************/
 .bandeja-comida {
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  z-index: 1000002;
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  max-width: 92vw;
-  padding: 10px 18px;
-  overflow-x: auto;
-  background: rgba(43, 27, 54, 0.9);
-  border: 4px solid #ffffff;
-  border-radius: 999px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-  -webkit-overflow-scrolling: touch;
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 1000002;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    max-width: 92vw;
+    padding: 10px 18px;
+    overflow-x: auto;
+    background: rgba(43, 27, 54, 0.9);
+    border: 4px solid #ffffff;
+    border-radius: 999px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
 
 .bandeja-comida .item-bandeja {
-  flex: 0 0 auto;
-  background: linear-gradient(180deg, #C9B6E4, #8F71B3);
-  border: 3px solid #17140F;
-  border-radius: 14px;
-  padding: 8px;
-  cursor: pointer;
+    flex: 0 0 auto;
+    background: linear-gradient(180deg, #C9B6E4, #8F71B3);
+    border: 3px solid #17140F;
+    border-radius: 14px;
+    padding: 8px;
+    cursor: pointer;
 }
 
 .bandeja-comida .item-bandeja:hover {
-  filter: brightness(1.08);
+    filter: brightness(1.08);
 }
 
 .bandeja-comida .item-bandeja:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 .bandeja-vacia {
-  color: #FFF6E2;
-  font-size: 0.85rem;
-  margin: 0;
-  padding: 0 8px;
-  white-space: nowrap;
+    color: #FFF6E2;
+    font-size: 0.85rem;
+    margin: 0;
+    padding: 0 8px;
+    white-space: nowrap;
 }
 
+/* Bounce cortito cuando Cusi come algo de la bandeja */
 @keyframes comiendo {
-  0%   { transform: translateX(-50%) scale(1); }
-  30%  { transform: translateX(-50%) scale(1.12) rotate(-3deg); }
-  60%  { transform: translateX(-50%) scale(0.96) rotate(2deg); }
-  100% { transform: translateX(-50%) scale(1); }
+    0% { transform: scale(1); }
+    30% { transform: scale(1.12) rotate(-3deg); }
+    60% { transform: scale(0.96) rotate(2deg); }
+    100% { transform: scale(1); }
 }
 
 #cusi_a.comiendo {
-  animation: comiendo 0.4s ease;
+    animation: comiendo 0.4s ease;
 }
 
-/* ==========================================================================
-   8. MEDIA QUERIES (CELULAR VERTICAL Y HORIZONTAL)
-   ========================================================================== */
-
-/* --- CELULAR VERTICAL (PORTRAIT) --- */
-@media screen and (max-width: 600px) and (orientation: portrait) {
-  .pantalla-inicio,
-  .living,
-  .garden,
-  .cocina,
-  .baño,
-  .pieza,
-  .piezan {
-    padding: 30px 10px 16px 10px;
-  }
-
-  /* Posicionamiento ajustado para la vista vertical */
-  #heladera   { bottom: 32%; left: 18%; }
-  #armario    { bottom: 30%; left: 18%; }
-  #tienda     { bottom: 38%; left: 12%; }
-  #huerta     { bottom: 35%; left: 22%; }
-  #pablo      { bottom: 40%; left: 8%;  }
-  #diego      { bottom: 22%; left: 18%; }
-  #franco     { bottom: 20%; right: 10%; }
-  #leo        { bottom: 22%; right: 15%; }
-  #minijuegos { bottom: 24%; right: 12%; }
-
-  .arrow_l { bottom: 10%; left: 2%; }
-  .arrow_r { bottom: 10%; right: 2%; }
-
-  .cartelera,
-  #cartelera {
-    width: 94%;
-    padding: 16px 12px;
-  }
-
-  .opciones-grid,
-  .opciones {
-    gap: 8px;
-  }
-
-  .opciones button.opcion-buscaminas,
-  .opciones button.opcion-blackjack,
-  .opciones button.opcion-tragaperras,
-  .opciones button.opcion-banda,
-  .opciones button.opcion-ruleta,
-  .opciones button.opcion-pablo,
-  .opciones button.opcion-pc,
-  .opciones button.opcion-snake {
-    height: 70px;
-  }
+#franco {
+    position: absolute;
+    bottom: 200px;
+    right: 270px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+    z-index: 1;
 }
 
-/* --- CELULAR HORIZONTAL (LANDSCAPE) --- */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-  .pantalla-inicio,
-  .living,
-  .garden,
-  .cocina,
-  .baño,
-  .pieza,
-  .piezan {
-    padding: 10px;
-  }
+.baño {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url('bat_scr/fondo_b.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 70px 16px;
+    font-family: 'Cusi-Regular';
 
-  .campos {
-    top: 8px;
-    right: 8px;
-  }
+}
 
-  .campos #nombre {
-    font-size: 13px;
-    padding: 6px 10px;
-  }
+#ducha {
+    position: absolute;
+    top: 0%;
+    left: 43%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
 
-  .cusimios {
-    top: 8px;
-    left: 8px;
-  }
+#leo {
+    position: absolute;
+    bottom: 228px;
+    right: 402px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
 
-  #value {
-    font-size: 28px;
-    top: -12px;
-    left: 110px;
-  }
+#cartel {
+    position: absolute;
+    
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Evita que bloquee la pantalla mientras esté vacío */
+    z-index: 100;
+}
 
-  #src {
-    top: 8px;
-    right: 8px;
-  }
+/* El cuadro/cartel estilizado */
+.cartel-pregunta {
+    pointer-events: auto; /* Activa la interacción para los botones */
+    background: #222222;
+    border: 4px solid #ffffff;
+    border-radius: 12px;
+    padding: 20px 30px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    font-family: 'Cusi-Regular';
+}
 
-  /* Posicionamiento ajustado para la vista horizontal */
-  #heladera   { bottom: 28%; left: 30%; }
-  #armario    { bottom: 25%; left: 30%; }
-  #tienda     { bottom: 32%; left: 28%; }
-  #huerta     { bottom: 30%; left: 42%; }
-  #pablo      { bottom: 35%; left: 15%; }
-  #diego      { bottom: 18%; left: 35%; }
-  #cusi_a     { bottom: 5%; }
-  #franco     { bottom: 16%; right: 22%; }
-  #leo        { bottom: 18%; right: 32%; }
-  #minijuegos { bottom: 20%; right: 28%; }
+.cartel-pregunta p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 
-  .arrow_l { bottom: 8%; left: 4%; }
-  .arrow_r { bottom: 8%; right: 4%; }
-
-  .cartelera,
-  #cartelera {
-    max-height: 90vh;
-    width: 80%;
-    padding: 12px 16px;
-  }
-
-  .cartelera p,
-  #cartelera p {
+/* Botones del cartel */
+.cartel-pregunta button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
     font-size: 16px;
-    margin-bottom: 10px;
-  }
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
 
-  .opciones button.opcion-buscaminas,
-  .opciones button.opcion-blackjack,
-  .opciones button.opcion-tragaperras,
-  .opciones button.opcion-banda,
-  .opciones button.opcion-ruleta,
-  .opciones button.opcion-pablo,
-  .opciones button.opcion-pc,
-  .opciones button.opcion-snake {
-    height: 55px;
-  }
+/* Botón "No" diferenciado en rojo */
+.cartel-pregunta button#btn_no {
+    background-color: #f44336;
+}
 
-  .opciones button .etiqueta-juego {
-    font-size: 11px;
-    padding: 3px 2px;
-  }
+/* Efecto hover en botones */
+.cartel-pregunta button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
 
-  .bandeja-comida {
-    bottom: 6px;
-    padding: 4px 10px;
-  }
+.cartel-pregunta button:active {
+    transform: scale(0.95);
+}
+
+.piezan {
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url('room-scr/fondo_b.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 70px 16px;
+
+}
+
+#armario {
+    position: absolute;
+    top: 208px;
+    left: 355px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+
+#minijuegos {
+    position: absolute;
+    bottom: 243px;
+    right: 345px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }

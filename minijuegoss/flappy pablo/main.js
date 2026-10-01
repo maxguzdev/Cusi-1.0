@@ -718,9 +718,7 @@ const $ = (id) => document.getElementById(id)
 const stage = $('stage')
 const panelOver = $('panel-over')
 const panelPause = $('panel-pause')
-const btnPause = $('btn-pause')
 const btnMute = $('btn-mute')
-const btnFull = $('btn-full')
 let bestScore = 0
 let muted = false
 let overShown = false
@@ -863,13 +861,7 @@ document.addEventListener('visibilitychange', () => {
 
 $('btn-retry').addEventListener('click', restart)
 $('btn-resume').addEventListener('click', () => setPaused(false))
-btnPause.addEventListener('click', () => setPaused(!paused))
 btnMute.addEventListener('click', () => { muted = !muted; applyMute() })
-btnFull.addEventListener('click', toggleFullscreen)
-document.addEventListener('fullscreenchange', () => {
-    btnFull.dataset.activo = document.fullscreenElement ? '1' : '0'
-})
-if (!document.fullscreenEnabled) btnFull.hidden = true
 
 renderBest()
 applyMute()
