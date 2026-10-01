@@ -16,47 +16,44 @@
                 console.error('Hubo un error:', error);
             }    
         } 
-
 let listadetextos = JSON.parse(localStorage.getItem("text")) || [];
+
+// Convierte texto en HTML seguro (evita XSS)
+function limpiar(texto) {
+    const div = document.createElement("div");
+    div.textContent = texto;
+    return div.innerHTML;
+}
+
 function renderizarComentarios() {
     const contenedor = document.getElementById("contenedor");
-    if (!contenedor) return;
-
-    contenedor.innerHTML = ""; 
+    contenedor.innerHTML = "";
 
     listadetextos.forEach(texto => {
-        let tweetCard = document.createElement("div");
-        tweetCard.className = "tweetcard";
-
-        tweetCard.innerHTML = `
-            <div class="tweetheader">
-                <img src="${userSession.img}" class="avatar" alt="Avatar">
-                <div>
-                    <span class="name">${userSession.nombre}</span>
-                    <span class="gmail">${userSession.correo}</span>
+        contenedor.innerHTML += `
+            <div class="tweetcard">
+                <div class="tweetheader">
+                    <img src="${limpiar(userSession.img)}" class="avatar" alt="Avatar">
+                    <div>
+                        <span class="name">${limpiar(userSession.nombre)}</span>
+                        <span class="gmail">${limpiar(userSession.correo)}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="textito">${texto}</div>
-        `;
-
-        contenedor.appendChild(tweetCard);
+                <div class="textito">${limpiar(texto)}</div>
+            </div>`;
     });
 }
 
+function cambiartexto() {
+    const input = document.getElementById("newtext");
+    const texto = input.value.trim();
+
+    if (texto === "") return;
+
+    listadetextos.push(texto);
+    localStorage.setItem("text", JSON.stringify(listadetextos));
+    renderizarComentarios();
+    input.value = "";
+}
 
 renderizarComentarios();
-
-function cambiartexto() {
-    let input = document.getElementById("newtext");
-    if (!input) return;
-
-    let x = input.value.trim();
-
-    if (x !== "") {
-        listadetextos.push(x); 
-        localStorage.setItem("text", JSON.stringify(listadetextos));
-        
-        renderizarComentarios(); 
-        input.value = ""; 
-    }
-}
