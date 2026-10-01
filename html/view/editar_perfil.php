@@ -13,10 +13,11 @@ if (!isset($_SESSION['nombre_perfil'])) {
     <link rel="stylesheet" href="../css/confi.css"> 
 </head>
 <body>
+    <!-- IMPORTANTE: Todo el formulario DEBE estar adentro del div "ford" -->
     <div id="ford">
         <h2>Editar Perfil</h2>
         
-        <form action="co_edit.php" method="POST">
+        <form action="co_edit.php" method="POST" enctype="multipart/form-data">
             <div>
                 <label for="nombre">Nombre:</label><br>
                 <input type="text" id="nombre" name="nombre_perfil" value="<?= $_SESSION['nombre_perfil'] ?>" required>
@@ -29,9 +30,16 @@ if (!isset($_SESSION['nombre_perfil'])) {
             </div>
             <br>
             
+            <div>
+                <label for="nueva_foto">Foto de perfil:</label><br>
+                <input type="file" id="nueva_foto" name="foto_perfil" accept="image/*">
+            </div>
+            <br>
+            
             <button type="submit" name="guardar_cambios">Guardar Cambios</button>
             <a href="configuracion.php">Cancelar</a>
         </form>
-    </div>
+    </div> <!-- Aquí cierra el contenedor rosa principal -->
 </body>
 </html>
+
