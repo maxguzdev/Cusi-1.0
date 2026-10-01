@@ -1,70 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Casino Roulette – Definitive Release</title>
-  <link href="style.css" rel="stylesheet"> 
+  <title>Cusi Roulette</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <!-- HEADER & HUD -->
   <header>
-    <h1>Cusi Roulette xxx</h1>
+    <h1>Cusi Roulette</h1>
+    <p>Ruleta europea · 0 a 36</p>
   </header>
+
   <div id="hud">
-    <span>Player: <input id="playerNameInput" type="text" value="Guest" style="font-size:1em;width:100px; text-align:center;"></span>
-    <span id="bankDisplay">Bank: $1000</span>
+    <label>Jugador <input id="playerNameInput" type="text" value="Invitado" maxlength="16"></label>
+    <span id="bankDisplay">Banco: $1000</span>
+    <span id="betDisplay">Apostado: $0</span>
   </div>
-  
-  <!-- CHIP SELECTION -->
-  <div id="chipContainer">
-    <span>Select Chip:</span>
-    <button class="chip" data-value="5">$5</button>
-    <button class="chip" data-value="10">$10</button>
-    <button class="chip" data-value="20">$20</button>
-    <button class="chip" data-value="50">$50</button>
-    <button class="chip" data-value="100">$100</button>
-  </div>
-  
-  <!-- BETTING BOARD: Numbers (0 to 90) -->
-  <div id="bettingBoard"></div>
-  
-  <!-- External Betting Areas -->
-  <div class="betArea" id="colorBetArea">
-    <div class="betOption" data-bet="color" data-value="red">RED</div>
-    <div class="betOption" data-bet="color" data-value="black">BLACK</div>
-  </div>
-  <div class="betArea" id="evenoddBetArea">
-    <div class="betOption" data-bet="evenodd" data-value="odd">ODD</div>
-    <div class="betOption" data-bet="evenodd" data-value="even">EVEN</div>
-  </div>
-  
-  <!-- Roulette Wheel Area -->
-  <div id="wheelContainer">
-    <canvas id="wheelCanvas" width="400" height="400"></canvas>
-  </div>
-  
-  <!-- Spin Button -->
-  <button id="spinButton">Spin Roulette</button>
-  
-  <!-- Result Display -->
-  <div id="resultDisplay">Place your bets and click Spin!</div>
-  
-  <!-- High Score Board -->
-  <div id="scoreboard">
-    <h3>High Scores</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Player</th>
-          <th>Bank</th>
-        </tr>
-      </thead>
-      <tbody id="scoreboardBody"></tbody>
-    </table>
-  </div>
-  
- 
+
+  <main>
+    <section id="tableCol">
+      <div id="chipContainer">
+        <button class="chip" data-value="5">5</button>
+        <button class="chip" data-value="10">10</button>
+        <button class="chip" data-value="20">20</button>
+        <button class="chip" data-value="50">50</button>
+        <button class="chip" data-value="100">100</button>
+      </div>
+
+      <div id="bettingBoard"></div>
+
+      <div class="betArea" id="colorBetArea">
+        <div class="betOption red" data-value="red">Rojo</div>
+        <div class="betOption black" data-value="black">Negro</div>
+      </div>
+      <div class="betArea" id="evenoddBetArea">
+        <div class="betOption" data-value="odd">Impar</div>
+        <div class="betOption" data-value="even">Par</div>
+      </div>
+    </section>
+
+    <section id="wheelCol">
+      <div id="wheelContainer"><canvas id="wheelCanvas" width="400" height="400"></canvas></div>
+      <div id="resultDisplay">Elige una ficha y haz tus apuestas.</div>
+      <div class="actions">
+        <button id="spinButton">Girar</button>
+        <button id="clearButton" class="ghost">Quitar apuestas</button>
+        <button id="newGameButton" class="ghost">Nueva partida</button>
+      </div>
+      <div id="scoreboard">
+        <h3>Mejores puntuaciones</h3>
+        <table>
+          <thead><tr><th>Jugador</th><th>Banco</th></tr></thead>
+          <tbody id="scoreboardBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
   <script src="main.js"></script>
 </body>
 </html>

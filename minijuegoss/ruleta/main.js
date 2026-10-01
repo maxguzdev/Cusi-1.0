@@ -1,231 +1,198 @@
-/********** GLOBAL STATE **********/
-const NUM_NUMBERS = 91; // 0 to 90
-let bank = 1000;
-let currentChip = 0; // Selected chip value
+/********** ESTADO **********/
+const RED = new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
+const colorOf = n => n === 0 ? "green" : RED.has(n) ? "red" : "black";
+const START_BANK = 1000;
+let bank = START_BANK;
+let currentChip = 0;
 let bets = { numbers: {}, color: {}, evenodd: {} };
-let highScores = JSON.parse(localStorage.getItem("rouletteHighScores")) || [];
+let highScores = [];
+try { highScores = JSON.parse(localStorage.getItem("rouletteHighScores")) || []; } catch { highScores = []; }
 
-const bankDisplay = document.getElementById("bankDisplay");
-const playerNameInput = document.getElementById("playerNameInput");
-const resultDisplay = document.getElementById("resultDisplay");
+const $ = id => document.getElementById(id);
+const bankDisplay = $("bankDisplay"), betDisplay = $("betDisplay");
+const playerNameInput = $("playerNameInput"), resultDisplay = $("resultDisplay"), spinButton = $("spinButton");
 
-const updateBankDisplay = () => bankDisplay.textContent = "Bank: $" + bank;
+const sumBets = c => Object.values(bets[c]).reduce((s, v) => s + v, 0);
+const totalBet = () => sumBets("numbers") + sumBets("color") + sumBets("evenodd");
+function updateDisplays() {
+  bankDisplay.textContent = "Banco: $" + bank;
+  betDisplay.textContent = "Apostado: $" + totalBet();
+}
 
-/********** BETTING **********/
-// One handler for the three betting areas (numbers, color, even/odd): each
-// bumps its own bucket in `bets` by the selected chip and redraws its label.
-// (This also makes all three require a selected chip before betting, fixing
-// a small inconsistency the original had between the number grid and the
-// color/even-odd buttons.)
+/********** APUESTAS **********/
+const LABELS = { red: "Rojo", black: "Negro", odd: "Impar", even: "Par" };
+function paint(el, category, key) {
+  const label = category === "numbers" ? key : LABELS[key];
+  const amt = bets[category][key];
+  el.innerHTML = `<span>${label}</span>` + (amt ? `<span class="amt">$${amt}</span>` : "");
+}
+
 function attachBetting(elements, category, keyOf) {
-  elements.forEach(el => {
-    el.addEventListener("click", () => {
-      if (currentChip <= 0) return;
-      const key = keyOf(el);
-      bets[category][key] = (bets[category][key] || 0) + currentChip;
-      el.innerHTML = `${key.toUpperCase()}<br><small>$${bets[category][key]}</small>`;
-    });
-  });
+  elements.forEach(el => el.addEventListener("click", () => {
+    if (spinning) return;
+    if (currentChip <= 0) { resultDisplay.textContent = "Primero elige una ficha."; return; }
+    if (totalBet() + currentChip > bank) { resultDisplay.textContent = "No te alcanza el banco para esa apuesta."; return; }
+    const key = keyOf(el);
+    bets[category][key] = (bets[category][key] || 0) + currentChip;
+    paint(el, category, key);
+    updateDisplays();
+  }));
 }
 
 function renderBettingBoard() {
-  const board = document.getElementById("bettingBoard");
-  board.innerHTML = "";
-  const cells = [];
-  for (let i = 0; i < NUM_NUMBERS; i++) {
+  const board = $("bettingBoard");
+  const order = [0];
+  for (let row = 3; row >= 1; row--) for (let col = 0; col < 12; col++) order.push(col * 3 + row); // disposición de mesa real
+  const cells = order.map(n => {
     const cell = document.createElement("div");
-    cell.className = "betCell";
-    cell.dataset.number = i;
-    cell.textContent = i;
+    cell.className = `betCell ${colorOf(n)}${n === 0 ? " zero" : ""}`;
+    cell.dataset.number = n;
+    cell.innerHTML = `<span>${n}</span>`;
     board.appendChild(cell);
-    cells.push(cell);
-  }
-  // Numbers keep just the digit as label (no .toUpperCase() needed, but
-  // harmless since it's numeric text) via the same shared handler.
+    return cell;
+  });
   attachBetting(cells, "numbers", el => el.dataset.number);
 }
-
 renderBettingBoard();
-updateBankDisplay();
-
 attachBetting(document.querySelectorAll("#colorBetArea .betOption"), "color", el => el.dataset.value);
 attachBetting(document.querySelectorAll("#evenoddBetArea .betOption"), "evenodd", el => el.dataset.value);
 
-/********** CHIP SELECTION **********/
 const chipButtons = document.querySelectorAll(".chip");
-chipButtons.forEach(chip => {
-  chip.addEventListener("click", () => {
-    chipButtons.forEach(c => c.classList.remove("selected"));
-    chip.classList.add("selected");
-    currentChip = parseInt(chip.dataset.value);
-  });
-});
-
-/********** WHEEL DRAWING & ANIMATION **********/
-const canvas = document.getElementById("wheelCanvas");
-const ctx = canvas.getContext("2d");
-const wheelRadius = canvas.width / 2;
-const numPockets = 37; // European roulette: 0 to 36
-const segmentAngle = (2 * Math.PI) / numPockets;
-let rotationAngle = 0;
-let spinVelocity = 0;
-let spinning = false;
-
-// Official European roulette wheel order.
-const rouletteOrder = [
-  { number: 0, color: "green" }, { number: 32, color: "red" }, { number: 15, color: "black" },
-  { number: 19, color: "red" }, { number: 4, color: "black" }, { number: 21, color: "red" },
-  { number: 2, color: "black" }, { number: 25, color: "red" }, { number: 17, color: "black" },
-  { number: 34, color: "red" }, { number: 6, color: "black" }, { number: 27, color: "red" },
-  { number: 13, color: "black" }, { number: 36, color: "red" }, { number: 11, color: "black" },
-  { number: 30, color: "red" }, { number: 8, color: "black" }, { number: 23, color: "red" },
-  { number: 10, color: "black" }, { number: 5, color: "red" }, { number: 24, color: "black" },
-  { number: 16, color: "red" }, { number: 33, color: "black" }, { number: 1, color: "red" },
-  { number: 20, color: "black" }, { number: 14, color: "red" }, { number: 31, color: "black" },
-  { number: 9, color: "red" }, { number: 22, color: "black" }, { number: 18, color: "red" },
-  { number: 29, color: "black" }, { number: 7, color: "red" }, { number: 28, color: "black" },
-  { number: 12, color: "red" }, { number: 35, color: "black" }, { number: 3, color: "red" },
-  { number: 26, color: "black" }
-];
-
-const POCKET_FILL = { red: "#ff4444", black: "#222222", green: "#008800" };
-
-function drawWheel() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  rouletteOrder.forEach((pocket, i) => {
-    const startAngle = rotationAngle + i * segmentAngle;
-    const endAngle = startAngle + segmentAngle;
-
-    ctx.beginPath();
-    ctx.moveTo(wheelRadius, wheelRadius);
-    ctx.arc(wheelRadius, wheelRadius, wheelRadius, startAngle, endAngle);
-    ctx.closePath();
-    ctx.fillStyle = POCKET_FILL[pocket.color];
-    ctx.fill();
-
-    // Pocket number, rotated to sit upright along its segment.
-    const textAngle = startAngle + segmentAngle / 2;
-    const textRadius = wheelRadius * 0.7;
-    ctx.save();
-    ctx.translate(
-      wheelRadius + textRadius * Math.cos(textAngle),
-      wheelRadius + textRadius * Math.sin(textAngle)
-    );
-    ctx.rotate(textAngle + Math.PI / 2);
-    ctx.fillStyle = "#fff";
-    ctx.font = "bold 14px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText(pocket.number, 0, 0);
-    ctx.restore();
-  });
-
-  // Fixed pointer on the right edge.
-  ctx.beginPath();
-  ctx.moveTo(canvas.width - 20, wheelRadius - 10);
-  ctx.lineTo(canvas.width - 20, wheelRadius + 10);
-  ctx.lineTo(canvas.width - 5, wheelRadius);
-  ctx.closePath();
-  ctx.fillStyle = "#ffff00";
-  ctx.fill();
-}
-
-function animateWheel() {
-  if (!spinning) return;
-  rotationAngle += spinVelocity;
-  spinVelocity *= 0.98;
-  if (spinVelocity < 0.001) {
-    spinning = false;
-    determineOutcome();
-  }
-  drawWheel();
-  requestAnimationFrame(animateWheel);
-}
-
-// The pointer sits at angle 0 (right edge); find which segment lines up with it.
-function determineOutcome() {
-  const finalAngle = (2 * Math.PI - (rotationAngle % (2 * Math.PI))) % (2 * Math.PI);
-  const winningPocket = rouletteOrder[Math.floor(finalAngle / segmentAngle) % numPockets];
-  resultDisplay.textContent = `Result: ${winningPocket.number} (${winningPocket.color.toUpperCase()})`;
-  evaluateBets(winningPocket);
-}
-
-/********** EVALUATE BETS & PAYOUT **********/
-const sumBets = category => Object.values(bets[category]).reduce((sum, v) => sum + Number(v), 0);
-
-function evaluateBets(winner) {
-  const totalBet = sumBets("numbers") + sumBets("color") + sumBets("evenodd");
-  let totalWin = 0;
-
-  if (bets.numbers[winner.number]) totalWin += bets.numbers[winner.number] * 35; // straight-up: 35:1
-
-  if (winner.number !== 0) {
-    if (bets.color[winner.color]) totalWin += bets.color[winner.color]; // color: 1:1
-    const parity = winner.number % 2 === 0 ? "even" : "odd";
-    if (bets.evenodd[parity]) totalWin += bets.evenodd[parity]; // even/odd: 1:1
-  }
-
-  if (totalWin > 0) {
-    bank += totalWin;
-    resultDisplay.textContent += ` – You win $${totalWin}!`;
-  } else {
-    bank -= totalBet;
-    resultDisplay.textContent += ` – You lose $${totalBet}.`;
-  }
-
-  updateBankDisplay();
-  resetBets();
-  updateHighScore();
-}
+chipButtons.forEach(chip => chip.addEventListener("click", () => {
+  chipButtons.forEach(c => c.classList.remove("selected"));
+  chip.classList.add("selected");
+  currentChip = parseInt(chip.dataset.value);
+}));
 
 function resetBets() {
   bets = { numbers: {}, color: {}, evenodd: {} };
-  document.querySelectorAll(".betCell").forEach(cell => cell.innerHTML = cell.dataset.number);
-  document.querySelectorAll("#colorBetArea .betOption, #evenoddBetArea .betOption")
-    .forEach(opt => opt.innerHTML = opt.dataset.value.toUpperCase());
+  document.querySelectorAll(".betCell").forEach(c => c.innerHTML = `<span>${c.dataset.number}</span>`);
+  document.querySelectorAll(".betOption").forEach(o => o.innerHTML = `<span>${LABELS[o.dataset.value]}</span>`);
+  updateDisplays();
 }
 
-/********** HIGH SCORE BOARD **********/
+/********** RULETA **********/
+const canvas = $("wheelCanvas"), ctx = canvas.getContext("2d");
+const R = canvas.width / 2;
+const order = [0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
+const SEG = (2 * Math.PI) / order.length;
+const FILL = { red: "#b3122b", black: "#141414", green: "#0a7a3f" };
+let rotationAngle = 0, spinVelocity = 0, spinning = false;
+
+function drawWheel() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // aro de madera y oro
+  ctx.beginPath(); ctx.arc(R, R, R - 2, 0, 7); ctx.fillStyle = "#4a2410"; ctx.fill();
+  ctx.lineWidth = 3; ctx.strokeStyle = "#d8b45a"; ctx.stroke();
+  const rim = 16, r = R - rim;
+  order.forEach((n, i) => {
+    const a0 = rotationAngle + i * SEG, a1 = a0 + SEG;
+    ctx.beginPath(); ctx.moveTo(R, R); ctx.arc(R, R, r, a0, a1); ctx.closePath();
+    ctx.fillStyle = FILL[colorOf(n)]; ctx.fill();
+    ctx.strokeStyle = "#d8b45a88"; ctx.lineWidth = 1; ctx.stroke();
+    const t = a0 + SEG / 2;
+    ctx.save();
+    ctx.translate(R + r * 0.84 * Math.cos(t), R + r * 0.84 * Math.sin(t));
+    ctx.rotate(t + Math.PI / 2);
+    ctx.fillStyle = "#f6edd2"; ctx.font = "bold 13px Lato, Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(n, 0, 0);
+    ctx.restore();
+  });
+  // centro
+  const g = ctx.createRadialGradient(R, R, 5, R, R, r * 0.55);
+  g.addColorStop(0, "#f0d58a"); g.addColorStop(1, "#7a5d1a");
+  ctx.beginPath(); ctx.arc(R, R, r * 0.55, 0, 7); ctx.fillStyle = "#16060c"; ctx.fill();
+  ctx.beginPath(); ctx.arc(R, R, r * 0.18, 0, 7); ctx.fillStyle = g; ctx.fill();
+  // bola fija en el puntero (borde derecho)
+  ctx.beginPath(); ctx.arc(R + r - 14, R, 7, 0, 7);
+  ctx.fillStyle = "#fff"; ctx.shadowColor = "#000"; ctx.shadowBlur = 6; ctx.fill(); ctx.shadowBlur = 0;
+}
+
+function animateWheel() {
+  rotationAngle += spinVelocity;
+  spinVelocity *= 0.985;
+  drawWheel();
+  if (spinVelocity < 0.002) { spinning = false; finishSpin(); return; }
+  requestAnimationFrame(animateWheel);
+}
+
+function finishSpin() {
+  const finalAngle = (2 * Math.PI - (rotationAngle % (2 * Math.PI))) % (2 * Math.PI);
+  const n = order[Math.floor(finalAngle / SEG) % order.length];
+  evaluateBets(n);
+}
+
+/********** PAGOS **********/
+function evaluateBets(n) {
+  const color = colorOf(n);
+  let payout = 0; // incluye la apuesta devuelta
+  const wins = [];
+  if (bets.numbers[n]) { payout += bets.numbers[n] * 36; wins.push(document.querySelector(`.betCell[data-number="${n}"]`)); }
+  if (n !== 0) {
+    if (bets.color[color]) { payout += bets.color[color] * 2; wins.push(document.querySelector(`#colorBetArea [data-value="${color}"]`)); }
+    const parity = n % 2 === 0 ? "even" : "odd";
+    if (bets.evenodd[parity]) { payout += bets.evenodd[parity] * 2; wins.push(document.querySelector(`#evenoddBetArea [data-value="${parity}"]`)); }
+  }
+  const staked = totalBet(), net = payout - staked;
+  bank += payout; // la apuesta ya se descontó al girar
+  const names = { red: "ROJO", black: "NEGRO", green: "VERDE" };
+  resultDisplay.textContent = `Salió ${n} (${names[color]}). ` +
+    (net > 0 ? `Ganaste $${net}.` : net === 0 ? "Recuperas tu apuesta." : `Pierdes $${-net}.`);
+  const cellsToFlash = document.querySelector(`.betCell[data-number="${n}"]`);
+  cellsToFlash.classList.add("win"); wins.forEach(w => w && w.classList.add("win"));
+  setTimeout(() => { document.querySelectorAll(".win").forEach(e => e.classList.remove("win")); }, 2500);
+  bets = { numbers: {}, color: {}, evenodd: {} };
+  document.querySelectorAll(".betCell").forEach(c => c.querySelector(".amt")?.remove());
+  document.querySelectorAll(".betOption").forEach(o => o.querySelector(".amt")?.remove());
+  spinButton.disabled = false;
+  updateDisplays();
+  updateHighScore();
+  if (bank <= 0) resultDisplay.textContent += " Te quedaste sin fondos: pulsa «Nueva partida».";
+}
+
+/********** PUNTUACIONES **********/
 function updateHighScore() {
-  highScores.push({ name: playerNameInput.value, bank });
+  const name = (playerNameInput.value.trim() || "Invitado").slice(0, 16);
+  const prev = highScores.find(s => s.name === name);
+  if (prev) prev.bank = Math.max(prev.bank, bank); else highScores.push({ name, bank });
   highScores = highScores.sort((a, b) => b.bank - a.bank).slice(0, 5);
-  localStorage.setItem("rouletteHighScores", JSON.stringify(highScores));
+  try { localStorage.setItem("rouletteHighScores", JSON.stringify(highScores)); } catch {}
   renderHighScores();
 }
 
 function renderHighScores() {
-  document.getElementById("scoreboardBody").innerHTML = highScores
-    .map(({ name, bank }) => `<tr><td>${name}</td><td>$${bank}</td></tr>`)
-    .join("");
+  const body = $("scoreboardBody");
+  body.replaceChildren(...highScores.map(({ name, bank }) => {
+    const tr = document.createElement("tr");
+    [name, "$" + bank].forEach(t => { const td = document.createElement("td"); td.textContent = t; tr.appendChild(td); });
+    return tr;
+  }));
 }
 
-/********** SPIN BUTTON **********/
-document.getElementById("spinButton").addEventListener("click", () => {
-  if (bank <= 0) {
-    resultDisplay.textContent = "You are out of money!";
-    return;
-  }
-  const hasBets = Object.keys(bets.numbers).length || Object.keys(bets.color).length || Object.keys(bets.evenodd).length;
-  if (!hasBets) {
-    resultDisplay.textContent = "Place your bets first!";
-    return;
-  }
-  spinVelocity = 0.3 + Math.random() * 0.2;
+/********** CONTROLES **********/
+spinButton.addEventListener("click", () => {
+  if (spinning) return;
+  const stake = totalBet();
+  if (!stake) { resultDisplay.textContent = "Haz tus apuestas antes de girar."; return; }
+  if (stake > bank) { resultDisplay.textContent = "Tus apuestas superan tu banco."; return; }
+  bank -= stake; // se descuenta al girar
+  updateDisplays();
+  resultDisplay.textContent = "No va más…";
+  spinButton.disabled = true;
+  spinVelocity = 0.3 + Math.random() * 0.25;
   spinning = true;
   animateWheel();
 });
 
-/********** NEW GAME SETUP **********/
-function newGameSetup() {
-  bank = 1000;
-  updateBankDisplay();
-  resetBets();
-  rotationAngle = 0;
-  spinVelocity = 0;
-  spinning = false;
-  drawWheel();
-}
+$("clearButton").addEventListener("click", () => { if (!spinning) resetBets(); });
 
-/********** INITIALIZATION **********/
-newGameSetup();
+$("newGameButton").addEventListener("click", () => {
+  if (spinning) return;
+  bank = START_BANK; resetBets();
+  resultDisplay.textContent = "Nueva partida. ¡Suerte!";
+  updateDisplays();
+});
+
+drawWheel();
+updateDisplays();
 renderHighScores();

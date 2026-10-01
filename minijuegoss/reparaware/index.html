@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tech Repair Sim</title>
+     <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="stage">
+        <div id="hud"><span id="hs"></span><button class="btn" id="hint" hidden>Pista</button><button class="btn"
+                id="hb">Cómo jugar</button></div>
+        <div id="sc" class="scene">
+            <div id="bgc"></div>
+            <div id="player" class="box"></div>
+            <div id="client" class="box"></div>
+            <div id="bub" class="box"><span id="bubimg"></span>
+                <p id="btxt"></p>
+            </div>
+            <button id="acc" aria-label="Aceptar"></button>
+        </div>
+        <div id="sb" class="scene" hidden>
+            <div id="bgb"></div>
+            <div id="pc" class="box">
+                <div id="pcimg"></div>
+                <div id="dust"></div>
+                <div id="slots"></div>
+            </div>
+            <button id="mon" aria-label="Encender monitor"></button>
+            <div id="note" class="box"><b id="nprob"></b><br><span id="msg"></span></div>
+            <div id="menu" class="box"><span id="menubg"></span>
+                <h3>Menú de cosas</h3>
+                <div id="items"></div>
+            </div>
+            <button id="listo" aria-label="Listo"></button>
+        </div>
+    </div>
+    <div id="help" class="ov" hidden>
+        <div class="card left">
+            <h2>Cómo jugar</h2>
+            <ol>
+                <li>El cliente llega y cuenta su problema. Pulsa Aceptar.</li>
+                <li>En la mesa, haz clic en las piezas o en el fondo del gabinete para inspeccionar.</li>
+                <li>Arrastra piezas del menú a su ranura. Para sacar una, arrástrala de vuelta al menú.</li>
+                <li>Elige una herramienta del menú y haz clic en el gabinete (aire para el polvo, pasta para la CPU,
+                    destornillador para piezas flojas).</li>
+                <li>Si es de software, haz clic en el monitor y usa la terminal.</li>
+                <li>Pulsa Listo para entregar.</li>
+            </ol>
+            <p><b>Comandos:</b> help, fsck /dev/sda, reboot, killall virus, grub-install /dev/sda, update-grub, cp viejo
+                nuevo, apt-get update, clear.</p><button class="btn" id="hx">Entendido</button>
+        </div>
+    </div>
+    <div id="modal" class="ov" hidden>
+        <div id="tw">
+            <pre id="tout"></pre>
+            <input id="tin" autocomplete="off" spellcheck="false"
+                placeholder="escribe un comando y pulsa Enter"><br><br><button class="btn" id="tx">Cerrar
+                terminal</button>
+        </div>
+    </div>
+    <div id="end" class="ov" hidden>
+        <div class="card" style="text-align:center">
+            <h2 id="et"></h2>
+            <p id="ep"></p><button class="btn" id="restart">Continuar</button>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>

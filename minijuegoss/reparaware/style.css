@@ -1,0 +1,383 @@
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            background: #111;
+            font-family: "Trebuchet MS", Verdana, sans-serif
+        }
+
+        body {
+            display: grid;
+            place-items: center
+        }
+
+        #stage {
+            position: relative;
+            width: min(100vw, calc(100dvh*16/9));
+            aspect-ratio: 16/9;
+            background: #e6e0d2;
+            overflow: hidden;
+            container-type: size
+        }
+
+        #stage>* {
+            font-size: 1.3cqw
+        }
+
+        .scene {
+            position: absolute;
+            inset: 0
+        }
+
+        .scene>div:first-child,
+        #bubimg,
+        #menubg,
+        #pcimg,
+        #dust,
+        #slots {
+            position: absolute;
+            inset: 0
+        }
+
+        #dust {
+            pointer-events: none
+        }
+
+        .box {
+            position: absolute
+        }
+
+        .a {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block
+        }
+
+        #bgc .a,
+        #bgb .a,
+        #bubimg .a,
+        #menubg .a {
+            object-fit: fill
+        }
+
+        .miss {
+            display: grid;
+            place-items: center;
+            width: 100%;
+            height: 100%;
+            border: 2px dashed #777;
+            background: rgba(255, 255, 255, .55);
+            font: 1.05cqw monospace;
+            text-align: center;
+            padding: 2px;
+            color: #333;
+            overflow: hidden
+        }
+
+        #hud {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 5.5%;
+            display: flex;
+            gap: 1.5cqw;
+            align-items: center;
+            padding: 0 1.5cqw;
+            background: rgba(0, 0, 0, .7);
+            color: #fff;
+            z-index: 5
+        }
+
+        #hs {
+            flex: 1
+        }
+
+        .btn {
+            background: #ffb000;
+            border: 0;
+            border-radius: 4px;
+            padding: .4cqw 1cqw;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit
+        }
+
+        .ov .btn {
+            font-size: 15px;
+            padding: 7px 14px
+        }
+
+        #client {
+            left: 42%;
+            top: 21%;
+            width: 30%;
+            height: 46%
+        }
+
+        #client.enter {
+            animation: enter .5s ease-out
+        }
+
+        @keyframes enter {
+            from {
+                transform: translateX(30%);
+                opacity: 0
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            #client.enter {
+                animation: none
+            }
+        }
+
+        #player {
+            left: 1%;
+            top: 38%;
+            width: 36%;
+            height: 60%
+        }
+
+        #bub {
+            left: 38%;
+            top: 7%;
+            width: 44%;
+            height: 14%
+        }
+
+        #btxt {
+            position: absolute;
+            inset: 0;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 0 4%;
+            line-height: 1.2;
+            font-size: 1.3cqw
+        }
+
+        #acc,
+        #listo,
+        #mon {
+            position: absolute;
+            background: none;
+            border: 0;
+            padding: 0;
+            cursor: pointer
+        }
+
+        #acc {
+            left: 62%;
+            top: 70%;
+            width: 24%;
+            height: 16%
+        }
+
+        #listo {
+            left: 68%;
+            top: 80%;
+            width: 25%;
+            height: 15%
+        }
+
+        #mon {
+            left: 3%;
+            top: 78%;
+            width: 14%;
+            height: 19%
+        }
+
+        #pc {
+            left: 6%;
+            top: 9%;
+            width: 54%;
+            height: 68%
+        }
+
+        .slot {
+            position: absolute;
+            border: 2px dashed transparent;
+            display: flex
+        }
+
+        .slot.over,
+        #menu.over {
+            border-color: #e08a00;
+            background: rgba(255, 160, 0, .25)
+        }
+
+        .slot i {
+            position: absolute;
+            left: 3px;
+            top: 0;
+            font: normal 1cqw monospace;
+            color: #555;
+            pointer-events: none;
+            z-index: 2
+        }
+
+        .part {
+            position: relative;
+            cursor: grab;
+            user-select: none;
+            width: 100%;
+            height: 100%
+        }
+
+        .part .a,
+        .part .miss {
+            pointer-events: none
+        }
+
+        .part.burnt>.a:first-child {
+            filter: grayscale(1) brightness(.35)
+        }
+
+        .part.loose {
+            transform: rotate(-6deg)
+        }
+
+        .part.sel,
+        .tool.on {
+            outline: 3px solid #2a9d4f
+        }
+
+        .fx {
+            position: absolute;
+            inset: 0;
+            pointer-events: none
+        }
+
+        #menu {
+            left: 64%;
+            top: 9%;
+            width: 33%;
+            height: 66%;
+            padding: 1.2%;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, .75);
+            border: 2px solid #555;
+            border-radius: 8px
+        }
+
+        #menu h3 {
+            position: relative;
+            margin: 0 0 .6cqw;
+            font-size: 1.5cqw
+        }
+
+        #items {
+            position: relative;
+            flex: 1;
+            overflow: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .6cqw;
+            align-content: start
+        }
+
+        .tool,
+        #items .part {
+            height: 8.5cqw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 1cqw;
+            cursor: pointer
+        }
+
+        .tool .a,
+        .tool .miss,
+        #items .part>.a,
+        #items .part>.miss {
+            flex: 1;
+            min-height: 0;
+            height: auto
+        }
+
+        #note {
+            left: 19%;
+            top: 80%;
+            width: 44%;
+            height: 17%;
+            background: rgba(255, 255, 255, .85);
+            border-radius: 8px;
+            padding: .6cqw .9cqw;
+            overflow: auto
+        }
+
+        #msg {
+            color: #a05a00;
+            font-weight: 700
+        }
+
+        .ov {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            z-index: 9
+        }
+
+        .ov[hidden] {
+            display: none
+        }
+
+        .card {
+            background: #fff;
+            color: #222;
+            border: 3px solid #ffb000;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 440px;
+            max-height: 90vh;
+            overflow: auto
+        }
+
+        .left li {
+            margin: 5px 0
+        }
+
+        #tw {
+            width: min(720px, 100%);
+            background: #111;
+            border: 3px solid #555;
+            border-radius: 8px;
+            padding: 10px
+        }
+
+        #tout {
+            height: 320px;
+            overflow: auto;
+            margin: 0 0 8px;
+            white-space: pre-wrap;
+            color: #33ff66;
+            font: 14px "Courier New", monospace
+        }
+
+        #tin {
+            width: 100%;
+            background: #000;
+            color: #33ff66;
+            border: 1px solid #1d6b33;
+            padding: 8px;
+            font: 14px "Courier New", monospace
+        }
+
+        button:focus-visible,
+        input:focus-visible {
+            outline: 3px solid #fff;
+            outline-offset: 2px
+        }

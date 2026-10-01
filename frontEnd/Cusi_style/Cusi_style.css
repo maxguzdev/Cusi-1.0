@@ -476,32 +476,6 @@ button:focus-visible {
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
 }
 
-.opciones button.opcion-run {
-    position: relative;
-    width: 140px;
-    height: 90px;
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
-}
-
-.opciones button.opcion-run .etiqueta-juego {
-    width: 100%;
-    padding: 6px 4px;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    color: #FFF6E2;
-   font-family: 'Cusi-Regular';
-    letter-spacing: 0.5px;
-    font-size: 14px;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
-}
-
 .opciones button.opcion-pc {
     position: relative;
     width: 140px;
@@ -858,7 +832,7 @@ button:focus-visible {
     transform: scale(0.95);
 }
 
-.pieza {
+.piezan {
     position: absolute;
     width: 100%;
     min-height: 100vh;

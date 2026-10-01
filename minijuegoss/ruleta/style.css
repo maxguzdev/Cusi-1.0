@@ -1,168 +1,318 @@
-/* ========== RESET & GLOBAL STYLES ========== */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #010130, #001f54);
-      color: #eee;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      padding: 10px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    header h1 {
-      font-size: 2em;
-      margin-bottom: 5px;
-      text-shadow: 0 0 8px #ff00ff;
-    }
-    /* ========== HUD: Player Info & Bank ========== */
-    #hud {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    #hud span {
-      margin: 0 10px;
-      font-size: 1.2em;
-      text-shadow: 0 0 5px #00ffff;
-    }
-    /* ========== CHIP SELECTION ========== */
-    #chipContainer {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-    .chip {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #ffd700, #ffa500);
-      color: #000;
-      font-weight: bold;
-      margin: 5px;
-      cursor: pointer;
-      user-select: none;
-      border: 2px solid #fff;
-    }
-    .chip.selected {
-      box-shadow: 0 0 10px #ff00ff;
-    }
-    /* ========== BETTING BOARD (Numbers 0 to 90) ========== */
-    #bettingBoard {
-      max-width: 900px;
-      margin: 0 auto 15px auto;
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 2px;
-      border: 2px solid #00ffff;
-      background: #001f54;
-      padding: 5px;
-      border-radius: 10px;
-    }
-    .betCell {
-      background: #222;
-      color: #fff;
-      text-align: center;
-      padding: 8px;
-      border: 1px solid #00ffff;
-      cursor: pointer;
-      user-select: none;
-    }
-    .betCell:hover {
-      background: #333;
-    }
-    /* ========== External Betting Areas: Color & Odd/Even ========== */
-    .betArea {
-      margin: 10px auto;
-      max-width: 500px;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px;
-      background: #001f54;
-      border: 2px solid #00ffff;
-      border-radius: 10px;
-    }
-    .betOption {
-      background: #222;
-      color: #fff;
-      padding: 10px 15px;
-      border: 1px solid #00ffff;
-      cursor: pointer;
-      user-select: none;
-      text-shadow: 0 0 3px #000;
-    }
-    .betOption:hover {
-      background: #333;
-    }
-    /* ========== Roulette Wheel Area ========== */
-    #wheelContainer {
-      text-align: center;
-      margin: 20px auto;
-    }
-    #wheelCanvas {
-      background: #000;
-      border: 2px solid #00ffff;
-      border-radius: 50%;
-      display: block;
-      margin: 0 auto;
-    }
-    /* ========== Spin Button ========== */
-    #spinButton {
-      display: block;
-      margin: 15px auto;
-      padding: 10px 20px;
-      font-size: 1.1em;
-      background: #28a745;
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    #spinButton:hover {
-      background: #218838;
-    }
-    /* ========== Result Display ========== */
-    #resultDisplay {
-      text-align: center;
-      font-size: 1.3em;
-      margin-bottom: 20px;
-      text-shadow: 0 0 5px #ff00ff;
-    }
-    /* ========== High Score Board ========== */
-    #scoreboard {
-      max-width: 400px;
-      margin: 10px auto;
-      border: 2px solid #00ffff;
-      border-radius: 10px;
-      padding: 10px;
-      background: #001f54;
-    }
-    #scoreboard h3 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    #scoreboard table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    #scoreboard th, #scoreboard td {
-      border: 1px solid #00ffff;
-      padding: 5px;
-      text-align: center;
-    }
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.5em; }
-      #hud span { font-size: 1em; }
-      .chip { width: 40px; height: 40px; line-height: 40px; }
-      .betCell { font-size: 0.9em; padding: 4px; }
-      #wheelCanvas { width: 300px; height: 300px; }
-    }
+:root {
+  --wine: #16060c;
+  --felt: #0d4a34;
+  --felt2: #093626;
+  --gold: #d8b45a;
+  --ivory: #f6edd2;
+  --red: #b3122b;
+  --ink: #141414
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0
+}
+
+body {
+  font-family: 'Lato', Arial, sans-serif;
+  color: var(--ivory);
+  min-height: 100vh;
+  padding: 14px;
+  background: radial-gradient(ellipse at top, #3a0c1c 0, var(--wine) 70%) fixed
+}
+
+header {
+  text-align: center;
+  margin-bottom: 10px
+}
+
+header h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 800;
+  font-size: 2.6em;
+  letter-spacing: .04em;
+  color: var(--gold);
+  text-shadow: 0 2px 0 #5a4210, 0 0 24px rgba(216, 180, 90, .35)
+}
+
+header p {
+  opacity: .7;
+  font-size: .95em
+}
+
+#hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 14px;
+  font-size: 1.05em
+}
+
+#hud input {
+  width: 120px;
+  padding: 4px 8px;
+  text-align: center;
+  background: #00000055;
+  color: var(--ivory);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  font: inherit
+}
+
+#bankDisplay {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4em;
+  color: var(--gold)
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+  max-width: 1180px;
+  margin: 0 auto
+}
+
+#tableCol {
+  flex: 1 1 520px;
+  max-width: 640px;
+  background: var(--felt);
+  padding: 16px;
+  border-radius: 18px;
+  border: 6px solid #4a2410;
+  box-shadow: 0 0 0 2px var(--gold), inset 0 0 60px #00000088, 0 18px 40px #000a;
+  background-image: radial-gradient(circle at 50% 40%, #13694a, var(--felt2))
+}
+
+#wheelCol {
+  flex: 1 1 380px;
+  max-width: 460px;
+  text-align: center
+}
+
+#chipContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px
+}
+
+.chip {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font: 700 1em 'Lato';
+  cursor: pointer;
+  color: var(--ink);
+  background: radial-gradient(circle, var(--ivory) 52%, var(--gold) 54%);
+  border: 3px dashed var(--red);
+  transition: transform .15s
+}
+
+.chip:hover {
+  transform: translateY(-3px)
+}
+
+.chip.selected {
+  transform: translateY(-5px) scale(1.12);
+  box-shadow: 0 6px 14px #000a, 0 0 0 3px var(--gold)
+}
+
+#bettingBoard {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3px;
+  margin-bottom: 12px
+}
+
+.betCell,
+.betOption {
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #ffffff55;
+  border-radius: 4px;
+  transition: filter .15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center
+}
+
+.betCell {
+  padding: 9px 0;
+  font-weight: 700;
+  min-height: 44px
+}
+
+.betCell.zero {
+  grid-column: 1/-1;
+  background: #0a7a3f
+}
+
+.betCell.red,
+.betOption.red {
+  background: var(--red)
+}
+
+.betCell.black,
+.betOption.black {
+  background: var(--ink)
+}
+
+.betCell:hover,
+.betOption:hover {
+  filter: brightness(1.35)
+}
+
+.betCell.win,
+.betOption.win {
+  outline: 3px solid var(--gold);
+  box-shadow: 0 0 16px var(--gold);
+  z-index: 1
+}
+
+.amt {
+  font-size: .68em;
+  line-height: 1;
+  margin-top: 2px;
+  padding: 2px 6px;
+  border-radius: 9px;
+  background: var(--gold);
+  color: var(--ink)
+}
+
+.betArea {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px
+}
+
+.betOption {
+  flex: 1;
+  padding: 12px;
+  font-weight: 700;
+  background: var(--felt2);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1em
+}
+
+#wheelContainer {
+  padding: 10px
+}
+
+#wheelCanvas {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 14px 40px #000b
+}
+
+#resultDisplay {
+  min-height: 3.2em;
+  margin: 8px 0 12px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25em;
+  color: var(--gold)
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center
+}
+
+button:focus-visible,
+.chip:focus-visible,
+input:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px
+}
+
+#spinButton {
+  padding: 12px 34px;
+  font: 700 1.1em 'Lato';
+  border: none;
+  border-radius: 30px;
+  color: var(--ink);
+  cursor: pointer;
+  background: linear-gradient(#f0d58a, var(--gold));
+  box-shadow: 0 4px 0 #7a5d1a
+}
+
+#spinButton:disabled {
+  filter: grayscale(1);
+  opacity: .6;
+  cursor: not-allowed
+}
+
+.ghost {
+  padding: 10px 16px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--ivory);
+  border-radius: 30px;
+  cursor: pointer;
+  font: inherit
+}
+
+.ghost:hover {
+  background: #ffffff14
+}
+
+#scoreboard {
+  margin-top: 22px;
+  padding: 12px;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  background: #00000040
+}
+
+#scoreboard h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  margin-bottom: 8px
+}
+
+#scoreboard table {
+  width: 100%;
+  border-collapse: collapse
+}
+
+#scoreboard th,
+#scoreboard td {
+  padding: 5px;
+  border-bottom: 1px solid #d8b45a44
+}
+
+@media(max-width:600px) {
+  header h1 {
+    font-size: 1.9em
+  }
+
+  .chip {
+    width: 46px;
+    height: 46px
+  }
+
+  .betCell {
+    min-height: 38px;
+    padding: 6px 0;
+    font-size: .85em
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  * {
+    transition: none !important
+  }
+}

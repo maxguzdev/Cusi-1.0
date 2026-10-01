@@ -1,5 +1,5 @@
 
- <section class="pieza">
+ <section class="piezan">
         <div class="botones">
             <button onclick="irA('php/baño.php')" class="arrow_l"><img src="/CUSI-1.0/frontEnd/Cusi_style/left.png" width="70"></button>
             <button onclick="irA('incluides/config.php')" class="btn-secundario" id="src"> <img src="/CUSI-1.0/frontEnd/Cusi_style/eng.png"

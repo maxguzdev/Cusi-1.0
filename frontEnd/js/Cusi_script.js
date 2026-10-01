@@ -337,9 +337,6 @@ document.addEventListener('click', function (e) {
                               <a href="/Cusi-1.0/minijuegoss/cusis_band/cband.html">
                             <button class="opcion-banda"><span class="etiqueta-juego">Cusi´s Band</span></button>
                               </a>
-                               <a href="/Cusi-1.0/minijuegoss/dino/index.html">
-                            <button class="opcion-run"><span class="etiqueta-juego">Leopoldo Run</span></button>
-                              </a>
                                <a href="/Cusi-1.0/minijuegoss/snake/index.html">
                             <button class="opcion-snake"><span class="etiqueta-juego">Snake</span></button>
                               </a>
