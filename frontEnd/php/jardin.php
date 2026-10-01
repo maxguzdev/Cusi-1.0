@@ -11,6 +11,21 @@
          <p id="value"></p> 
       </div>
       
+     <div class="stats-container">
+    <div class="stat-group">
+        <span class="stat-label">Vida</span>
+        <div class="bar-background">
+            <div class="bar-fill hp-fill" id="hp-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+    <div class="stat-group">
+        <span class="stat-label">Hambre</span>
+        <div class="bar-background">
+            <div class="bar-fill hunger-fill" id="hunger-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
+
        <div id="cartela" class="carti"></div>
 
       <img src="/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi.png" width="550" id="cusi_a">
@@ -19,4 +34,5 @@
       <img src="/CUSI-1.0/frontEnd/Cusi_style/garden-scr/pablo_a.png" width="350" id="pablo" style="cursor: pointer;">
       <audio src="/CUSI-1.0/frontEnd/mp3/dialogo2.mp3" id="d2"></audio>
    </section>
+
  

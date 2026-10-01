@@ -6,6 +6,21 @@
                     width="70"></button>
         </div>
 
+        <div class="stats-container">
+    <div class="stat-group">
+        <span class="stat-label">Vida</span>
+        <div class="bar-background">
+            <div class="bar-fill hp-fill" id="hp-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+    <div class="stat-group">
+        <span class="stat-label">Hambre</span>
+        <div class="bar-background">
+            <div class="bar-fill hunger-fill" id="hunger-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
+
            <div class="cusimios">
          <img src="/CUSI-1.0/frontEnd/Cusi_style/cusimios.png" width="150">
          <p id="value"></p> 

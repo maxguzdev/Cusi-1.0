@@ -5,11 +5,11 @@ let dinero = JSON.parse(localStorage.getItem("dinero")) || 100;
 // es la que se usa para el id de los botones ("comida_" + key) y para
 // guardar las cantidades.
 const COMIDAS = {
-    empanada: { nombre: "Empanada", costo: 8, img: "https://betos.com.ar/wp-content/uploads/2019/08/empanada-criollas.png" },
-    choripan: { nombre: "Choripán", costo: 12, img: "https://i.ibb.co/84XsP9ct/Gemini-Generated-Image-56pd6056pd6056pd.png" }, //no te la puedo creer, no me di cuenta que estaba hecho con ia el chori de mierda, absolute gaga
-    fideos: { nombre: "Fideos", costo: 10, img: "https://pastamiacr.com/wp-content/uploads/2024/07/spaghetti-with-bolognese-sauce-wooden-tablexa1.png" },
-    milanesa: { nombre: "Milanesa", costo: 15, img: "https://elranchitosupermarket.com/wp-content/uploads/2025/01/MILANESA-DE-RES.png" },
-    asado: { nombre: "Asado", costo: 50, img: "https://airescriollos.com.ar/wp-content/uploads/2020/09/Parrillada-icono.png" },
+    empanada: { nombre: "Empanada", costo: 8, hambre: 15, vida: 0, img: "https://betos.com.ar/wp-content/uploads/2019/08/empanada-criollas.png" },
+    choripan: { nombre: "Choripán", costo: 12, hambre: 30, vida: 5, img: "https://i.ibb.co/84XsP9ct/Gemini-Generated-Image-56pd6056pd6056pd.png" },
+    fideos: { nombre: "Fideos", costo: 10, hambre: 25, vida: 0, img: "https://pastamiacr.com/wp-content/uploads/2024/07/spaghetti-with-bolognese-sauce-wooden-tablexa1.png" },
+    milanesa: { nombre: "Milanesa", costo: 15, hambre: 40, vida: 10, img: "https://elranchitosupermarket.com/wp-content/uploads/2025/01/MILANESA-DE-RES.png" },
+    asado: { nombre: "Asado", costo: 50, hambre: 80, vida: 25, img: "https://airescriollos.com.ar/wp-content/uploads/2020/09/Parrillada-icono.png" },
 };
 
 // Cuánta comida tenés guardada, por plato. Arranca todo en 0 y persiste
@@ -351,3 +351,55 @@ document.addEventListener('click', function (e) {
         }
     }
 });
+
+function obtenerStats() {
+    return {
+        vida: parseInt(localStorage.getItem('vida')) || 100,
+        hambre: parseInt(localStorage.getItem('hambre')) || 100
+    };
+}
+
+function guardarStats(vida, hambre) {
+    localStorage.setItem('vida', vida);
+    localStorage.setItem('hambre', hambre);
+    actualizarInterfazVisual();
+}
+
+function actualizarInterfazVisual() {
+    const stats = obtenerStats();
+    const hpBar = document.getElementById('hp-bar');
+    const hpText = document.getElementById('hp-text');
+    const hungerBar = document.getElementById('hunger-bar');
+    const hungerText = document.getElementById('hunger-text');
+
+    if (hpBar) hpBar.style.width = stats.vida + '%';
+    if (hpText) hpText.textContent = stats.vida;
+    if (hungerBar) hungerBar.style.width = stats.hambre + '%';
+    if (hungerText) hungerText.textContent = stats.hambre;
+}
+
+window.addEventListener('DOMContentLoaded', actualizarInterfazVisual);
+
+function comerComida(key) {
+    if (!inventarioComida[key] || inventarioComida[key] <= 0) return;
+
+    const plato = COMIDAS[key];
+    
+    let stats = obtenerStats();
+
+    let nuevoHambre = Math.min(100, stats.hambre + plato.hambre);
+    let nuevoVida = Math.min(100, stats.vida + plato.vida);
+
+    guardarStats(nuevoVida, nuevoHambre);
+
+    inventarioComida[key] -= 1;
+    guardarComida();
+    renderBandejaComida();
+
+    const cusi = document.getElementById("cusi_a");
+    if (cusi) {
+        cusi.classList.remove("comiendo");
+        void cusi.offsetWidth; 
+        cusi.classList.add("comiendo");
+    }
+}

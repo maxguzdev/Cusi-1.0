@@ -609,11 +609,6 @@ button:focus-visible {
 /*******************************************************************************\
  Menú de la heladera: botón de salir, botones de comida con imagen + cantidad
 \*******************************************************************************/
-/* El botón de salir ahora es HIJO de .cartelera (no un hermano de afuera),
-   anclado en su esquina como el botón de cerrar de cualquier modal. Al ser
-   descendiente, siempre viaja pegado a la tarjeta (incluso con su
-   position:relative; top:-240px) y nunca vuelve a quedar tapado ni a
-   superponerse con la grilla de opciones. */
 .btn-cerrar-heladera {
     position: absolute;
     top: -16px;
@@ -663,8 +658,7 @@ button:focus-visible {
 }
 
 /*******************************************************************************\
- Bandeja de comida (estilo Pou) para darle de comer a Cusi directo,
- sin pasar por el menú de compra de la heladera.
+ Bandeja de comida (estilo Pou) para darle de comer a Cusi directo
 \*******************************************************************************/
 .bandeja-comida {
     position: fixed;
@@ -709,7 +703,6 @@ button:focus-visible {
     white-space: nowrap;
 }
 
-/* Bounce cortito cuando Cusi come algo de la bandeja */
 @keyframes comiendo {
     0% { transform: scale(1); }
     30% { transform: scale(1.12) rotate(-3deg); }
@@ -773,7 +766,6 @@ button:focus-visible {
 
 #cartel {
     position: absolute;
-    
     top: 0;
     left: 0;
     width: 100%;
@@ -781,13 +773,12 @@ button:focus-visible {
     display: flex;
     justify-content: center;
     align-items: center;
-    pointer-events: none; /* Evita que bloquee la pantalla mientras esté vacío */
+    pointer-events: none;
     z-index: 100;
 }
 
-/* El cuadro/cartel estilizado */
 .cartel-pregunta {
-    pointer-events: auto; /* Activa la interacción para los botones */
+    pointer-events: auto;
     background: #222222;
     border: 4px solid #ffffff;
     border-radius: 12px;
@@ -804,7 +795,6 @@ button:focus-visible {
     margin-bottom: 15px;
 }
 
-/* Botones del cartel */
 .cartel-pregunta button {
     background-color: #4CAF50;
     color: white;
@@ -818,12 +808,10 @@ button:focus-visible {
     transition: background 0.2s, transform 0.1s;
 }
 
-/* Botón "No" diferenciado en rojo */
 .cartel-pregunta button#btn_no {
     background-color: #f44336;
 }
 
-/* Efecto hover en botones */
 .cartel-pregunta button:hover {
     opacity: 0.9;
     transform: scale(1.05);
@@ -848,7 +836,6 @@ button:focus-visible {
     justify-content: flex-end;
     box-sizing: border-box;
     padding: 70px 16px;
-
 }
 
 #armario {
@@ -861,7 +848,6 @@ button:focus-visible {
     justify-content: flex-end;
 }
 
-
 #minijuegos {
     position: absolute;
     bottom: 243px;
@@ -870,4 +856,67 @@ button:focus-visible {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-end;
+}
+
+
+.stats-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background: rgba(43, 27, 54, 0.85);
+    padding: 10px 20px;
+    border-radius: 16px;
+    border: 3px solid #FFF6E2;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+}
+
+.stat-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 140px;
+}
+
+.stat-label {
+    font-family: 'Cusi-Regular', sans-serif;
+    font-size: 14px;
+    color: #FFF6E2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bar-background {
+    width: 100%;
+    height: 16px;
+    background-color: rgba(20, 15, 25, 0.9);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #FFF6E2;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.bar-fill {
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease-in-out;
+}
+
+.hp-fill {
+    background: linear-gradient(180deg, #ff5252, #c62828);
+    box-shadow: 0 0 8px rgba(255, 82, 82, 0.7);
+}
+
+.hunger-fill {
+    background: linear-gradient(180deg, #ffa726, #ef6c00);
+    box-shadow: 0 0 8px rgba(255, 167, 38, 0.7);
 }
