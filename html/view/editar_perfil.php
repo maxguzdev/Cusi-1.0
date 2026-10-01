@@ -13,7 +13,6 @@ if (!isset($_SESSION['nombre_perfil'])) {
     <link rel="stylesheet" href="../css/confi.css"> 
 </head>
 <body>
-    <!-- IMPORTANTE: Todo el formulario DEBE estar adentro del div "ford" -->
     <div id="ford">
         <h2>Editar Perfil</h2>
         
@@ -39,7 +38,7 @@ if (!isset($_SESSION['nombre_perfil'])) {
             <button type="submit" name="guardar_cambios">Guardar Cambios</button>
             <a href="configuracion.php">Cancelar</a>
         </form>
-    </div> <!-- Aquí cierra el contenedor rosa principal -->
+    </div> 
 </body>
 </html>
 
