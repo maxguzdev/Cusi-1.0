@@ -121,8 +121,8 @@
             </p>
             <h4>AVANCES</h4>
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/PHMRoEMio4Q?si=xrTPaYXLUKIR7fzV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/3IgiE0hKdYs?si=wk7-2PMDgtY9gCW8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>     
+                </div>
 
             <h3>CUSIX:</h3>
             <p>
@@ -130,8 +130,7 @@
             </p>
             <h4>AVANCES</h4>
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/-1rQp8jxTbQ?si=wBZWX-5R2WaO_Yjq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/8buXiLWd15k?si=_MDSLX8WCJZcrFFT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div>
 
             <h3>Diego Market:</h3>
             <p>
@@ -139,8 +138,7 @@
             </p>
             <h4>AVANCES</h4>
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/zzK6z1LeKRI?si=_pE4DLafUwZE2XL9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/wf2Ojwq4gYU?si=AEe7bM4wWPlqEj7g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>    </div>
         </div>
         
         <div class="social-footer">

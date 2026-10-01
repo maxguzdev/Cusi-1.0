@@ -355,6 +355,61 @@ a {
     object-fit: cover;
 }
 
+.acciones {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--morado-borde);
+}
+
+.btn-accion {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-accion:hover {
+    background-color: var(--morado-claro);
+    color: var(--morado-fuerte);
+}
+
+.btn-accion i {
+    font-size: 17px;
+}
+
+.btn-like.activo,
+.btn-guardado.activo {
+    color: var(--morado-fuerte);
+    font-weight: 600;
+}
+
+.btn-like.activo i {
+    animation: latido 0.3s ease;
+}
+
+@keyframes latido {
+    50% { transform: scale(1.35); }
+}
+
+.btn-borrar {
+    margin-left: auto;
+}
+
+.btn-borrar:hover {
+    background-color: #fdecec;
+    color: #c0392b;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         position: static;

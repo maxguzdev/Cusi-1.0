@@ -48,15 +48,15 @@ session_start();
              data-bs-ride="carousel" data-bs-interval="3500">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2klcMLTPhyti7l3P4p4CAYYiCUGJ13Nzc_sYOz5H3dAvKFJ44D-2uxpKm&s=10"
+                    <img src="../img/logo_cusix.png"
                          class="d-block w-100" alt="Imagen 1" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_09qsLmFFuEsuv_QClvadmO99S1I4yDkGwV2hUO3bhMZuTtJGGl_xFbGS&s=10"
+                    <img src="../img/logo_cusix.png"
                          class="d-block w-100" alt="Imagen 2" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSihTMN1t_Jg6pqZnrXYIZXbotUHbDyJ6SP67Slpmsc0TkrMVaKDIZ6KIg&s=10"
+                    <img src="../img/logo_cusix.png"
                          class="d-block w-100" alt="Imagen 3" loading="lazy">
                 </div>
             </div>
