@@ -23,6 +23,20 @@
             <div class="bar-fill hunger-fill" id="hunger-bar" style="width: 100%;"></div>
         </div>
     </div>
+    <div class="stat-group">
+        <span class="stat-label">Entretenimiento</span>
+        <div class="bar-background">
+            <div class="bar-fill ent-fill" id="entretenimiento-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+    <div class="stat-group">
+        <span class="stat-label">Suciedad</span>
+        <div class="bar-background">
+            <div class="bar-fill suc-fill" id="suciedad-bar" style="width: 0%;"></div>
+        </div>
+    </div>
+</div>
+    
 </div>
       <img src="/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi.png" width="550" id="cusi_a">
       <audio src="/CUSI-1.0/frontEnd/mp3/Deam.mp3" id="damn"></audio>

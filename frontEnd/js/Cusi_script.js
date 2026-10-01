@@ -115,12 +115,45 @@ function comerComida(key) {
         void cusi.offsetWidth; // fuerza el reinicio de la animación si ya estaba corriendo
         cusi.classList.add("comiendo");
     }
+
+    // Actualizamos las stats de hambre y vida al comer
+    const plato = COMIDAS[key];
+    const statsActuales = obtenerStats();
+    const nuevaHambre = Math.min(100, statsActuales.hambre + plato.hambre);
+    const nuevaVida = Math.min(100, statsActuales.vida + plato.vida);
+    guardarStats({ hambre: nuevaHambre, vida: nuevaVida });
+}
+
+// Función para bañar a Cusi (limpia la suciedad y actualiza la interfaz)
+function bañarCusi() {
+    guardarStats({ suciedad: 0 });
+    console.log("¡Cusi está limpio y reluciente!");
 }
 
 // Si venimos de un minijuego con "?volver=NOMBRE" en la URL (por ejemplo
 // index.html?volver=pieza), apenas carga la página se pide ese fragmento
 // con irA() y se pone en #content, igual que hacen los botones del juego.
 document.addEventListener('DOMContentLoaded', () => {
+    actualizarInterfazVisual();
+    economia();
+
+    // 1. Revisar si estábamos jugando a un minijuego y calcular el tiempo transcurrido
+    const tiempoInicio = sessionStorage.getItem('tiempoInicioJuego');
+    if (tiempoInicio) {
+        const tiempoTranscurridoSegundos = Math.floor((Date.now() - parseInt(tiempoInicio)) / 1000);
+        sessionStorage.removeItem('tiempoInicioJuego');
+
+        // Regla: 1 punto de entretenimiento cada 5 segundos jugados (con un tope de 50)
+        const entretenimientoGanado = Math.min(50, Math.floor(tiempoTranscurridoSegundos / 5));
+
+        if (entretenimientoGanado > 0) {
+            const statsActuales = obtenerStats();
+            const nuevoEntretenimiento = Math.min(100, statsActuales.entretenimiento + entretenimientoGanado);
+            guardarStats({ entretenimiento: nuevoEntretenimiento });
+            console.log(`¡Jugaste ${tiempoTranscurridoSegundos} segundos! Ganaste ${entretenimientoGanado} de entretenimiento.`);
+        }
+    }
+
     const params = new URLSearchParams(window.location.search);
     const volverA = params.get('volver');
 
@@ -128,10 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
         irA(`php/${volverA}.php`);
 
         // Sacamos el "?volver=..." de la URL para que quede como index.html
-        // sola, igual que el resto del sitio (que nunca cambia la URL real,
-        // solo el contenido de #content). Si no lo limpiamos, un F5 o un
-        // "atrás" del navegador te devuelve siempre a pieza sin importar
-        // dónde estabas navegando dentro del juego.
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 });
@@ -149,6 +178,7 @@ async function irA(url) {
         document.getElementById("content").innerHTML = html;
         economia();
         renderBandejaComida();
+        actualizarInterfazVisual();
 
     } catch (error) {
         console.error('Hubo un error:', error);
@@ -158,10 +188,15 @@ async function irA(url) {
 document.addEventListener('click', function (e) {
     console.log('clickeaste:', e.target.tagName, e.target.id, e.target.className); //IMPORTANTE, CUANDO EL JUEGO ESTE TERMINADO ESTA LINEA BORRARLA PARA QUE NO OCUPE MUCHA CACHE
 
+    // Detectar si hace clic en cualquier enlace que lleve a minijuegos
+    const enlaceMinijuego = e.target.closest('a');
+    if (enlaceMinijuego && enlaceMinijuego.href.includes('minijuegoss')) {
+        sessionStorage.setItem('tiempoInicioJuego', Date.now());
+    }
+
     const id = e.target.id;
 
-    // Comprar comida: la plata se descuenta con el mismo gastar() de
-    // siempre, no hay una función de gastar aparte para la comida.
+    // Comprar comida: la plata se descuenta con el mismo gastar() de siempre
     if (id.startsWith('comida_')) {
         const key = id.replace('comida_', '');
         if (gastar(COMIDAS[key].costo)) {
@@ -180,6 +215,12 @@ document.addEventListener('click', function (e) {
     }
 
     switch (id) {
+        case 'baño':
+        case 'ducha': {
+            bañarCusi();
+            break;
+        }
+
         case 'cusi_a': {
             const deam = document.getElementById("damn");
             if (deam) {
@@ -187,9 +228,9 @@ document.addEventListener('click', function (e) {
                 deam.play().catch(error => console.log('no funciona', error));
             }
 
-            e.target.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi_enojado.png";
+            e.target.src = "/CUSI-1.0/frontEnd/Cusi_style/Cusi_skins/Cusi_enojado.png";
             setTimeout(() => {
-                e.target.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Cusi.png";
+                e.target.src = "/CUSI-1.0/frontEnd/Cusi_style/Cusi_skins/Cusi.png";
             }, 700);
             break;
         }
@@ -201,17 +242,14 @@ document.addEventListener('click', function (e) {
                 dialog1.play().catch(error => console.log('no funciona', error));
             }
 
-            e.target.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Diego_2.png";
+            e.target.src = "/CUSI-1.0/frontEnd/Cusi_style/Cusi_skins/Diego_2.png";
             setTimeout(() => {
-                e.target.src = "/CUSI-1.0/frontEnd/Cusi_style/CUSI_skins/Diego.png";
+                e.target.src = "/CUSI-1.0/frontEnd/Cusi_style/Cusi_skins/Diego.png";
             }, 1117);
             break;
         }
 
         case 'tienda': {
-            // TODO: todavía sin contenido, es el mismo patrón que heladera
-            // (abrir un .cartelera adentro de un contenedor) para cuando se
-            // sume el catálogo de la tienda.
             const contenedor = document.getElementById("tenda");
             if (contenedor) contenedor.innerHTML = `<div class="cartelera"></div>`;
             break;
@@ -222,7 +260,6 @@ document.addEventListener('click', function (e) {
             break;
         }
 
-        // Vive afuera del opciones-grid, por eso es un case aparte del "opt_6".
         case 'salir_heladera': {
             const contenedor = document.getElementById("food");
             if (contenedor) contenedor.innerHTML = "";
@@ -321,28 +358,28 @@ document.addEventListener('click', function (e) {
                         <div class="opciones">
                             <a href="/Cusi-1.0/minijuegoss/bm/buscaminitas.php">
                             <button class="opcion-buscaminas"><span class="etiqueta-juego">Buscaminas</span></button>
-                              </a>
+                            </a>
                             <a href="/Cusi-1.0/minijuegoss/blackjack/index.html">
                             <button class="opcion-blackjack"><span class="etiqueta-juego">Blackjack</span></button>
-                              </a>
+                            </a>
                             <a href="/Cusi-1.0/minijuegoss/ruleta/index.html">
                             <button class="opcion-ruleta"><span class="etiqueta-juego">Ruleta</span></button>
-                              </a>
-                              <a href="/Cusi-1.0/minijuegoss/tragaperras/index.html">
+                            </a>
+                            <a href="/Cusi-1.0/minijuegoss/tragaperras/index.html">
                             <button class="opcion-tragaperras"><span class="etiqueta-juego">Tragaperras</span></button>
-                              </a>
-                               <a href="/Cusi-1.0/minijuegoss/flappy pablo/index.html">
+                            </a>
+                            <a href="/Cusi-1.0/minijuegoss/flappy pablo/index.html">
                             <button class="opcion-pablo"><span class="etiqueta-juego">Flappy Pablo</span></button>
-                              </a>
-                              <a href="/Cusi-1.0/minijuegoss/cusis_band/cband.html">
+                            </a>
+                            <a href="/Cusi-1.0/minijuegoss/cusis_band/cband.html">
                             <button class="opcion-banda"><span class="etiqueta-juego">Cusi´s Band</span></button>
-                              </a>
-                               <a href="/Cusi-1.0/minijuegoss/snake/index.html">
+                            </a>
+                            <a href="/Cusi-1.0/minijuegoss/snake/index.html">
                             <button class="opcion-snake"><span class="etiqueta-juego">Snake</span></button>
-                              </a>
+                            </a>
                             <a href="/Cusi-1.0/minijuegoss/reparaware/index.html">
-                            <button class="opcion-pc"><span class="etiqueta-juego">Reparaware</span></button>
-                              </a>
+                            <button class="opcion-pc"><span class="etiqueta-juego` + `-juego">Reparaware</span></button>
+                            </a>
                         </div>
                     </div>
                 `;
@@ -353,53 +390,60 @@ document.addEventListener('click', function (e) {
 });
 
 function obtenerStats() {
+    const vidaVal = parseInt(localStorage.getItem('vida'));
+    const hambreVal = parseInt(localStorage.getItem('hambre'));
+    const entVal = parseInt(localStorage.getItem('entretenimiento'));
+    const sucVal = parseInt(localStorage.getItem('suciedad'));
+
     return {
-        vida: parseInt(localStorage.getItem('vida')) || 100,
-        hambre: parseInt(localStorage.getItem('hambre')) || 100
+        vida: !isNaN(vidaVal) ? vidaVal : 100,
+        hambre: !isNaN(hambreVal) ? hambreVal : 100,
+        entretenimiento: !isNaN(entVal) ? entVal : 100,
+        suciedad: !isNaN(sucVal) ? sucVal : 0 // 0 = limpio, 100 = re sucio
     };
 }
 
-function guardarStats(vida, hambre) {
-    localStorage.setItem('vida', vida);
-    localStorage.setItem('hambre', hambre);
+function guardarStats(statsParciales = {}) {
+    const current = obtenerStats();
+    const updated = { ...current, ...statsParciales };
+
+    localStorage.setItem('vida', updated.vida);
+    localStorage.setItem('hambre', updated.hambre);
+    localStorage.setItem('entretenimiento', updated.entretenimiento);
+    localStorage.setItem('suciedad', updated.suciedad);
+
     actualizarInterfazVisual();
 }
 
 function actualizarInterfazVisual() {
     const stats = obtenerStats();
+
     const hpBar = document.getElementById('hp-bar');
     const hpText = document.getElementById('hp-text');
-    const hungerBar = document.getElementById('hunger-bar');
-    const hungerText = document.getElementById('hunger-text');
-
     if (hpBar) hpBar.style.width = stats.vida + '%';
     if (hpText) hpText.textContent = stats.vida;
+
+    const hungerBar = document.getElementById('hunger-bar');
+    const hungerText = document.getElementById('hunger-text');
     if (hungerBar) hungerBar.style.width = stats.hambre + '%';
     if (hungerText) hungerText.textContent = stats.hambre;
+
+    const entBar = document.getElementById('entretenimiento-bar');
+    const entText = document.getElementById('entretenimiento-text');
+    if (entBar) entBar.style.width = stats.entretenimiento + '%';
+    if (entText) entText.textContent = stats.entretenimiento;
+
+    const sucBar = document.getElementById('suciedad-bar');
+    const sucText = document.getElementById('suciedad-text');
+    if (sucBar) sucBar.style.width = stats.suciedad + '%';
+    if (sucText) sucText.textContent = stats.suciedad;
 }
 
-window.addEventListener('DOMContentLoaded', actualizarInterfazVisual);
-
-function comerComida(key) {
-    if (!inventarioComida[key] || inventarioComida[key] <= 0) return;
-
-    const plato = COMIDAS[key];
-    
-    let stats = obtenerStats();
-
-    let nuevoHambre = Math.min(100, stats.hambre + plato.hambre);
-    let nuevoVida = Math.min(100, stats.vida + plato.vida);
-
-    guardarStats(nuevoVida, nuevoHambre);
-
-    inventarioComida[key] -= 1;
-    guardarComida();
-    renderBandejaComida();
-
-    const cusi = document.getElementById("cusi_a");
-    if (cusi) {
-        cusi.classList.remove("comiendo");
-        void cusi.offsetWidth; 
-        cusi.classList.add("comiendo");
+setInterval(() => {
+    const stats = obtenerStats();
+    if (stats.suciedad < 100) {
+        const nuevaSuciedad = Math.min(100, stats.suciedad + 5);
+        guardarStats({ suciedad: nuevaSuciedad });
+        console.log("Cusi se ensució un poco. Suciedad actual:", nuevaSuciedad);
     }
-}
+}, 30000);

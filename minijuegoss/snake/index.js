@@ -7,19 +7,33 @@ class SnakePart {
 
 let speed = 7;
 let tileCount = 20;
-let tileSize = canvas.width / tileCount; // 20px por casilla
+let tileSize = canvas.width / tileCount; 
 let headX = 10, headY = 10;
 let snakeParts = [];
 let tailLength = 2;
 let appleX = 5, appleY = 5;
 let inputsXVelocity = 0, inputsYVelocity = 0;
 let xVelocity = 0, yVelocity = 0;
-let facingX = 1, facingY = 0; // hacia dónde mira la cabeza
+let facingX = 1, facingY = 0; 
 let score = 0;
 let tick = 0;
 let gameIsOver = false;
 let gulpSound = new Audio("gulp.mp3");
 
+let headImg = new Image();
+headImg.src = "img/Cusi.png"; // Reemplazá esta ruta por la de tu imagen de la cabeza
+
+function drawHead(p) {
+  ctx.save();
+  ctx.translate(p.x, p.y);
+  ctx.rotate(Math.atan2(facingY, facingX) + Math.PI / 2); // Ajustá la rotación según cómo mire tu imagen
+
+  // Dibuja la imagen centrada en la casilla (asumiendo tamaño de tileSize = 20px)
+  let imgSize = tileSize * 1.2; // Tamaño de la cabeza respecto a la celda
+  ctx.drawImage(headImg, -imgSize / 2, -imgSize / 2, imgSize, imgSize);
+
+  ctx.restore();
+}
 function drawGame() {
   xVelocity = inputsXVelocity;
   yVelocity = inputsYVelocity;
@@ -59,20 +73,20 @@ function isGameOver() {
 }
 
 function drawGameOver() {
-  ctx.fillStyle = "rgba(10, 30, 15, 0.65)";
+  ctx.fillStyle = "rgba(36, 0, 70, 0.8)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = "#E0AAFF";
   ctx.font = "bold 44px Trebuchet MS, Verdana, sans-serif";
   ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2 - 10);
 
   ctx.font = "20px Trebuchet MS, Verdana, sans-serif";
-  ctx.fillStyle = "#ffd54f";
+  ctx.fillStyle = "#FFD166";
   ctx.fillText("Puntaje: " + score, canvas.width / 2, canvas.height / 2 + 26);
 
   ctx.font = "14px Trebuchet MS, Verdana, sans-serif";
-  ctx.fillStyle = "#c8e6c9";
+  ctx.fillStyle = "#C77DFF";
   ctx.fillText("Apretá una flecha para jugar de nuevo", canvas.width / 2, canvas.height / 2 + 56);
   ctx.textAlign = "start";
 }
@@ -93,11 +107,11 @@ function drawScore() {
   ctx.textBaseline = "alphabetic";
 }
 
-// pasto a cuadros
+// Fondo de tablero adaptado a tonos oscuros/morados sutiles
 function clearScreen() {
   for (let y = 0; y < tileCount; y++) {
     for (let x = 0; x < tileCount; x++) {
-      ctx.fillStyle = (x + y) % 2 === 0 ? "#a8d65c" : "#9ccc4f";
+      ctx.fillStyle = (x + y) % 2 === 0 ? "#2D004F" : "#3C096C";
       ctx.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
     }
   }
@@ -110,19 +124,19 @@ function center(p) {
 function drawSnake() {
   const pts = [...snakeParts, new SnakePart(headX, headY)].map(center);
 
-  // sombra
+  // Sombra de la serpiente
   ctx.save();
   ctx.translate(2, 3);
-  strokePath(pts, 16, "rgba(0, 0, 0, 0.22)");
+  strokePath(pts, 16, "rgba(0, 0, 0, 0.3)");
   ctx.restore();
 
-  // contorno, cuerpo y brillo
-  strokePath(pts, 17, "#1b5e20");
-  strokePath(pts, 14, "#43a047");
-  strokePath(pts, 5, "#81c784");
+  // Cuerpo morado (Contorno oscuro -> Cuerpo principal -> Brillo central)
+  strokePath(pts, 17, "#240046"); // Contorno morado muy oscuro
+  strokePath(pts, 14, "#7B2CBF"); // Cuerpo morado principal
+  strokePath(pts, 5, "#C77DFF");  // Brillo central lila
 
-  // manchas del lomo, una por medio
-  ctx.fillStyle = "#2e7d32";
+  // Detalles / escamas en el lomo con tono morado profundo
+  ctx.fillStyle = "#3C096C";
   for (let i = pts.length - 2; i >= 0; i -= 2) {
     ctx.beginPath();
     ctx.arc(pts[i].x, pts[i].y, 3, 0, Math.PI * 2);
@@ -147,14 +161,15 @@ function strokePath(pts, width, color) {
   ctx.stroke();
 }
 
+// Función original de la cabeza (Podés reemplazarla por la de la imagen que te pasé arriba si querés usar una foto)
 function drawHead(p) {
   ctx.save();
   ctx.translate(p.x, p.y);
   ctx.rotate(Math.atan2(facingY, facingX));
 
-  // lengua bífida (titila)
+  // Lengua bífida
   if (tick % 4 < 2) {
-    ctx.strokeStyle = "#e53935";
+    ctx.strokeStyle = "#FF5964";
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
     ctx.beginPath();
@@ -167,16 +182,16 @@ function drawHead(p) {
     ctx.stroke();
   }
 
-  // cabeza
-  ctx.fillStyle = "#2e7d32";
-  ctx.strokeStyle = "#1b5e20";
+  // Cabeza morada combinada
+  ctx.fillStyle = "#5A189A";
+  ctx.strokeStyle = "#240046";
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.ellipse(2, 0, 11, 9, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.stroke();
 
-  // ojos
+  // Ojos
   for (const side of [-1, 1]) {
     ctx.fillStyle = "#fff";
     ctx.beginPath();
@@ -187,13 +202,6 @@ function drawHead(p) {
     ctx.arc(6, side * 4.8, 1.6, 0, Math.PI * 2);
     ctx.fill();
   }
-
-  // fosas nasales
-  ctx.fillStyle = "#1b5e20";
-  ctx.beginPath();
-  ctx.arc(11, -2, 0.9, 0, Math.PI * 2);
-  ctx.arc(11, 2, 0.9, 0, Math.PI * 2);
-  ctx.fill();
 
   ctx.restore();
 }
@@ -212,13 +220,11 @@ function drawAppleAt(cx, cy, s) {
   ctx.translate(cx, cy);
   ctx.scale(s, s);
 
-  // sombra
   ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
   ctx.beginPath();
   ctx.ellipse(1, 8, 7, 2.5, 0, 0, Math.PI * 2);
   ctx.fill();
 
-  // cuerpo (dos lóbulos para la forma de manzana)
   const g = ctx.createRadialGradient(-3, -3, 1, 0, 0, 10);
   g.addColorStop(0, "#ff6f60");
   g.addColorStop(0.6, "#e53935");
@@ -228,33 +234,6 @@ function drawAppleAt(cx, cy, s) {
   ctx.arc(-3, 0, 6.5, 0, Math.PI * 2);
   ctx.arc(3, 0, 6.5, 0, Math.PI * 2);
   ctx.arc(0, 2, 6.5, 0, Math.PI * 2);
-  ctx.fill();
-
-  // hundidito de arriba
-  ctx.fillStyle = "#8e1b1b";
-  ctx.beginPath();
-  ctx.ellipse(0, -5.5, 2, 1, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  // tallo
-  ctx.strokeStyle = "#5d4037";
-  ctx.lineWidth = 1.8;
-  ctx.lineCap = "round";
-  ctx.beginPath();
-  ctx.moveTo(0, -5);
-  ctx.quadraticCurveTo(0.5, -8, 2, -10);
-  ctx.stroke();
-
-  // hoja
-  ctx.fillStyle = "#43a047";
-  ctx.beginPath();
-  ctx.ellipse(5, -8, 4.2, 2, -0.5, 0, Math.PI * 2);
-  ctx.fill();
-
-  // brillo
-  ctx.fillStyle = "rgba(255, 255, 255, 0.55)";
-  ctx.beginPath();
-  ctx.ellipse(-4, -2.5, 1.8, 3, 0.5, 0, Math.PI * 2);
   ctx.fill();
 
   ctx.restore();
@@ -270,7 +249,6 @@ function checkAppleCollision() {
   }
 }
 
-// la manzana no puede aparecer encima de la serpiente
 function placeApple() {
   let x, y;
   do {
@@ -298,7 +276,6 @@ function resetGame() {
   placeApple();
 }
 
-// [dx, dy] por tecla — arriba/W, abajo/S, izquierda/A, derecha/D
 const TECLAS = {
   38: [0, -1], 87: [0, -1],
   40: [0, 1], 83: [0, 1],
@@ -320,7 +297,6 @@ document.body.addEventListener("keydown", (event) => {
     return;
   }
 
-  // no permite invertir de golpe sobre el eje en el que ya se mueve
   if (dx !== 0 && inputsXVelocity === -dx) return;
   if (dy !== 0 && inputsYVelocity === -dy) return;
 

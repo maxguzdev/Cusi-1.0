@@ -24,6 +24,18 @@
             <div class="bar-fill hunger-fill" id="hunger-bar" style="width: 100%;"></div>
         </div>
     </div>
+    <div class="stat-group">
+        <span class="stat-label">Entretenimiento</span>
+        <div class="bar-background">
+            <div class="bar-fill ent-fill" id="entretenimiento-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+    <div class="stat-group">
+        <span class="stat-label">Suciedad</span>
+        <div class="bar-background">
+            <div class="bar-fill suc-fill" id="suciedad-bar" style="width: 0%;"></div>
+        </div>
+    </div>
 </div>
 
        <div id="cartela" class="carti"></div>

@@ -920,3 +920,16 @@ button:focus-visible {
     background: linear-gradient(180deg, #ffa726, #ef6c00);
     box-shadow: 0 0 8px rgba(255, 167, 38, 0.7);
 }
+.ent-fill {
+    background-color: #4cd137;
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}
+
+.suc-fill {
+    background-color: #e1b12c;
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}

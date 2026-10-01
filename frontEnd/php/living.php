@@ -10,7 +10,7 @@
          <p id="value"></p> 
    </div>
 
-   <<div class="stats-container">
+   <div class="stats-container">
     <div class="stat-group">
         <span class="stat-label">Vida</span>
         <div class="bar-background">
@@ -21,6 +21,18 @@
         <span class="stat-label">Hambre</span>
         <div class="bar-background">
             <div class="bar-fill hunger-fill" id="hunger-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+    <div class="stat-group">
+        <span class="stat-label">Entretenimiento</span>
+        <div class="bar-background">
+            <div class="bar-fill ent-fill" id="entretenimiento-bar" style="width: 100%;"></div>
+        </div>
+    </div>
+    <div class="stat-group">
+        <span class="stat-label">Suciedad</span>
+        <div class="bar-background">
+            <div class="bar-fill suc-fill" id="suciedad-bar" style="width: 0%;"></div>
         </div>
     </div>
 </div>
