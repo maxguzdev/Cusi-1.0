@@ -28,7 +28,7 @@ function hablar() {
   if (!audioOk) return;
   const id = cust.base.id;
   vozTimer = setTimeout(() => {
-    voz.src = 'assets/audio/' + id + VOZ_EXT;
+    voz.src = 'assets/mp3/' + id + VOZ_EXT;
     voz.play().catch(() => {});                              // si no existe el archivo, se ignora
   },300);
 }

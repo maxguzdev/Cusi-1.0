@@ -215,11 +215,6 @@ document.addEventListener('click', function (e) {
     }
 
     switch (id) {
-        case 'baño':
-        case 'ducha': {
-            bañarCusi();
-            break;
-        }
 
         case 'cusi_a': {
             const deam = document.getElementById("damn");
@@ -275,7 +270,7 @@ document.addEventListener('click', function (e) {
                         cartel.innerHTML = `
                             <div class="cartel-pregunta">
                                 <p>¿Querés jugar?</p>
-                                <a href="/Cusi-1.0/minijuegoss/dino/index.html">
+                                <a href="/Cusi-1.0/minijuegoss/flappy pablo/index.html">
                                 <button id="btn_si">Sí</button>
                                 </a>
                                 <button id="btn_no">No</button>
@@ -308,6 +303,12 @@ document.addEventListener('click', function (e) {
             if (poldos) poldos.src = "/CUSI-1.0/frontEnd/Cusi_style/bat_scr/leo_3.png";
             break;
         }
+
+        case 'ducha': {
+            bañarCusi();
+            break;
+        }
+
 
         case 'pablo': {
             const dialog2 = document.getElementById("d2");
