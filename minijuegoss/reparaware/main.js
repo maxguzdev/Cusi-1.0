@@ -3,7 +3,8 @@
    Imágenes: assets/CARPETA/NOMBRE.png  (si falta una, se ve un recuadro con su nombre)
    ui/{bg_counter,bg_bench,player,bubble,btn_aceptar,btn_listo,menu,pc_open,monitor}
    fx/{dust,smoke}  tools/{screw,paste,air}  parts/{cpu,ram,gpu,hdd,psu}_{1,2}
-   clients/{gamer,estudiante,programador,abuela,disenadora,minero,oficinista,hacker,streamer,misterioso} */
+   clients/{gamer,estudiante,programador,abuela,disenadora,minero,oficinista,hacker,streamer,misterioso}
+   Audios:   assets/audio/<id del cliente>.mp3  (ej: assets/audio/gamer.mp3; si falta, simplemente no suena) */
 
 const $ = s => document.querySelector(s);
 
@@ -12,6 +13,24 @@ const $ = s => document.querySelector(s);
 function img(ruta, nombre = '', clase = '') {
   return `<img class="a ${clase}" src="assets/${ruta}.png" alt="${nombre}" draggable="false"
     onerror="this.outerHTML = this.alt ? '<span class=miss>' + this.alt + '</span>' : ''">`;
+}
+
+/* 1b) VOZ DE LOS CLIENTES: al entrar un cliente suena assets/audio/<id>.mp3 (el id es el de CLIENTS: gamer, abuela...).
+      Si el archivo no existe, no pasa nada. Para otro formato, cambiá VOZ_EXT ('.ogg', '.wav'). */
+const VOZ_EXT = '.mp3';
+           // milisegundos de espera entre que aparece el cliente y empieza el audio
+const voz = new Audio();
+let vozTimer = null;
+let audioOk = false;            // el navegador solo deja sonar audio después del primer clic del jugador
+
+function hablar() {
+  clearTimeout(vozTimer); voz.pause();                       // corta el audio anterior si seguía sonando
+  if (!audioOk) return;
+  const id = cust.base.id;
+  vozTimer = setTimeout(() => {
+    voz.src = 'assets/audio/' + id + VOZ_EXT;
+    voz.play().catch(() => {});                              // si no existe el archivo, se ignora
+  },300);
 }
 
 /* 2) DATOS FIJOS */
@@ -26,25 +45,25 @@ const SLOT_POS = { psu: [3, 3, 26, 24], cpu: [38, 30, 18, 22], ram: [70, 20, 12,
    Daños de hardware:  p.slots.gpu.st = 'burnt' (quemada) | 'loose' (floja)
    Otros daños (true/false): dusty, dryPaste, fsBad, virus, bootBad, needData, all2 (pide todo premium) */
 const CLIENTS = [
-  { name: 'Gamer furioso', id: 'gamer', reward: 100, text: 'Los juegos me van a 10 FPS.',
+  { name: 'Gordo Compu', id: 'gamer', reward: 100, text: 'Los juegos me van a 10 FPS.',
     vars: [p => p.slots.gpu.st = 'burnt', p => { p.dusty = true; p.dryPaste = true }] },
-  { name: 'Estudiante asustado', id: 'estudiante', reward: 100, text: 'Mi PC no arranca, pantalla negra.',
+  { name: 'Niño 67', id: 'estudiante', reward: 100, text: 'No puedo jugar Steal a Brainrot',
     vars: [p => p.slots.ram.st = 'loose', p => p.slots.psu.st = 'burnt'] },
-  { name: 'Programador descuidado', id: 'programador', reward: 120, text: 'El sistema de archivos de mi server Linux colapsó tras un corte de luz.',
+  { name: 'Linux User', id: 'programador', reward: 120, text: 'El sistema de archivos de mi servidor colapsó tras un corte de luz.',
     vars: [p => p.fsBad = true, p => { p.fsBad = true; p.slots.ram.st = 'loose' }] },
-  { name: 'Abuela paranoica', id: 'abuela', reward: 90, text: 'La flechita se mueve sola y me salen anuncios rusos.',
+  { name: 'Abuelita', id: 'abuela', reward: 90, text: 'La flechita se mueve sola y me salen anuncios en ruso.',
     vars: [p => p.virus = true, p => { p.virus = true; p.dusty = true }] },
-  { name: 'Diseñadora', id: 'disenadora', reward: 150, text: 'El disco duro hace un ruido de clac-clac-clac.',
+  { name: 'Diseñadora', id: 'disenadora', reward: 150, text: 'El disco duro hace un ruido raro.',
     vars: [p => { p.slots.hdd.st = 'burnt'; p.needData = true }] },
-  { name: 'Minero de cripto', id: 'minero', reward: 130, text: 'Se apaga a los 5 minutos de encender.',
+  { name: 'Minero de cripto', id: 'minero', reward: 130, text: 'Se apaga a los 5 minutos de haberla prendido.',
     vars: [p => { p.slots.psu.st = 'burnt'; p.dryPaste = true }, p => { p.slots.psu.st = 'burnt'; p.dryPaste = true; p.dusty = true }] },
-  { name: 'Oficinista', id: 'oficinista', reward: 110, text: 'Derramé café pero se secó. Ahora no da video.',
+  { name: 'Oficinista', id: 'oficinista', reward: 110, text: 'mi hijo le tiro el cafe y se secó. Ahora no da video.',
     vars: [p => { p.dusty = true; p.slots.gpu.st = 'burnt' }, p => { p.dusty = true; p.slots.ram.st = 'burnt' }] },
-  { name: 'Hacker wannabe', id: 'hacker', reward: 140, text: 'Borré el bootloader sin querer.',
+  { name: 'Falso Hacker', id: 'hacker', reward: 140, text: 'Borré el bootloader porque tenia ganas, no fue ningun accidente ni nada y totalmente se como arreglarlo pero no tengo ganas.',
     vars: [p => p.bootBad = true, p => { p.bootBad = true; p.dusty = true }] },
-  { name: 'Streamer', id: 'streamer', reward: 120, text: 'El micrófono y la capturadora hacen corto.',
+  { name: 'Streamer', id: 'streamer', reward: 120, text: 'El micrófono y la capturadora hacen corto, clipearon eso chat?.',
     vars: [p => { p.slots.psu.st = 'burnt'; p.dusty = true }] },
-  { name: 'Cliente misterioso', id: 'misterioso', reward: 500, text: 'Haz que vuele.',
+  { name: 'Cliente misterioso', id: 'misterioso', reward: 500, text: 'dame lo mejor que tengas.',
     vars: [p => p.all2 = true] }
 ];
 
@@ -118,6 +137,7 @@ function nextCustomer() {
   $('#tout').textContent = ''; say('');
   showScene('c'); render();
   const c = $('#client'); c.classList.remove('enter'); setTimeout(() => c.classList.add('enter'), 10);
+  hablar();
 }
 
 function showScene(s) {   // 'c' = mostrador, 'b' = mesa de trabajo
@@ -316,7 +336,10 @@ $('#hint').onclick = hint;
 $('#mon').onclick = openTerminal;
 $('#tx').onclick = () => { $('#modal').hidden = true; render() };
 $('#hb').onclick = () => $('#help').hidden = false;
-$('#hx').onclick = () => $('#help').hidden = true;
+$('#hx').onclick = () => {
+  $('#help').hidden = true;
+  if (!audioOk) { audioOk = true; hablar() }               // primer cliente: suena al cerrar la ayuda
+};
 
 /* 13) ARRANQUE: imágenes fijas + primer cliente */
 $('#bgc').innerHTML = img('ui/bg_counter');

@@ -460,7 +460,7 @@ button:focus-visible {
     align-items: flex-end;
     justify-content: center;
     background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+                url('/CUSI-1.0/frontEnd/Cusi_style/pablo_icon.png') center/cover no-repeat;
 }
 
 .opciones button.opcion-pablo .etiqueta-juego {
@@ -486,7 +486,7 @@ button:focus-visible {
     align-items: flex-end;
     justify-content: center;
     background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+                url('/CUSI-1.0/frontEnd/Cusi_style/pc_icon.png') center/cover no-repeat;
 }
 
 .opciones button.opcion-pc .etiqueta-juego {
@@ -512,7 +512,7 @@ button:focus-visible {
     align-items: flex-end;
     justify-content: center;
     background: linear-gradient(rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
-                url('/CUSI-1.0/frontEnd/Cusi_style/buscaminas_icon.png') center/cover no-repeat;
+                url('/CUSI-1.0/frontEnd/Cusi_style/snake_icon.png') center/cover no-repeat;
 }
 
 .opciones button.opcion-snake .etiqueta-juego {

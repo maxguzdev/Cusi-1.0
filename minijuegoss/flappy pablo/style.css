@@ -270,18 +270,22 @@ canvas {
 .btn-grande:active, .btn-sec:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--sombra); }
 
 /* game over */
+/* medallas: salen de img/og-theme.png (cada una 45x45, escalada x1.6 a 72px) */
 .medalla {
+    --mx: 0;
+    --my: 0;
     width: 72px;
     height: 72px;
-    border-radius: 50%;
-    border: 4px solid var(--tinta);
-    background: radial-gradient(circle at 35% 30%, #d8d2e8, #8e86a8);
-    box-shadow: inset 0 -6px 10px rgba(0, 0, 0, .2), 0 4px 0 var(--sombra);
+    background-image: url('img/og-theme.png');
+    background-repeat: no-repeat;
+    background-size: 969.6px 684.8px;
+    background-position: calc(var(--mx) * -1.6px) calc(var(--my) * -1.6px);
 }
-.medalla[data-medalla="bronce"]  { background: radial-gradient(circle at 35% 30%, #f0b27a, #a45f23); }
-.medalla[data-medalla="plata"]   { background: radial-gradient(circle at 35% 30%, #f4f6fa, #98a3b5); }
-.medalla[data-medalla="oro"]     { background: radial-gradient(circle at 35% 30%, #ffe28a, var(--naranja)); }
-.medalla[data-medalla="platino"] { background: radial-gradient(circle at 35% 30%, #ffffff, #8fd3ff); }
+.medalla[data-medalla="ninguna"]  { display: none; }
+.medalla[data-medalla="bronce"]   { --mx: 346; --my: 157; }
+.medalla[data-medalla="plata"]    { --mx: 394; --my: 112; }
+.medalla[data-medalla="oro"]      { --mx: 394; --my: 157; }
+.medalla[data-medalla="platino"]  { --mx: 346; --my: 112; }
 
 .medalla-nombre { margin: -3px 0 0; font-size: .85em; font-weight: 700; }
 
